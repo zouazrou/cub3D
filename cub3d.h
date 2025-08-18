@@ -11,6 +11,9 @@
 
 #define W 512
 #define H 512
+
+// #define W 3000
+// #define H 3000
 #define PI 3.141592653589793
 
 #define GREEN 0x00D100
@@ -46,7 +49,7 @@ typedef struct s_game
     t_vd  pdir;
     /*Angle Player*/
     double pa;
-    /*Fov Player*/
+    /* !Fov Player*/
     t_vd  plane;
     /*speed ply*/
     int  sp;
@@ -59,6 +62,8 @@ typedef struct s_game
 void    draw_big_point(void *img, t_vi crd, int r, int col);
 int     close_win(void *ptr);
 void    display(t_game *data);
+
+void    DDA(t_vi end_point, t_game *data);
 
 int		keyboard(int keysym, t_game *map);
 void    init_data(t_game *data);

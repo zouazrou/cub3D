@@ -1,10 +1,10 @@
 NAME = cub3D
 CC = cc
 # CFLAGS = -Wall -Wextra -Werror -lm
-CFLAGS = -g 
+CFLAGS = -g -lm
 MLX_FLAGS = -lXext -lX11
 
-SRC = main.c init.c utils.c keypress.c
+SRC = main.c init.c utils.c keypress.c DDA.c
 
 MLX_PATH = minilibx-linux/
 
