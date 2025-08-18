@@ -72,9 +72,9 @@ void    display(t_game *data)
     // printf("debug : draw_map2D()\n");
     fill_img(data->image, BLCK_SHDW);
     draw_map2D(data);
-    draw_big_point(data->image, data->ppos, 8, GREEN);
+    draw_big_point(data->image, data->p, 4, GREEN);
     // draw_ray(data, data->image);
-    DDA((t_vi){data->ppos.x+data->pdir.x*5, data->ppos.y+data->pdir.y*5}, data);
+    DDA(data->p, (t_vi){data->p.x+data->d.x*12, data->p.y+data->d.y*12}, data);
     // !put image to win
     mlx_put_image_to_window(data->mlx, data->win, data->image, 0, 0);
 }

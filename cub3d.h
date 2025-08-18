@@ -14,7 +14,7 @@
 
 // #define W 3000
 // #define H 3000
-#define PI 3.141592653589793
+#define PI 3.1415926535
 
 #define GREEN 0x00D100
 #define BLCK_SHDW 0Xbfafb2
@@ -44,9 +44,9 @@ typedef struct s_game
     void    *image;
     
     /*position Player*/
-    t_vi  ppos;
+    t_vi  p;
     /*direction Player*/
-    t_vd  pdir;
+    t_vd  d;
     /*Angle Player*/
     double pa;
     /* !Fov Player*/
@@ -63,7 +63,7 @@ void    draw_big_point(void *img, t_vi crd, int r, int col);
 int     close_win(void *ptr);
 void    display(t_game *data);
 
-void    DDA(t_vi end_point, t_game *data);
+void    DDA(t_vi a, t_vi b, t_game *data);
 
 int		keyboard(int keysym, t_game *map);
 void    init_data(t_game *data);
