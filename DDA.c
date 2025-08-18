@@ -1,18 +1,20 @@
 #include "cub3d.h"
 
-void    DDA(t_vec p0, t_vec p1, t_game *data)
+void    DDA(t_vi end_point, t_game *data)
 {
 	int		dx;
     int		dy;
 	float	Xinc, Yinc;
 	float	x, y;
     int		steps;
+    // DDA((t_vi){data->ppos.x+data->pdir.x*5, data->ppos.y+data->pdir.y*5}, data);
 
-    printf("Xp0 = %d | Yp0 = %d\nXp1 = %d | Yp1 = %d\n", p0.x, p0.y, p1.x, p1.y);
+
+    // printf("Xp0 = %d | Yp0 = %d\nXend_point = %d | Yend_point = %d\n", p0.x, p0.y, end_point.x, end_point.y);
     //
-    dx = p1.x - p0.x;
-    dy = p1.y - p0.y;
-    printf("Xd = %d | Yd = %d\n", dx, dy);
+    dx = end_point.x - data->ppos.x;
+    dy = end_point.y - data->ppos.y;
+    // printf("Xd = %d | Yd = %d\n", dx, dy);
 
     // steps 
     steps = dx;
@@ -21,18 +23,20 @@ void    DDA(t_vec p0, t_vec p1, t_game *data)
     // calculate increment in x & y for each steps
     Xinc = (float)(dx / (float)steps);
     Yinc = (float)(dy / (float)steps);
-    printf("Xinc = %f | Yinc = %f\n", Xinc, Yinc);
+    // printf("Xinc = %f | Yinc = %f\n", Xinc, Yinc);
 
     // draw line in the window
-    x = p0.x;
-	y = p0.y;
-    printf("x = %.2f | y = %.2f\n", x, y);
+    x = data->ppos.x;
+	y = data->ppos.y;
+    // printf("x = %.2f | y = %.2f\n", x, y);
     for (int i = 0; i <= steps; i++)
     {
         // put pixel in this position ...
-		mlx_pixel_put(data->mlx, data->win, x, y, 0xFFFFFF);
+		// !mlx_pixel_put(data->mlx, data->win, x, y, 0xFFFFFF);
+        // put_pixel_in_image(data->image,, 0x0);
+        draw_big_point(data->image, (t_vi){x, y}, 3, GREEN);
         x += Xinc;
         y += Yinc;
-        printf("x = %.2f | y = %.2f\n", x, y);
+        // printf("x = %.2f | y = %.2f\n", x, y);
     }
 }

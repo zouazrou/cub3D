@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/18 12:40:19 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:07:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    init_data(t_game *data)
     data->pdir.x = -1;
     data->pa = 0;
     data->pdir.y = 0;
-    data->ppos.x = 300;
+    data->ppos.x = 200;
     data->ppos.y = 300;
     data->sp = 5;
     data->plane.x = 0;

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/18 12:43:10 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:02:17 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,22 @@ void change_position(int keysym, t_game *data)
 }
 void change_angle(int keysym, t_game *data)
 {
-	// if ((keysym == XK_a))
-    // {
-    //     data->pa -= 0.1;
-    //     if (data->pa < 0)
-    //         data->pa += 2*PI;
-    //     // if (data->pa > 2*pipe)
-    // }
-    // else if ((keysym == XK_Down || keysym == XK_s))
-    // {
-    // }
-    // else if ((keysym == XK_Left || keysym == XK_a))
-    // {
-    // }
-    // else if ((keysym == XK_Right || keysym == XK_d))
-    // {
-    // }
-    // else
-    //     return (1);
+    if (keysym == XK_Left)
+    {
+        data->pa -= 0.1;
+        if (data->pa < 0)
+            data->pa += (PI*2);
+        data->pdir.x = cos(data->pa)*5;
+        data->pdir.y = sin(data->pa)*5;
+    }
+    else if (XK_Right)
+    {
+        data->pa += 0.1;
+        if (data->pa < 2*PI)
+            data->pa -= PI*2;
+        data->pdir.x = cos(data->pa);
+        data->pdir.y = sin(data->pa);
+    }
     // printf("dubeg : x = %.1f ; y = %.1f| b dis\n", data->ppos.x, data->ppos.y);
     return;
 }
