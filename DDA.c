@@ -1,32 +1,6 @@
 #include "cub3d.h"
 
-
-#define SIZE 20
-
-char **board;
-
-void    print_board()
-{
-    for (int y = 0; y < SIZE; y++)
-    {
-        for (int x = 0; x < SIZE; x++)
-        {
-            if (board[y][x] == 0)
-                write(1, ".", 1);
-            else
-                write(1, board[y] + x, 1);
-            write(1, " ", 1);
-        }
-        write(1, "\n", 1);
-    }
-}
-
-void put_pixel(int x, int y)
-{
-    board[y][x] = 'x';
-}
-
-void    DDA(t_vec p0, t_vec p1)
+void    DDA(t_vec p0, t_vec p1, t_game *data)
 {
 	int		dx;
     int		dy;
@@ -40,7 +14,7 @@ void    DDA(t_vec p0, t_vec p1)
     dy = p1.y - p0.y;
     printf("Xd = %d | Yd = %d\n", dx, dy);
 
-    // steps
+    // steps 
     steps = dx;
     if (dx < dy)
         steps = dy;
@@ -52,28 +26,13 @@ void    DDA(t_vec p0, t_vec p1)
     // draw line in the window
     x = p0.x;
 	y = p0.y;
+    printf("x = %.2f | y = %.2f\n", x, y);
     for (int i = 0; i <= steps; i++)
     {
         // put pixel in this position ...
-        put_pixel(x, y);
+		mlx_pixel_put(data->mlx, data->win, x, y, 0xFFFFFF);
         x += Xinc;
         y += Yinc;
+        printf("x = %.2f | y = %.2f\n", x, y);
     }
-}
-
-int main(int argc, char const *argv[])
-{
-	t_game	game;
-
-    board = calloc(SIZE, sizeof(char *));
-    for (int i = 0; i < SIZE; i++)
-        board[i] = calloc(SIZE, 1);
-
-
-
-
-    DDA((t_vec){0, 0}, (t_vec){9, 13});    
-
-    print_board();
-    return 0;
 }
