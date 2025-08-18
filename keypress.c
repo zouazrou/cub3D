@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/18 15:02:17 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 21:12:24 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,36 @@
 
 void change_position(int keysym, t_game *data)
 {
-    t_vi    p = data->ppos;
+    t_vi    p = data->p;
     int     speed = data->sp;
 
     if (keysym == XK_w)
     {
         if ((p.y - speed >= speed))
-            data->ppos.y -= speed;
+            data->p.y -= speed;
         else
-            data->ppos.y = speed;		
+            data->p.y = speed;		
     }
     else if (keysym == XK_s)
     {
         if ((p.y + speed < H))
-            data->ppos.y += speed;
+            data->p.y += speed;
         else
-            data->ppos.y = H-speed;
+            data->p.y = H-speed;
     }
     else if (keysym == XK_a)
     {
         if ((p.x - speed >= speed))
-            data->ppos.x -= speed;
+            data->p.x -= speed;
         else
-            data->ppos.x = speed;		
+            data->p.x = speed;		
     }
     else if (keysym == XK_d)
     {
         if ((p.x + speed < W))
-            data->ppos.x += speed;
+            data->p.x += speed;
         else
-            data->ppos.x = W-speed;
+            data->p.x = W-speed;
     }
 }
 void change_angle(int keysym, t_game *data)
@@ -54,18 +54,22 @@ void change_angle(int keysym, t_game *data)
         data->pa -= 0.1;
         if (data->pa < 0)
             data->pa += (PI*2);
-        data->pdir.x = cos(data->pa)*5;
-        data->pdir.y = sin(data->pa)*5;
     }
-    else if (XK_Right)
+    if (keysym == XK_Right)
     {
         data->pa += 0.1;
-        if (data->pa < 2*PI)
+        if (data->pa >= PI*2)
             data->pa -= PI*2;
-        data->pdir.x = cos(data->pa);
-        data->pdir.y = sin(data->pa);
+        data->d.x = cos(data->pa);
+        data->d.y = sin(data->pa);
     }
-    // printf("dubeg : x = %.1f ; y = %.1f| b dis\n", data->ppos.x, data->ppos.y);
+    data->d.x = cos(data->pa);
+    data->d.y = sin(data->pa);
+    // printf("cos()=%f\n", cos(data->pa));
+    // printf("cos()=%f\n", data->d.x);
+    // printf("sin()=%f\n", sin(data->pa));
+    // printf("sin()=%f\n", data->d.y);
+    // printf("dubeg : change_angle()\ndx = %.1f ; dy = %.1f| angle = %.1f\n", data->p.x, data->p.y,data->pa);
     return;
 }
 int  close_win(void *ptr)

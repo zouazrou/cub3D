@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/18 15:07:35 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 21:19:49 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ extern int endian;
 void    init_data(t_game *data)
 {
     data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, W, H, "dda");
+    data->win = mlx_new_window(data->mlx, W, H, "small game");
     data->image = mlx_new_image(data->mlx, W, H);
-    data->pdir.x = -1;
-    data->pa = 0;
-    data->pdir.y = 0;
-    data->ppos.x = 200;
-    data->ppos.y = 300;
+    // angle
+    data->pa = PI;
+    data->d.x = cos(data->pa);
+    data->d.y = sin(data->pa);
+    data->p.x = 200;
+    data->p.y = 300;
     data->sp = 5;
     data->plane.x = 0;
     data->plane.y = 0.66;
