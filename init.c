@@ -6,53 +6,41 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/17 21:19:35 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 12:40:19 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+extern int bpp;
+extern int line_bytes;
+extern int endian;
+
 void    init_data(t_game *data)
 {
     data->mlx = mlx_init();
     data->win = mlx_new_window(data->mlx, W, H, "dda");
-    data->dir.x = -1;
-    data->dir.y = 0;
-    data->pos.x = 100;
-    data->pos.y = 100;
+    data->image = mlx_new_image(data->mlx, W, H);
+    data->pdir.x = -1;
+    data->pa = 0;
+    data->pdir.y = 0;
+    data->ppos.x = 300;
+    data->ppos.y = 300;
+    data->sp = 5;
     data->plane.x = 0;
     data->plane.y = 0.66;
 }
 
 
-void    mlx_big_point(t_game *data, int r, int color)
+void    draw_big_point(void *img, t_vi crd, int r, int col)
 {
+    char *data_img = mlx_get_data_addr(img, &bpp, &line_bytes, &endian);
     for (int dx = -r; dx <= r; dx++)
     {
         for (int dy = -r; dy <= r; dy++)
         {
             if (dx*dx + dy*dy <= r*r) // inside circle
-                mlx_pixel_put(data->mlx, data->win, data->pos.x + dx, data->pos.y + dy, color);
+                put_pixel_in_image(img, crd.x + dx, crd.y + dy, col);
         }
     }
-}
-int  close_win(void *ptr)
-{
-    printf("Exit !\n");
-    exit(0);
-}
-int keyboard(int keysym, t_game *data)
-{
-    if (keysym == XK_Escape)
-		exit((printf("Exit ! (esc)"), 0));
-	else if (keysym == XK_Up || keysym == XK_w)
-        data->pos.y -= 25;		
-    else if (keysym == XK_Down || keysym == XK_s)
-        data->pos.y += 25;		
-    else if (keysym == XK_Left || keysym == XK_a)
-        data->pos.x -= 25;		
-    else if (keysym == XK_Right || keysym == XK_d)
-        data->pos.x += 25;	
-    	
-	return (0);   
 }
