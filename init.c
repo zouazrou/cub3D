@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/18 21:19:49 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 21:27:04 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    init_data(t_game *data)
     data->win = mlx_new_window(data->mlx, W, H, "small game");
     data->image = mlx_new_image(data->mlx, W, H);
     // angle
-    data->pa = PI;
+    data->pa = PI/2;
     data->d.x = cos(data->pa);
     data->d.y = sin(data->pa);
     data->p.x = 200;

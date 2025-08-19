@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   DDA.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/19 08:22:48 by zouazrou          #+#    #+#             */
+/*   Updated: 2025/08/19 08:55:21 by zouazrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void    DDA(t_vi a, t_vi b, t_game *data)
+void    DDA(t_vi a, t_vi b, t_game *data, int col)
 {
 	int		dx;
     int		dy;
@@ -33,7 +45,7 @@ void    DDA(t_vi a, t_vi b, t_game *data)
     {
         // put pixel in this position ...
 		// !mlx_pixel_put(data->mlx, data->win, x, y, 0xFFFFFF);
-        draw_big_point(data->image, (t_vi){x, y}, 2, GREEN);
+        draw_big_point(data->image, (t_vi){x, y}, 1, col);
         x += Xinc;
         y += Yinc;
         if (flg == 0)
