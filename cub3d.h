@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
+/*   Updated: 2025/08/19 10:31:06 by zouazrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -21,6 +33,7 @@
 #define BLACK 0x0
 #define WHITE 0xffffff
 #define YLW 0XFFFF00
+#define RED 0XFF0000
 /*
 
 */
@@ -61,12 +74,13 @@ typedef struct s_game
 
 void    draw_big_point(void *img, t_vi crd, int r, int col);
 int     close_win(void *ptr);
+void    draw_ray(t_game *g);
 void    display(t_game *data);
 
-void    DDA(t_vi a, t_vi b, t_game *data);
+void    DDA(t_vi a, t_vi b, t_game *data, int col);
 
 int		keyboard(int keysym, t_game *map);
 void    init_data(t_game *data);
-void put_pixel_in_image(void *image, int x, int y, int col);
-int  close_win(void *ptr);
+void    put_pixel_in_image(void *image, int x, int y, int col);
+int     close_win(void *ptr);
 #endif

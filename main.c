@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
+/*   Updated: 2025/08/19 08:58:35 by zouazrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int mapx = 8, mapy  = 8, maps;
@@ -59,10 +71,8 @@ void fill_img(void *img, int col)
             put_pixel_in_image(img, x, y, col);
     }
 }
-void    display(t_game *data)
+void    display(t_game *g)
 {
-    int col = BLCK_SHDW;
-    
     // !init g_vars
     maps = mapx * mapy;
     tilex = W / mapx;
@@ -70,13 +80,14 @@ void    display(t_game *data)
 
     // ! Draw
     // printf("debug : draw_map2D()\n");
-    fill_img(data->image, BLCK_SHDW);
-    draw_map2D(data);
-    draw_big_point(data->image, data->p, 4, GREEN);
-    // draw_ray(data, data->image);
-    DDA(data->p, (t_vi){data->p.x+data->d.x*12, data->p.y+data->d.y*12}, data);
+    fill_img(g->image, BLCK_SHDW);
+    draw_map2D(g);
+    draw_big_point(g->image, g->p, 4, GREEN);
+    // draw direction vector 
+    DDA(g->p, (t_vi){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
+    draw_ray(g);
     // !put image to win
-    mlx_put_image_to_window(data->mlx, data->win, data->image, 0, 0);
+    mlx_put_image_to_window(g->mlx, g->win, g->image, 0, 0);
 }
 
 
@@ -92,6 +103,5 @@ int main(int argc, char const *argv[])
     mlx_hook(data.win, DestroyNotify, 0, close_win, NULL);
     mlx_hook(data.win, KeyPress, KeyPressMask, keyboard, &data);
 	mlx_loop(data.mlx);
-	// DDA((t_vec){200, 200}, (t_vec){205, 202}, &data);
 }
 
