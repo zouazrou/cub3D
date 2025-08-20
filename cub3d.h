@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/19 10:31:06 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:28:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # include <X11/keysym.h>
 # include "minilibx-linux/mlx.h"
 
-
+// if your game window is 640×480, the projection plane is also 640×480.
 #define W 512
 #define H 512
+#define tile_size 64
 
 // #define W 3000
 // #define H 3000
@@ -66,6 +67,7 @@ typedef struct s_game
     t_vd  plane;
     /*speed ply*/
     int  sp;
+    int fov;
     /*FPS*/
     double  time;
     double  oldtime;

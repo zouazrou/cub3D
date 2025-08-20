@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/19 08:58:35 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:10:26 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void    draw_map2D(t_game *data)
         for (int x = 0; x < mapx; x++)
         {
             if (map[y][x] == 1)
-                drow_quade(data, x * tilex, y * tiley, BLACK);
+                drow_quade(data, x * tilex, y * tiley, BLCK_SHDW);
             // else if (map[y][x] == 0)
             //     drow_quade(data, x * tilex, y * tiley, CHI LON);
         }
@@ -80,12 +80,12 @@ void    display(t_game *g)
 
     // ! Draw
     // printf("debug : draw_map2D()\n");
-    fill_img(g->image, BLCK_SHDW);
+    fill_img(g->image, 0x0);
     draw_map2D(g);
     draw_big_point(g->image, g->p, 4, GREEN);
     // draw direction vector 
     DDA(g->p, (t_vi){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
-    draw_ray(g);
+    // draw_ray(g);
     // !put image to win
     mlx_put_image_to_window(g->mlx, g->win, g->image, 0, 0);
 }

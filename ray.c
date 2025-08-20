@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/19 10:33:51 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:50:15 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,26 @@ void draw_ray(t_game *g)
 
 void draw_rayv2(t_game *g)
 {
+    t_vd    rd;
+    double ra;
+    double inc_angle;
+    
+    ra = g->pa;
+    inc_angle = g->fov / W;
     for (int r = 0; r < W; r++)
     {
-        t_vd rd;
-        double camera_x;
+        rd.x = cos(ra);
+        rd.y = sin(ra);
+        // cast_aray(rd, ra);
+        // ! 1/ cast ray
+        // ?-> Check Horizontal
+        // ?-> Check Vertical
+        //  ?* if there a wall on either x-axis and y-axis
+        //      ? the closer distance is chosen 
+            
+        // ! 2/ record the distance to the Wall
         
-        camera_x = 2 * r / (double)W -1; // x-coordinate in camera space
-        rd.x = g->d.x + g->plane.x * camera_x;
-        rd.y = g->d.y + g->plane.y * camera_x;
+        ra+= inc_angle;
     }
     
 }
