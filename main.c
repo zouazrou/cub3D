@@ -106,6 +106,7 @@ void    display(t_game *g)
     maps = mapx * mapy;
     tilex = W / mapx;
     tiley = H / mapy;
+    printf("tile-x[%d] | tile-y[%d]\n", tilex, tiley);
 
     // printf("debug : draw_map2D()\n");
     fill_img(g->image, 0x0);
@@ -117,6 +118,8 @@ void    display(t_game *g)
     draw_dir(g->image, g->p, g->d, 36, GREEN);
     // draw_dir(g, g->d, 15, GREEN);
     // DDA(g->p, (t_vi){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
+    // 
+    cast_rays(g);
     mlx_put_image_to_window(g->mlx, g->win, g->image, 0, 0);
 }
 
