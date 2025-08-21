@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/20 11:28:05 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/21 10:12:54 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 #define GREEN 0x00D100
 #define BLCK_SHDW 0Xbfafb2
+#define BLUE 0x3C6CAB
 #define BLACK 0x0
 #define WHITE 0xffffff
 #define YLW 0XFFFF00
@@ -39,7 +40,7 @@
 
 */
 
-typedef struct t_vd
+typedef struct s_vd
 {
     double     x;
     double     y;
@@ -74,9 +75,11 @@ typedef struct s_game
     // x-coordinate h
 }   t_game;
 
-void    draw_big_point(void *img, t_vi crd, int r, int col);
+void    draw_big_point(void *img, int x, int y,  int r, int col);
 int     close_win(void *ptr);
-void    draw_ray(t_game *g);
+void draw_ray(void *img, t_vi p0, t_vd p1, int color);
+// void    draw_line(void *img, t_vd p0, t_vd p1, int color);
+void    draw_dir(void *img, t_vi point, t_vd dir, int len, int color);
 void    display(t_game *data);
 
 void    DDA(t_vi a, t_vi b, t_game *data, int col);
