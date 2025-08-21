@@ -1,7 +1,7 @@
 NAME = cub3D
 CC = cc
 # CFLAGS = -Wall -Wextra -Werror -lm
-CFLAGS = -g -lm
+CFLAGS = -g 
 MLX_FLAGS = -lXext -lX11
 
 SRC = main.c init.c utils.c keypress.c DDA.c ray.c
@@ -10,15 +10,18 @@ MLX_PATH = minilibx-linux/
 
 OBJ = $(SRC:.c=.o)
 
+LIBS = minilibx-linux/libmlx.a $(MLX_FLAGS) -lm
 all : $(NAME)
 
 $(NAME) : $(OBJ) 
-	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ) minilibx-linux/libmlx.a  -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "exec:✅"
 
 $(OBJ) : $(SRC) cub3d.h
 	@$(CC) -c $(CFLAGS) $(SRC)
 	@echo "OBJ:✅"
+
+re : fclean all
 
 clean :
 	@rm -f $(OBJ)

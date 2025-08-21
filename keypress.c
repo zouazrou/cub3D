@@ -60,8 +60,6 @@ void change_angle(int keysym, t_game *data)
         data->pa += 0.1;
         if (data->pa >= PI*2)
             data->pa -= PI*2;
-        data->d.x = cos(data->pa);
-        data->d.y = sin(data->pa);
     }
     data->d.x = cos(data->pa);
     data->d.y = sin(data->pa);
