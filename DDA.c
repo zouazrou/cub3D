@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:48 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/20 11:12:00 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/21 10:05:45 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void    DDA(t_vi a, t_vi b, t_game *data, int col)
     {
         // put pixel in this position ...
 		// !mlx_pixel_put(data->mlx, data->win, x, y, 0xFFFFFF);
-        draw_big_point(data->image, (t_vi){x, y}, 1, col);
+        draw_big_point(data->image, x, y, 1, col);
         x += Xinc;
         y += Yinc;
         if (flg == 0)
