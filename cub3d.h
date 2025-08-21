@@ -85,4 +85,6 @@ int		keyboard(int keysym, t_game *map);
 void    init_data(t_game *data);
 void    put_pixel_in_image(void *image, int x, int y, int col);
 int     close_win(void *ptr);
+
+void cast_rays(t_game *g);
 #endif

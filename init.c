@@ -15,6 +15,8 @@
 extern int bpp;
 extern int line_bytes;
 extern int endian;
+extern int tilex;
+extern int tiley;
 
 void    init_data(t_game *data)
 {
@@ -23,14 +25,14 @@ void    init_data(t_game *data)
     data->image = mlx_new_image(data->mlx, W, H);
     // ? angle by rad
     // data->pa = (PI)*1/3;
-    data->pa = PI/2;
+    data->pa = (PI*3/2) + (PI/4); // 45 degree
     // ? convert angle to vector
     data->d.x = cos(data->pa);
     data->d.y = sin(data->pa);
     printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", data->pa, data->d.x, data->d.y);
     
-    data->p.x = 200;
-    data->p.y = 300;
+    data->p.x = 2 * 64;
+    data->p.y = 4 * 64;
     data->sp = 5;
     data->fov = 60;
     data->plane.x = 0;
@@ -50,3 +52,20 @@ void    draw_big_point(void *img, t_vi crd, int r, int col)
         }
     }
 }
+/*
+
+x->
+Y|>
+            pi*4/3
+            |
+            |
+            |
+            |
+            |
+pi--------------------0
+            |          <
+            |
+            |
+            |
+            pi/2
+*/
