@@ -33,6 +33,7 @@
 #define BLCK_SHDW 0Xbfafb2
 #define BLUE 0x3C6CAB
 #define BLACK 0x0
+#define BROWN 0x61212D
 #define WHITE 0xffffff
 #define YLW 0XFFFF00
 #define RED 0XFF0000
@@ -42,15 +43,15 @@
 
 typedef struct s_vd
 {
-    double     x;
-    double     y;
+    float     x;
+    float     y;
 } t_vd;
 
-typedef struct s_vi
-{
-    int     x;
-    int     y;
-} t_vi;
+// typedef struct s_vi
+// {
+//     int     x;
+//     int     y;
+// } t_vd;
 
 typedef struct s_game
 {
@@ -59,30 +60,30 @@ typedef struct s_game
     void    *image;
     
     /*position Player*/
-    t_vi  p;
+    t_vd  p;
     /*direction Player*/
     t_vd  d;
     /*Angle Player*/
-    double pa;
+    float pa;
     /* !Fov Player*/
     t_vd  plane;
     /*speed ply*/
     int  sp;
     int fov;
     /*FPS*/
-    double  time;
-    double  oldtime;
+    float  time;
+    float  oldtime;
     // x-coordinate h
 }   t_game;
 
 void    draw_big_point(void *img, int x, int y,  int r, int col);
 int     close_win(void *ptr);
-void draw_ray(void *img, t_vi p0, t_vd p1, int color);
+void draw_ray(void *img, t_vd p0, t_vd p1, int color);
 // void    draw_line(void *img, t_vd p0, t_vd p1, int color);
-void    draw_dir(void *img, t_vi point, t_vd dir, int len, int color);
+void    draw_dir(void *img, t_vd point, t_vd dir, int len, int color);
 void    display(t_game *data);
 
-void    DDA(t_vi a, t_vi b, t_game *data, int col);
+void    DDA(t_vd a, t_vd b, t_game *data, int col);
 
 int		keyboard(int keysym, t_game *map);
 void    init_data(t_game *data);

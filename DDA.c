@@ -12,28 +12,28 @@
 
 #include "cub3d.h"
 
-void    DDA(t_vi a, t_vi b, t_game *data, int col)
+void    DDA(t_vd a, t_vd b, t_game *data, int col)
 {
 	int		dx;
     int		dy;
-	double	Xinc, Yinc;
-	double	x, y;
+	float	Xinc, Yinc;
+	float	x, y;
     int		steps;
 
 
-    // printf("Xp0 = %d | Yp0 = %d\nXb = %d | Yb = %d\n", p0.x, p0.y, b.x, b.y);
+    // printf("Xp0 = %.1f | Yp0 = %.1f\nXb = %.1f | Yb = %.1f\n", p0.x, p0.y, b.x, b.y);
     //
     dx = b.x - a.x;
     dy = b.y - a.y;
-    // printf("Xd = %d | Yd = %d\n", dx, dy);
+    // printf("Xd = %.1f | Yd = %.1f\n", dx, dy);
 
     // steps 
     steps = abs(dx);
     if (abs(dx) < abs(dy))
         steps = abs(dy);
     // calculate increment in x & y for each steps
-    Xinc = (double)(dx / (double)steps);
-    Yinc = (double)(dy / (double)steps);
+    Xinc = (float)(dx / (float)steps);
+    Yinc = (float)(dy / (float)steps);
     // printf("Xinc = %f | Yinc = %f\n", Xinc, Yinc);
 
     // draw line in the window

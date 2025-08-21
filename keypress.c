@@ -15,7 +15,7 @@
 
 void change_position(int keysym, t_game *data)
 {
-    t_vi    p = data->p;
+    t_vd    p = data->p;
     int     speed = data->sp;
 
     if (keysym == XK_w)
@@ -84,8 +84,8 @@ int keyboard(int keysym, t_game *data)
 		exit((printf("Exit ! (esc)\n"), 0));
     change_position(keysym, data);
     change_angle(keysym, data);
+    display(data);
     
 
-    display(data);
 	return (0);   
 }

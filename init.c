@@ -26,14 +26,15 @@ void    init_data(t_game *data)
     // ? angle by rad
     // data->pa = (PI)*1/3;
     // data->pa = (PI*3/2) + (PI/4); //  degree
-    data->pa = (PI) + (PI/4); //  degree
+    data->pa = (PI*2) - (PI/5)*2; //  degree
+    data->pa = (60) * PI/ 180;
     // ? convert angle to vector
     data->d.x = cos(data->pa);
     data->d.y = sin(data->pa);
     printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", data->pa, data->d.x, data->d.y);
     
-    data->p.x = 5 * 64;
-    data->p.y = 3 * 64;
+    data->p.x = 1.5 * 64;
+    data->p.y = 3.5 * 64;
     data->sp = 5;
     data->fov = 60;
     data->plane.x = 0;

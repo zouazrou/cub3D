@@ -19,7 +19,7 @@ int map[8][8] = {
     {1, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1},
@@ -37,7 +37,7 @@ void drow_quade(t_game *data, int x0, int y0, int col)
     int start_y = y0 * TILE_SIZE;
     char *data_img = mlx_get_data_addr(data->image, &bpp, &line_bytes, &endian);
 
-    // printf("x0 = %d ; y0 %d\n", x0, y0);
+    // printf("x0 = %.1f ; y0 %.1f\n", x0, y0);
     for (int y = 1; y < TILE_SIZE-1; y++)
     {
         for (int x = 1; x < TILE_SIZE-1; x++)
@@ -64,14 +64,14 @@ void    draw_map2D(t_game *data)
 void fill_img(void *img, int col)
 {
     // printf("debug : fill_img()\n");
-    // printf("bpp = %d| line_bytes = %d| endian=  %d\n", bpp, line_bytes, endian);
+    // printf("bpp = %.1f| line_bytes = %.1f| endian=  %.1f\n", bpp, line_bytes, endian);
     for (int y = 0; y < H; y++)
     {
         for (int x = 0; x < W; x++)
             put_pixel_in_image(img, x, y, col);
     }
 }
-void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
+void draw_dir(void *img, t_vd point, t_vd dir, int len, int color)
 {
     // compute end point
     float x2 = point.x + dir.x * len;
@@ -94,8 +94,8 @@ void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
     {
         if (x < 0 || x >= W || y < 0 || y >= H)
             break;
-        put_pixel_in_image(img, (int)x, (int)y, color);
-        // printf("dir ply : x = %d ====== y = %d\n", (int)x, (int)y);
+        put_pixel_in_image(img, x, y, color);
+        // printf("dir ply : x = %.1f ====== y = %.1f\n", x, y);
         x += x_inc;
         y += y_inc;
         
@@ -103,7 +103,7 @@ void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
     printf("\n\n\n\n\n\n");
 }
 
-void draw_ray(void *img, t_vi p0, t_vd p1, int color)
+void draw_ray(void *img, t_vd p0, t_vd p1, int color)
 {
     // compute end point
     t_vd    d;
@@ -126,8 +126,8 @@ void draw_ray(void *img, t_vi p0, t_vd p1, int color)
     {
         if (x < 0 || x >= W || y < 0 || y >= H)
             break;
-        put_pixel_in_image(img, (int)x, (int)y, color);
-        // printf("ray : x = %d ====== y = %d\n", (int)x, (int)y);
+        put_pixel_in_image(img, x, y, color);
+        // printf("ray : x = %.1f ====== y = %.1f\n", x, y);
         x += inc.x;
         y += inc.y;
     }
@@ -140,7 +140,7 @@ void    display(t_game *g)
     maps = mapx * mapy;
     tilex = W / mapx;
     tiley = H / mapy;
-    // printf("tile-x[%d] | tile-y[%d]\n", tilex, tiley);
+    // printf("tile-x[%.1f] | tile-y[%.1f]\n", tilex, tiley);
 
     // printf("debug : draw_map2D()\n");
     fill_img(g->image, 0x0);
@@ -151,7 +151,7 @@ void    display(t_game *g)
     // draw direction's plyer 
     draw_dir(g->image, g->p, g->d, 36, GREEN);
     // draw_dir(g, g->d, 15, GREEN);
-    // DDA(g->p, (t_vi){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
+    // DDA(g->p, (t_vd){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
     // 
     cast_rays(g);
     mlx_put_image_to_window(g->mlx, g->win, g->image, 0, 0);
