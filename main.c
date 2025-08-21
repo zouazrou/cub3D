@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/21 10:34:14 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/21 23:57:18 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void draw_ray(void *img, t_vi p0, t_vd p1, int color)
     inc.y = d.y / steps;
 
     float x = p0.x;
-    float y = p0.x;
+    float y = p0.y;
 
     for (int i = 0; i <= steps; i++)
     {
