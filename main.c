@@ -71,6 +71,35 @@ void fill_img(void *img, int col)
             put_pixel_in_image(img, x, y, col);
     }
 }
+void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
+{
+    // compute end point
+    float x1 = point.x;
+    float y1 = point.y;
+    float x2 = point.x + dir.x * len;
+    float y2 = point.y + dir.y * len;
+
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+
+    int steps = fabs(dy);
+    if (fabs(dx) > fabs(dy))
+        steps = fabs(dx);
+
+    float x_inc = dx / steps;
+    float y_inc = dy / steps;
+
+    float x = x1;
+    float y = y1;
+
+    for (int i = 0; i <= steps; i++)
+    {
+        put_pixel_in_image(img, (int)x, (int)y, color);
+        x += x_inc;
+        y += y_inc;
+    }
+}
+
 void    display(t_game *g)
 {
     // !init g_vars
@@ -78,15 +107,16 @@ void    display(t_game *g)
     tilex = W / mapx;
     tiley = H / mapy;
 
-    // ! Draw
     // printf("debug : draw_map2D()\n");
     fill_img(g->image, 0x0);
+
     draw_map2D(g);
+    // draw player
     draw_big_point(g->image, g->p, 4, GREEN);
-    // draw direction vector 
-    DDA(g->p, (t_vi){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
-    // draw_ray(g);
-    // !put image to win
+    // draw direction's plyer 
+    draw_dir(g->image, g->p, g->d, 36, GREEN);
+    // draw_dir(g, g->d, 15, GREEN);
+    // DDA(g->p, (t_vi){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
     mlx_put_image_to_window(g->mlx, g->win, g->image, 0, 0);
 }
 

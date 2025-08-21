@@ -23,7 +23,7 @@ void    init_data(t_game *data)
     data->image = mlx_new_image(data->mlx, W, H);
     // ? angle by rad
     // data->pa = (PI)*1/3;
-    data->pa = 0;
+    data->pa = PI/2;
     // ? convert angle to vector
     data->d.x = cos(data->pa);
     data->d.y = sin(data->pa);
