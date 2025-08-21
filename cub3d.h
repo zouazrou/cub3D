@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/21 10:12:54 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/21 23:28:11 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #define GREEN 0x00D100
 #define BLCK_SHDW 0Xbfafb2
 #define BLUE 0x3C6CAB
+#define BROWN 0x61212D
 #define BLACK 0x0
 #define WHITE 0xffffff
 #define YLW 0XFFFF00

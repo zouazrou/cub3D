@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/21 10:26:40 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/21 23:37:01 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void    init_data(t_game *data)
     data->d.y = sin(data->pa);
     printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", data->pa, data->d.x, data->d.y);
     
-    data->p.x = 5 * 64;
-    data->p.y = 3 * 64;
+    data->p.x = 5.5 * 64;
+    data->p.y = 3.5 * 64;
     data->sp = 5;
     data->fov = 60;
     data->plane.x = 0;
