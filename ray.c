@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/22 00:00:57 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/22 00:04:34 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void    check_vertical(t_game *g)
     {
         r.x = g->p.x;
         r.y = g->p.y;
+        inc.x = 0;
+        inc.y = 0;
     }
     // ! check grid cell at point 'r'
     int step = 0;
