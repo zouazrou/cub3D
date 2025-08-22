@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/21 23:28:11 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:18:44 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ typedef struct s_game
     // x-coordinate h
 }   t_game;
 
+
+t_vd    horizontal_hit(t_game *g, double ray_angle);
+t_vd    vertical_hit(t_game *g, double ray_angle);
+
+int check_map(int x, int y);
 void    draw_big_point(void *img, int x, int y,  int r, int col);
 int     close_win(void *ptr);
 void draw_ray(void *img, t_vi p0, t_vd p1, int color);
@@ -84,6 +89,7 @@ void    draw_dir(void *img, t_vi point, t_vd dir, int len, int color);
 void    display(t_game *data);
 
 void    DDA(t_vi a, t_vi b, t_game *data, int col);
+int distance(t_vd p0, t_vi p1);
 
 int		keyboard(int keysym, t_game *map);
 void    init_data(t_game *data);
