@@ -6,111 +6,122 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/22 12:20:06 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:36:53 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "cub3d.h"
 
-extern int mapx;
-extern int mapy;
-extern int maps;
 extern int map[8][8];
 
+/*
+    ! Horizontal (axix x)
+TODO : find first intersection point
+    * FACING UP
+        ? Ay = floor(Py/tilesz) * tilesz - 1
+    * FACING DOWN
+        ? Ay = floor(Py/tilesz) * tilesz + tilesz
+    ? Ax = (Ay - Py) / tan + Px
+    
+TODO : Find increment Value
+    * FACING UP
+        ? Yi = -tilesz
+    * FACING DOWN
+        ? Yi = tilesz
+    ? Xi = Yi / tan
+*/
+// ! Has problem in this fn
 t_vd    horizontal_hit(t_game *g, double ray_angle)
 {
     t_vd    r;
     t_vd    inc;
 
-    // ! Find the first intersectiontion point
-    if (ray_angle == 0 || ray_angle == PI) // ray_angley is horizontal, no intersectiontion
+    // *: Find the first Intersection Point
+    // // if (ray_angle == 0 || ray_angle == PI)
+    // //     return (printf("+++++++++++\n"), (t_vd){-42, -42});
+    if (FACING_UP(ray_angle))
     {
-        // r.x = g->p.x;
-        // r.y = g->p.y;
-        // inc.x = 0;
-        // inc.y = 0;
-        return ((t_vd){-42, -42});
+        r.y = (int)(g->p.y / g->tilesz) * g->tilesz - 1;
+        inc.y = -g->tilesz;
     }
-    if (ray_angle > PI && ray_angle < 2 * PI) // facing up
+    if (FACING_DOWN(ray_angle))
     {
-        r.y = ((int)(g->p.y / 64)) * 64 - 1;
-        r.x = g->p.x + (r.y - g->p.y) / tan(ray_angle);
-        inc.y = -64;
-        inc.x = inc.y / tan(ray_angle);
+        r.y = ((int)(g->p.y / g->tilesz)) * g->tilesz + g->tilesz;
+        inc.y = g->tilesz;
     }
- 
-    if (ray_angle > 0 && ray_angle < PI) // facing down
-    {
-        r.y = ((int)(g->p.y / 64)) * 64 + 64;
-        r.x = g->p.x + (r.y - g->p.y) / tan(ray_angle);
-        inc.y = 64;
-        inc.x = inc.y / tan(ray_angle);
-    }
-    // ! check grid cell at point 'r'
-    int step = 0;
-    int idx_x, idx_y;
+    r.x = g->p.x + (r.y - g->p.y) / tan(ray_angle);
+    inc.x = inc.y / tan(ray_angle);
+    
+    // *: check grid cell at point 'r'
+    bool hit = false;
     while (1)
     {
-        idx_x = (int)(r.x) / 64;
-        idx_y = (int)(r.y) / 64;
-        if (!check_map(idx_x, idx_y) || map[idx_y][idx_x] != 0)
+        if (!check_map_bound(g, r))
             break;
-        if (step > mapx)
+        hit = is_wall(g, r);
+        if (hit == true)
             break;
-        step++;
         r.x += inc.x;
         r.y += inc.y;
     }
-    // draw_ray(g->image, g->p, r, YLW);  
+    draw_ray(g->image, g->p, r, YLW);  
     return (r);   
 }
 
+/*
+    ! Vertical (axix x)
+TODO : find first intersection point
+    * FACING LEFT
+        ? Bx = floor(Px/tilesz) * tilesz - 1
+    * FACING RIGHT
+        ? Bx = floor(Px/tilesz) * tilesz + tilesz
+    ? By = Py + (Px - Bx) * tan
+    
+TODO : Find increment Value
+    * FACING LEFT
+        ? Xi = -tilesz
+    * FACING RIGHT
+        ? Xi = tilesz
+    ? Yi = Xi * tan
+*/
 t_vd vertical_hit(t_game *g, double ray_angle)
 {
     t_vd r;
     t_vd inc;
 
     // ! Find the first intersection point
-    if (ray_angle == PI / 2 || ray_angle == PI * 3 / 2) // ray_angley is vertical, no intersection
+    // // if (ray_angle == PI / 2 || ray_angle == PI * 3 / 2) // ray_angley is vertical, no intersection
+    // //     return ((t_vd){-42, -42});
+    if (FACING_LEFT(ray_angle))
     {
-        // r.x = g->p.x;
-        // r.y = g->p.y;
-        // inc.x = 0;
-        // inc.y = 0;
-        return ((t_vd){-42, -42});
-    }
-    if (ray_angle > PI / 2 && ray_angle < PI * 3 / 2) // facing left
-    {
-        r.x = ((int)(g->p.x / 64)) * 64 - 1;
-        r.y = g->p.y + (r.x - g->p.x) * tan(ray_angle);
-        inc.x = -64;
-        inc.y = inc.x * tan(ray_angle);
+        r.x = ((int)(g->p.x / g->tilesz)) * g->tilesz - 1;
+        inc.x = -g->tilesz;
     }
     
-    if (ray_angle < PI / 2 || ray_angle > PI * 3 / 2) // facing right
+    if (FACING_RIGHT(ray_angle))
     {
-        r.x = ((int)(g->p.x / 64)) * 64 + 64;
-        r.y = g->p.y + (r.x - g->p.x) * tan(ray_angle);
-        inc.x = 64;
-        inc.y = inc.x * tan(ray_angle);
+        r.x = (int)(g->p.x / g->tilesz) * g->tilesz + g->tilesz;
+        inc.x = g->tilesz;
+        
     }
-
+    r.y = g->p.y + (r.x - g->p.x) * tan(ray_angle);
+    inc.y = inc.x * tan(ray_angle);
     // ! check grid cell at point 'r'
     int step = 0;
     int idx_x, idx_y;
-    while (1)
+    while (check_map_bound(g, r))
     {
-        idx_x = (int)(r.x) / 64;
-        idx_y = (int)(r.y) / 64;
-        if (!check_map(idx_x, idx_y) || map[idx_y][idx_x] != 0)
+        idx_x = (int)(r.x) / g->tilesz;
+        idx_y = (int)(r.y) / g->tilesz;
+        if (is_wall(g, r))
             break;
-        if (step > mapx)
-            break;
+        // if (step > g->mapx)
+        //     break;
         step++;
         r.x += inc.x;
         r.y += inc.y;
     }
-    // draw_ray(g->image, g->p, r, BLACK);
+    draw_ray(g->image, g->p, r, BLACK);
     return (r);
 }

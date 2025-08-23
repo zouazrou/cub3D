@@ -6,47 +6,45 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/22 11:31:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:54:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int mapx;
-extern int mapy;
-extern int maps;
 extern int map[8][8];
 extern int bpp;
-extern int tilex, tiley;
 extern int line_bytes;
 extern int endian;
 
-void drow_quade(t_game *data, int x0, int y0, int col)
+void drow_quade(t_game *g, int x0, int y0, int col)
 {
-    int TILE_SIZE = W / mapx;
-    int start_x = x0 * TILE_SIZE;
-    int start_y = y0 * TILE_SIZE;
-    char *data_img = mlx_get_data_addr(data->image, &bpp, &line_bytes, &endian);
+    int start_x = x0 * g->tilesz;
+    int start_y = y0 * g->tilesz;
+    char *data_img = mlx_get_data_addr(g->image, &bpp, &line_bytes, &endian);
 
-    for (int y = 1; y < TILE_SIZE-1; y++)
+    for (int y = 0; y < g->tilesz; y++)
     {
-        for (int x = 1; x < TILE_SIZE-1; x++)
+        for (int x = 0; x < g->tilesz; x++)
         {
-            put_pixel_in_image(data->image, x0 + x, y0 + y, col);
+            if (!y || !x || y == g->tilesz-1 || y == g->tilesz-1)
+                put_pixel_in_image(g->image, x0 + x, y0 + y, BLACK);
+            else
+                put_pixel_in_image(g->image, x0 + x, y0 + y, col);
         }
     }
 }
 
-void    draw_map2D(t_game *data)
+void    draw_map2D(t_game *g)
 {
-    for (int y = 0; y < mapy; y++)
+    for (int y = 0; y < g->mapy; y++)
     {
-        for (int x = 0; x < mapx; x++)
+        for (int x = 0; x < g->mapx; x++)
         {
             if (map[y][x] == 1)
-                drow_quade(data, x * tilex, y * tiley, BLCK_SHDW);
-            else if (map[y][x] == 0)
-                drow_quade(data, x * tilex, y * tiley, BLUE);
+                drow_quade(g, x * g->tilesz, y * g->tilesz, BLCK_SHDW);
+            if (map[y][x] == 0)
+                drow_quade(g, x * g->tilesz, y * g->tilesz, BLUE);
         }
     }
 
@@ -55,9 +53,9 @@ void fill_img(void *img, int col)
 {
     // printf("debug : fill_img()\n");
     // printf("bpp = %d| line_bytes = %d| endian=  %d\n", bpp, line_bytes, endian);
-    for (int y = 0; y < H; y++)
+    for (int y = 0; y < HEIGHT; y++)
     {
-        for (int x = 0; x < W; x++)
+        for (int x = 0; x < WIDTH; x++)
             put_pixel_in_image(img, x, y, col);
     }
 }
@@ -82,7 +80,7 @@ void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
 
     for (int i = 0; i <= steps; i++)
     {
-        if (x < 0 || x >= W || y < 0 || y >= H)
+        if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
             break;
         put_pixel_in_image(img, (int)x, (int)y, color);
         // printf("dir ply : x = %d ====== y = %d\n", (int)x, (int)y);
@@ -90,7 +88,6 @@ void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
         y += y_inc;
         
     }
-    printf("\n\n\n\n\n\n");
 }
 
 void draw_ray(void *img, t_vi p0, t_vd p1, int color)
@@ -114,35 +111,32 @@ void draw_ray(void *img, t_vi p0, t_vd p1, int color)
 
     for (int i = 0; i <= steps; i++)
     {
-        if (x < 0 || x >= W || y < 0 || y >= H)
+        if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
             break;
-        put_pixel_in_image(img, (int)x, (int)y, color);
+        // put_pixel_in_image(img, (int)x, (int)y, color);
+        draw_big_point(img, (int)x, (int)y, 1, color);
         // printf("ray : x = %d ====== y = %d\n", (int)x, (int)y);
         x += inc.x;
         y += inc.y;
     }
-    // printf("\n\n\n\n\n\n\n");
 }
 
 void    display(t_game *g)
 {
-    // !init g_vars
-    maps = mapx * mapy;
-    tilex = W / mapx;
-    tiley = H / mapy;
-    // printf("tile-x[%d] | tile-y[%d]\n", tilex, tiley);
 
     // printf("debug : draw_map2D()\n");
-    fill_img(g->image, 0x0);
+    printf("\n-------------------------------------\n");
 
+    // ? Map
+    fill_img(g->image, 0x30302e);
     draw_map2D(g);
-    // draw player
-    draw_big_point(g->image, g->p.x, g->p.y, 4, GREEN);
-    // draw direction's plyer 
-    draw_dir(g->image, g->p, g->d, 36, GREEN);
-    // draw_dir(g, g->d, 15, GREEN);
-    // DDA(g->p, (t_vi){g->p.x+g->d.x*17, g->p.y+g->d.y*17}, g, GREEN);
-    // 
-    cast_rays(g);
+    
+    // ? Ray-Casting
+    ray_casting(g);
+    
+    // ? Player
+    draw_big_point(g->image, g->p.x, g->p.y, g->tilesz/10, RED);
+    draw_dir(g->image, g->p, g->d, g->tilesz/4, RED);
+    
     mlx_put_image_to_window(g->mlx, g->win, g->image, 0, 0);
 }
