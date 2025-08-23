@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/22 11:02:45 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:28:12 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,40 @@
 extern int bpp;
 extern int line_bytes;
 extern int endian;
-extern int tilex;
-extern int tiley;
 
-void    init_data(t_game *data)
+void    init_data(t_game *g)
 {
-    data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, W, H, "small game");
-    data->image = mlx_new_image(data->mlx, W, H);
-    // ? angle by rad
-    data->pa = (90)* PI / 180;
-    // data->pa = (PI*3/2) + (PI/4); //  degree
-    // data->pa = (PI) + (PI/4); //  degree
-    // ? convert angle to vector
-    data->d.x = cos(data->pa);
-    data->d.y = sin(data->pa);
-    printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", data->pa, data->d.x, data->d.y);
+    // ? MAP & MLX
+    g->mapx = 8;
+    g->mapy = 8;
+    g->mlx = mlx_init();
+    g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "small game");
+    g->image = mlx_new_image(g->mlx, WIDTH, HEIGHT);
     
-    data->p.x = 5.5 * 64;
-    data->p.y = 3.5 * 64;
-    data->sp = 5;
-    data->fov = 60;
-    data->plane.x = 0;
-    data->plane.y = 0.66;
+
+    
+    // ? screen setting
+    g->resolution = 20;
+    g->tilesz = 64;
+    // g->num_rays = 6; // ! TMP
+    g->num_rays = WIDTH / g->resolution;
+    g->move_speed = 10;
+    g->rotation_speed = deg_to_rad(3);
+    g->fov = deg_to_rad(60);
+    // g->plane.x = 0;
+    // g->plane.y = 0.66;
+
+    // ? Player's Postion
+    g->p.x = (5.5) * g->tilesz;
+    g->p.y = (3.5) * g->tilesz;
+    
+    // ? angle by rad
+    g->pa = deg_to_rad(90);
+    
+    // ? convert angle to vector
+    g->d.x = cos(g->pa);
+    g->d.y = sin(g->pa);
+    // printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", g->pa, g->d.x, g->d.y);
 }
 
 

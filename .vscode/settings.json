@@ -9,6 +9,8 @@
         "mlx.h": "c",
         "x.h": "c",
         "math.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "iterator": "c",
+        "cmath": "cpp"
     }
 }
