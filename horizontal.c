@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 18:36:53 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:45:29 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_vd    horizontal_hit(t_game *g, double ray_angle)
         r.x += inc.x;
         r.y += inc.y;
     }
-    draw_ray(g->image, g->p, r, YLW);  
+    // draw_ray(g->image, g->p, r, YLW);  
     return (r);   
 }
 
@@ -122,6 +122,6 @@ t_vd vertical_hit(t_game *g, double ray_angle)
         r.x += inc.x;
         r.y += inc.y;
     }
-    draw_ray(g->image, g->p, r, BLACK);
+    // draw_ray(g->image, g->p, r, BLACK);
     return (r);
 }
