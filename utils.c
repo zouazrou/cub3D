@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 18:42:52 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:47:56 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ bool    check_map_bound(t_game *g, t_vd position)
 int distance(t_vd p0, t_vi p1)
 {
     // printf("dis = %.2f", sqrt(pow(p0.x-p1.x, 2) + pow(p0.y-p1.y, 2)));
-    // return (sqrt(pow(p1.x-p0.x, 2) + pow(p1.y-p0.y, 2)));
-    return (sqrt((p1.x-p0.x)*(p1.x-p0.x)+(p1.y-p0.y)*(p1.y-p0.y)));
+    return (sqrt(pow(p1.x-p0.x, 2) + pow(p1.y-p0.y, 2)));
+    // return (sqrt((p1.x-p0.x)*(p1.x-p0.x)+(p1.y-p0.y)*(p1.y-p0.y)));
 }
 
 double  deg_to_rad(int degree)

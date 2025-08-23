@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 18:30:04 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:45:39 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void ray_casting(t_game *g)
     // printf("ray-inc [%.2f]\n", ray_inc);
     while (num_rays--)
     {
-        // w1 = horizontal_hit(g, normalize_angle(ray_angle));
+        w1 = horizontal_hit(g, normalize_angle(ray_angle));
         w2 = vertical_hit(g, (ray_angle));
-        // draw_ray(g->image, g->p, nearest_wall(g->p, w1, w2), YLW);
+        draw_ray(g->image, g->p, nearest_wall(g->p, w1, w2), YLW);
         ray_angle+= ray_inc;
     }
     
