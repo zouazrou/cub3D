@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 16:54:05 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 20:45:03 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ extern int endian;
 
 void drow_quade(t_game *g, int x0, int y0, int col)
 {
-    int start_x = x0 * g->tilesz;
-    int start_y = y0 * g->tilesz;
-    char *data_img = mlx_get_data_addr(g->image, &bpp, &line_bytes, &endian);
-
     for (int y = 0; y < g->tilesz; y++)
     {
         for (int x = 0; x < g->tilesz; x++)
@@ -120,23 +116,27 @@ void draw_ray(void *img, t_vi p0, t_vd p1, int color)
         y += inc.y;
     }
 }
+void    display_2D(t_game *g, int size_pxl)
+{
+    g->tilesz = size_pxl;
+    fill_img(g->image, 0x30302e);
+    draw_map2D(g);
+    ray_casting(g);
+    draw_big_point(g->image, g->p.x, g->p.y, g->tilesz/10, RED);
+    draw_dir(g->image, g->p, g->d, g->tilesz/4, RED);
+}
 
 void    display(t_game *g)
 {
 
     // printf("debug : draw_map2D()\n");
     printf("\n-------------------------------------\n");
-
     // ? Map
-    fill_img(g->image, 0x30302e);
-    draw_map2D(g);
     
     // ? Ray-Casting
-    ray_casting(g);
     
     // ? Player
-    draw_big_point(g->image, g->p.x, g->p.y, g->tilesz/10, RED);
-    draw_dir(g->image, g->p, g->d, g->tilesz/4, RED);
-    
+    display_2D(g, g->tilesz);
+    // display_3D(g, g->tilesz);
     mlx_put_image_to_window(g->mlx, g->win, g->image, 0, 0);
 }

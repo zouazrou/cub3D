@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 18:45:29 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 21:38:02 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_vd    horizontal_hit(t_game *g, double ray_angle)
     t_vd    inc;
 
     // *: Find the first Intersection Point
-    // // if (ray_angle == 0 || ray_angle == PI)
-    // //     return (printf("+++++++++++\n"), (t_vd){-42, -42});
+    if (ray_angle == 0 || ray_angle == PI)
+        return (printf("        ### no!!   ( -- )\n"), (t_vd){INT_MAX, INT_MAX});
     if (FACING_UP(ray_angle))
     {
         r.y = (int)(g->p.y / g->tilesz) * g->tilesz - 1;
@@ -91,8 +91,9 @@ t_vd vertical_hit(t_game *g, double ray_angle)
     t_vd inc;
 
     // ! Find the first intersection point
-    // // if (ray_angle == PI / 2 || ray_angle == PI * 3 / 2) // ray_angley is vertical, no intersection
-    // //     return ((t_vd){-42, -42});
+    if (ray_angle == PI / 2 || ray_angle == PI * 3 / 2) // ray_angley is vertical, no intersection
+        return (printf("        ### no!!   ( | )\n"), (t_vd){INT_MAX, INT_MAX});
+        // return ((t_vd){-42, -42});
     if (FACING_LEFT(ray_angle))
     {
         r.x = ((int)(g->p.x / g->tilesz)) * g->tilesz - 1;

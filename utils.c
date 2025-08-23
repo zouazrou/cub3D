@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 18:47:56 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 20:17:04 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ double  deg_to_rad(int degree)
 double  normalize_angle(double radian)
 {
     radian = fmod(radian, (PI*2));
-    if (radian < 0)
+    if (radian <  0)
         radian += (PI*2);
     return (radian);
 }
