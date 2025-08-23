@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 15:59:16 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/23 20:42:09 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void change_angle(int keysym, t_game *g)
 }
 int  close_win(void *ptr)
 {
+    (void)ptr;
     printf("Exit !\n");
     exit(0);
 }
@@ -66,7 +67,6 @@ int  close_win(void *ptr)
 
 int keyboard(int keysym, t_game *data)
 {
-    
     if (keysym == XK_Escape)
 		exit((printf("Exit ! (esc)\n"), 0));
     change_position(keysym, data);
