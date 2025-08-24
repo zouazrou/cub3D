@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 21:38:02 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:42:49 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ t_vd    horizontal_hit(t_game *g, double ray_angle)
 
     // *: Find the first Intersection Point
     if (ray_angle == 0 || ray_angle == PI)
-        return (printf("        ### no!!   ( -- )\n"), (t_vd){INT_MAX, INT_MAX});
+        return (printf("        ### no!!   ( -- )\n"), (t_vd){0, INT_MAX});
     if (FACING_UP(ray_angle))
     {
-        r.y = (int)(g->p.y / g->tilesz) * g->tilesz - 1;
+        r.y = (int)(g->p.y / g->tilesz) * g->tilesz - 0.001;
         inc.y = -g->tilesz;
     }
     if (FACING_DOWN(ray_angle))
@@ -65,7 +65,7 @@ t_vd    horizontal_hit(t_game *g, double ray_angle)
         r.x += inc.x;
         r.y += inc.y;
     }
-    // draw_ray(g->image, g->p, r, YLW);  
+    // draw_ray(g->img_2d, g->p, r, YLW);  
     return (r);   
 }
 
@@ -92,11 +92,11 @@ t_vd vertical_hit(t_game *g, double ray_angle)
 
     // ! Find the first intersection point
     if (ray_angle == PI / 2 || ray_angle == PI * 3 / 2) // ray_angley is vertical, no intersection
-        return (printf("        ### no!!   ( | )\n"), (t_vd){INT_MAX, INT_MAX});
+        return (printf("        ### no!!   ( | )\n"), (t_vd){0, INT_MAX});
         // return ((t_vd){-42, -42});
     if (FACING_LEFT(ray_angle))
     {
-        r.x = ((int)(g->p.x / g->tilesz)) * g->tilesz - 1;
+        r.x = ((int)(g->p.x / g->tilesz)) * g->tilesz - 0.001;
         inc.x = -g->tilesz;
     }
     
@@ -123,6 +123,6 @@ t_vd vertical_hit(t_game *g, double ray_angle)
         r.x += inc.x;
         r.y += inc.y;
     }
-    // draw_ray(g->image, g->p, r, BLACK);
+    // draw_ray(g->img_2d, g->p, r, BLACK);
     return (r);
 }

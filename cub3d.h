@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 21:37:20 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:30:27 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "minilibx-linux/mlx.h"
 
 // if your game window is 640×480, the projection plane is also 640×480.
-#define WIDTH 512
+#define WIDTH 600
 #define HEIGHT 512
 #define tile_size 64
 
@@ -59,8 +59,10 @@ typedef struct s_vi
 typedef struct s_game
 {
     void    *mlx;
-    void    *win;
-    void    *image;
+    void    *win_2d;
+    void    *win_3d;
+    void    *img_2d;
+    void    *img_3d;
     
     /*MAP*/
     int     mapx;
@@ -79,6 +81,8 @@ typedef struct s_game
     double  fov;
     int     resolution; // pixel
     int     num_rays;
+    // PLANE
+    double  distance_to_plane;
     /*FPS*/
     double  time;
     double  oldtime;
@@ -106,6 +110,9 @@ int     close_win(void *ptr);
 double  deg_to_rad(int degree);
 bool    is_wall(t_game *g, t_vd position);
 double  normalize_angle(double radian);
+void draw_wall_3d(t_game *g, int ray, double ray_angle, int distance_p_to_w, int col);
+// 
+// void draw_wall_3d(t_game *g, int x0, int wall_height_on_screen, int col);
 
 bool    FACING_UP(double angle);
 bool    FACING_DOWN(double angle);
