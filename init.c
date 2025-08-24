@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 20:57:19 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/24 16:26:19 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ void    init_data(t_game *g)
     g->mapx = 8;
     g->mapy = 8;
     g->mlx = mlx_init();
-    g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "small game");
-    g->image = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+    g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "2D");
+    g->img_2d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+    // g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
+    g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
+    g->img_3d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
     
 
     
     // ? screen setting
-    g->resolution = 16;
-    g->tilesz = 64;
+    g->resolution = 4;
+    g->tilesz = 32;
     // g->num_rays = 6; // ! TMP
     g->num_rays = WIDTH / g->resolution;
     g->move_speed = g->tilesz/10;
@@ -44,6 +47,11 @@ void    init_data(t_game *g)
     g->p.x = (4) * g->tilesz;
     g->p.y = (4) * g->tilesz;
     
+    // ? Plane
+        // * <=> DIS-TO-PLANE = WIDTH / TAN(FOV/2)
+    g->distance_to_plane = WIDTH / tan(g->fov/2);
+    g->distance_to_plane *= 0.66;
+    printf("distance to plane [%.2f]\n", g->distance_to_plane);
     // ? angle by rad
     g->pa = deg_to_rad(180);
     
@@ -66,19 +74,9 @@ void    draw_big_point(void *img, int x, int y,  int r, int col)
     }
 }
 /*
+? Wall-Height / dis-to-the-Wall
+!            == 
+? Projected-Wall-Height / dis-ply-to-projection-plane  
 
-x->
-Y|>
-            pi*4/3
-            |
-            |
-            |
-            |
-            |
-pi--------------------0
-            |          <
-            |
-            |
-            |
-            pi/2
+
 */
