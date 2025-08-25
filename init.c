@@ -61,12 +61,24 @@ void    init_data(t_game *g)
     // ? MAP & MLX
     g->mapx = 8;
     g->mapy = 8;
+    /***********/
     g->mlx = mlx_init();
+    if (!g->mlx)
+        exit((printf("-------------------mlx_init \n"), 1));
+    /***********/
     g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "2D");
+    if (!g->win_2d)
+        exit((printf("-------------------mlx_new_win 2D \n"), 42));
     g->img_2d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-    // g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
+    if (!g->img_2d)
+        exit((printf("-------------------mlx_new_img 2D\n"), 42));
+    /***********/
     g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
+    if (!g->win_3d)
+        exit((printf("-------------------mlx_new_win 3D \n"), 42));
     g->img_3d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+    if (!g->img_3d)
+        exit((printf("-------------------mlx_new_img 3D\n"), 42));
     
     // ? Plane
         // * <=> DIS-TO-PLANE = WIDTH / TAN(FOV/2)
