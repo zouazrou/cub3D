@@ -90,29 +90,34 @@ void ray_casting(t_game *g)
     {
         ray_h = horizontal_hit(g, ray_angle);
         ray_v = vertical_hit(g, ray_angle);
-        // g->ray[idx].position = nearest_wall(g, hit_pos_h, hit_pos_v);
-        if (ray_h.distance < ray_v.distance && ray_h.hit_wall == true)
-        {
-            g->ray[idx] = ray_h;
-            g->ray[idx].color = WHITE;
-        }
-        else if (ray_h.distance > ray_v.distance && ray_v.hit_wall == true)
-        {
-            g->ray[idx] = ray_v;
-            g->ray[idx].color = WHITE;
-        }
-        else if (ray_h.hit_wall == true)
+        if (ray_h.hit_wall && !ray_v.hit_wall)
         {
             g->ray[idx] = ray_h;
             g->ray[idx].color = GREEN;
         }
-        else if (ray_v.hit_wall == true)
+        else if (!ray_h.hit_wall && ray_v.hit_wall)
         {
             g->ray[idx] = ray_v;
-            g->ray[idx].color = RED;
+            g->ray[idx].color = GREEN;
+        }
+        else if (ray_h.hit_wall && ray_v.hit_wall)
+        {
+            if (ray_h.distance < ray_v.distance)
+            {
+                g->ray[idx] = ray_h;
+                g->ray[idx].color = WHITE;
+            }
+            else
+            {
+                g->ray[idx] = ray_v;
+                g->ray[idx].color = WHITE;
+            }
         }
         else
+        {
+
             printf("-------ERROR-------ray num [%d] CHI 7AAAJA MAHIYACH HAN !!\n", idx);
+        }
         // printf("---------INTERSEC COORDINATE [%.2f, %.2f]\n", wall.x, wall.y);
         draw_ray(g->img_2d, g->ply.position, g->ray[idx].position, YLW);
         //!aaaaaaaaaaaaaaaaaaaaaaaa
