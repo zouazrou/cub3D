@@ -20,41 +20,42 @@ extern int map[8][8];
 
 */
 
-bool no_intersection(t_vi player, t_vd p)
-{
-    // if (player.y == INT_MAX && player.x == INT_MAX)
-    // {
-    //     // printf("-----IS PLLLLLLLLLLLLLLLYER\n", p.x, p.y);
-    //     return (true);
-    // }
-    if (p.x < 0 || p.y < 0)
-        return (true);
-    if (p.x > WIDTH || p.y > HEIGHT)
-    {
-        // printf("-----NO INTERSEC  (%.2f , %.2f)\n", p.x, p.y);
-        return (1);
-    }
-    return (false);
-}
 
-t_vd    nearest_wall(t_game *g, t_vd w1, t_vd w2)
-{
-    int ret_1;
-    int ret_2;
-    t_vi player = g->ply.position;
+// bool no_intersection(t_vi player, t_vd p)
+// {
+//     // if (player.y == INT_MAX && player.x == INT_MAX)
+//     // {
+//     //     // printf("-----IS PLLLLLLLLLLLLLLLYER\n", p.x, p.y);
+//     //     return (true);
+//     // }
+//     if (p.x < 0 || p.y < 0)
+//         return (true);
+//     if (p.x > WIDTH || p.y > HEIGHT)
+//     {
+//         // printf("-----NO INTERSEC  (%.2f , %.2f)\n", p.x, p.y);
+//         return (1);
+//     }
+//     return (false);
+// }
+
+// t_vd    nearest_wall(t_game *g, t_vd w1, t_vd w2)
+// {
+//     int ret_1;
+//     int ret_2;
+//     t_vi player = g->ply.position;
     
-    ret_1 = no_intersection(player, w1);
-    ret_2 = no_intersection(player, w2);
-    if (ret_1 == true && ret_2 == true)
-        return (t_vd){0, 0};
-    if (ret_1 == true)
-        return w2;
-    // if (ret_2 == true)
-    //     return (g->ray_color = 160, w1);
-    // if (distance(w1, player) < distance(w2, player))
-    //     return (g->ray_color = 160, w1);
-    return (w2);
-}
+//     ret_1 = no_intersection(player, w1);
+//     ret_2 = no_intersection(player, w2);
+//     if (ret_1 == true && ret_2 == true)
+//         return (t_vd){0, 0};
+//     if (ret_1 == true)
+//         return w2;
+//     // if (ret_2 == true)
+//     //     return (g->ray_color = 160, w1);
+//     // if (distance(w1, player) < distance(w2, player))
+//     //     return (g->ray_color = 160, w1);
+//     return (w2);
+// }
 
 /*
 

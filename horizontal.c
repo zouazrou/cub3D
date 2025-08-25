@@ -15,6 +15,14 @@
 
 extern int map[8][8];
 
+void    init_ray_var(t_ray *ray, double ray_angle)
+{
+    ray->angle = normalize_angle(ray_angle);
+    ray->hit_wall = false;
+    ray->color = RED;
+    ray->position = (t_vd){INT_MAX, 0};
+    ray->inc = (t_vd){0, 0};
+}
 /*
     ! Horizontal (axix x)
 TODO : find first intersection point
@@ -51,11 +59,7 @@ t_ray    horizontal_hit(t_game *g, double ray_angle)
 {   
     t_ray ray;
 
-    ray.angle = normalize_angle(ray_angle);
-    ray.hit_wall = false;
-    ray.color = RED;
-    ray.position = (t_vd){INT_MAX, 0};
-    ray.inc = (t_vd){0, 0};
+    init_ray_var(&ray, ray_angle);
     //test whether the ray is almost horizontal or almost vertical.
     if (fabs(sin(ray.angle)) < 1e-6) 
         return (printf("        @@@\n"), (t_ray){0});
@@ -100,11 +104,7 @@ t_ray vertical_hit(t_game *g, double ray_angle)
 {
     t_ray ray;
 
-    ray.angle = normalize_angle(ray_angle);
-    ray.hit_wall = false;
-    ray.color = RED;
-    ray.position = (t_vd){INT_MAX, 0};
-    ray.inc = (t_vd){0, 0};
+    init_ray_var(&ray, ray_angle);
     // ! Find the first intersection point
     // if (ray.angle == PI / 2 || ray.angle == PI * 3 / 2) // ray_angley is vertical, no intersection
     if (fabs(cos(ray.angle)) < 1e-6)
