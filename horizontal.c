@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/24 17:42:49 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:02:11 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,46 @@ TODO : Find increment Value
     ? Xi = Yi / tan
 */
 // ! Has problem in this fn
-t_vd    horizontal_hit(t_game *g, double ray_angle)
+void    increment_to_other_point(t_game *g, t_ray *ray)
 {
-    t_vd    r;
-    t_vd    inc;
+    while (check_map_bound(g, ray->position))
+    {
+        if (is_wall(g, ray->position) == true)
+        {
+            ray->hit_wall = true;
+            break;
+        }
+        ray->position.x += ray->inc.x;
+        ray->position.y += ray->inc.y;
+    }
+    ray->distance = distance(ray->position, g->ply.position);
+}
+t_ray    horizontal_hit(t_game *g, double ray_angle)
+{   
+    t_ray ray;
 
+    ray.angle = normalize_angle(ray_angle);
     // *: Find the first Intersection Point
-    if (ray_angle == 0 || ray_angle == PI)
-        return (printf("        ### no!!   ( -- )\n"), (t_vd){0, INT_MAX});
-    if (FACING_UP(ray_angle))
+    if (ray.angle == 0 || ray.angle == PI)
+        return (printf("        @@@\n"), (t_ray){0});
+    if (FACING_UP(ray.angle))
     {
-        r.y = (int)(g->p.y / g->tilesz) * g->tilesz - 0.001;
-        inc.y = -g->tilesz;
+        ray.position.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz - 0.0001;
+        ray.inc.y = -g->tilesz;
     }
-    if (FACING_DOWN(ray_angle))
+    if (FACING_DOWN(ray.angle))
     {
-        r.y = ((int)(g->p.y / g->tilesz)) * g->tilesz + g->tilesz;
-        inc.y = g->tilesz;
+        ray.position.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz + g->tilesz;
+        ray.inc.y = g->tilesz;
     }
-    r.x = g->p.x + (r.y - g->p.y) / tan(ray_angle);
-    inc.x = inc.y / tan(ray_angle);
+    ray.position.x = g->ply.position.x + (ray.position.y - g->ply.position.y) / tan(ray.angle);
+    ray.inc.x = ray.inc.y / tan(ray.angle);
     
     // *: check grid cell at point 'r'
-    bool hit = false;
-    while (1)
-    {
-        if (!check_map_bound(g, r))
-            break;
-        hit = is_wall(g, r);
-        if (hit == true)
-            break;
-        r.x += inc.x;
-        r.y += inc.y;
-    }
-    // draw_ray(g->img_2d, g->p, r, YLW);  
-    return (r);   
+    increment_to_other_point(g, &ray);
+    
+    // draw_ray(g->img_2d, g->ply.position, r, YLW);  
+    return (ray);   
 }
 
 /*
@@ -85,44 +90,29 @@ TODO : Find increment Value
         ? Xi = tilesz
     ? Yi = Xi * tan
 */
-t_vd vertical_hit(t_game *g, double ray_angle)
+t_ray vertical_hit(t_game *g, double ray_angle)
 {
-    t_vd r;
-    t_vd inc;
+    t_ray ray;
 
+    ray.angle = normalize_angle(ray_angle);
     // ! Find the first intersection point
-    if (ray_angle == PI / 2 || ray_angle == PI * 3 / 2) // ray_angley is vertical, no intersection
-        return (printf("        ### no!!   ( | )\n"), (t_vd){0, INT_MAX});
-        // return ((t_vd){-42, -42});
-    if (FACING_LEFT(ray_angle))
+    if (ray.angle == PI / 2 || ray.angle == PI * 3 / 2) // ray_angley is vertical, no intersection
+        return (printf("        ### no!!   ( | )\n"), (t_ray){0});
+    if (FACING_LEFT(ray.angle))
     {
-        r.x = ((int)(g->p.x / g->tilesz)) * g->tilesz - 0.001;
-        inc.x = -g->tilesz;
+        ray.position.x = (int)(g->ply.position.x / g->tilesz) * g->tilesz - 0.0001;
+        ray.inc.x = -g->tilesz;
     }
+    if (FACING_RIGHT(ray.angle))
+    {
+        ray.position.x = (int)(g->ply.position.x / g->tilesz) * g->tilesz + g->tilesz;
+        ray.inc.x = g->tilesz;
+    }
+    ray.position.y = g->ply.position.y + (ray.position.x - g->ply.position.x) * tan(ray.angle);
+    ray.inc.y = ray.inc.x * tan(ray.angle);
     
-    if (FACING_RIGHT(ray_angle))
-    {
-        r.x = (int)(g->p.x / g->tilesz) * g->tilesz + g->tilesz;
-        inc.x = g->tilesz;
-        
-    }
-    r.y = g->p.y + (r.x - g->p.x) * tan(ray_angle);
-    inc.y = inc.x * tan(ray_angle);
-    // ! check grid cell at point 'r'
-    int step = 0;
-    int idx_x, idx_y;
-    while (check_map_bound(g, r))
-    {
-        idx_x = (int)(r.x) / g->tilesz;
-        idx_y = (int)(r.y) / g->tilesz;
-        if (is_wall(g, r))
-            break;
-        // if (step > g->mapx)
-        //     break;
-        step++;
-        r.x += inc.x;
-        r.y += inc.y;
-    }
-    // draw_ray(g->img_2d, g->p, r, BLACK);
-    return (r);
+    // * check grid cell at point 'r'
+    increment_to_other_point(g, &ray);
+    // draw_ray(g->img_2d, g->ply.position, r, BLACK);
+    return (ray);
 }

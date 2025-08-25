@@ -11,6 +11,8 @@
         "math.h": "c",
         "stdio.h": "c",
         "iterator": "c",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "limits.h": "c",
+        "complex": "c"
     }
 }
