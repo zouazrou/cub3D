@@ -146,7 +146,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 void    draw_big_point(void *img, int x, int y,  int r, int col);
 void    draw_ray(void *img, t_vi p0, t_vd p1, int color);
 void    put_pixel_in_image(void *image, int x, int y, int col);
-double  deg_to_rad(int degree);
+double  deg2rad(int degree);
 void    ft_clean(t_game *g, bool ter);
 
 

@@ -4,7 +4,8 @@ CC = cc
 CFLAGS = -g 
 MLX_FLAGS = -lXext -lX11
 
-SRC = main.c init.c utils.c utils2.c keypress.c ray.c horizontal.c display.c clean.c
+SRC = main.c init.c utils.c utils2.c keypress.c ray.c\
+		horizontal.c display.c clean.c check_direction.c\
 
 MLX_PATH = minilibx-linux/
 

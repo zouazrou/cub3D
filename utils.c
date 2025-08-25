@@ -47,9 +47,9 @@ int distance(t_vd p0, t_vi p1)
     // return (sqrt((p1.x-p0.x)*(p1.x-p0.x)+(p1.y-p0.y)*(p1.y-p0.y)));
 }
 
-double  deg_to_rad(int degree)
+double  deg2rad(int degree)
 {
-    return (degree * PI /180);
+    return (degree * (PI / 180));
 }
 
 double  normalize_angle(double radian)
@@ -72,40 +72,12 @@ bool    is_wall(t_game *g, t_vd position)
     return (false);
 }
 
-bool    FACING_DOWN(double angle)
-{
-    if (angle > 0 && angle < PI)
-        return (true);
-    return (false);
-}
-
-bool    FACING_UP(double angle)
-{
-    // if (angle > PI && angle < 2 * PI)
-    //     return (true);
-    // return (false);
-    return (!FACING_DOWN(angle));
-}
-
-bool    FACING_RIGHT(double angle)
-{
-    if (angle < PI / 2 || angle > PI * 3 / 2)
-        return (true);
-    return (false);
-}
-
-bool    FACING_LEFT(double angle)
-{
-    // if (angle > PI / 2 && angle < PI * 3 / 2)
-    //     return (true);
-    // return (false);
-    return (!FACING_RIGHT(angle)); 
-}
-
 void draw_wall_3d(t_game *g, int idx)
 {
     int y0;
     int x0;
+    int x;
+    int y;
     int wall_height_on_screen;
     t_ray *r;
 
@@ -115,14 +87,15 @@ void draw_wall_3d(t_game *g, int idx)
     wall_height_on_screen = g->distance_to_plane * (double)(g->tilesz/(double)r->distance);
     x0 = idx * g->resolution;
     y0 = (HEIGHT/2) - (wall_height_on_screen/2);
-    
+    if (y0 < 0)
+        y0 = 0;
     if (wall_height_on_screen >= HEIGHT)
         wall_height_on_screen = HEIGHT-1;
-    for (int y = 0; y < wall_height_on_screen; y++)
+    for (y = 0; y < wall_height_on_screen; y++)
     {
-        for (int x = 0; x < g->resolution; x+=1)
+        for (x = 0; x < g->resolution; x++)
         {
-            // if ((y0 + y) < HEIGHT)
+            if (x0 + x < WIDTH && y0 + y < HEIGHT)
                 put_pixel_in_image(g->img_3d, x0 + x, y0 + y, g->ray[idx].color);
         }
     }

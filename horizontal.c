@@ -46,17 +46,23 @@ void    increment_to_other_point(t_game *g, t_ray *ray)
     }
     ray->distance = distance(ray->position, g->ply.position);
 }
+
 t_ray    horizontal_hit(t_game *g, double ray_angle)
 {   
     t_ray ray;
 
     ray.angle = normalize_angle(ray_angle);
-    // *: Find the first Intersection Point
-    if (ray.angle == 0 || ray.angle == PI)
+    ray.hit_wall = false;
+    ray.color = RED;
+    ray.position = (t_vd){INT_MAX, 0};
+    ray.inc = (t_vd){0, 0};
+    //test whether the ray is almost horizontal or almost vertical.
+    if (fabs(sin(ray.angle)) < 1e-6) 
         return (printf("        @@@\n"), (t_ray){0});
+    // *: Find the first Intersection Point
     if (FACING_UP(ray.angle))
     {
-        ray.position.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz - 0.0001;
+        ray.position.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz - 1;
         ray.inc.y = -g->tilesz;
     }
     if (FACING_DOWN(ray.angle))
@@ -95,12 +101,17 @@ t_ray vertical_hit(t_game *g, double ray_angle)
     t_ray ray;
 
     ray.angle = normalize_angle(ray_angle);
+    ray.hit_wall = false;
+    ray.color = RED;
+    ray.position = (t_vd){INT_MAX, 0};
+    ray.inc = (t_vd){0, 0};
     // ! Find the first intersection point
-    if (ray.angle == PI / 2 || ray.angle == PI * 3 / 2) // ray_angley is vertical, no intersection
-        return (printf("        ### no!!   ( | )\n"), (t_ray){0});
+    // if (ray.angle == PI / 2 || ray.angle == PI * 3 / 2) // ray_angley is vertical, no intersection
+    if (fabs(cos(ray.angle)) < 1e-6)
+        return (printf("        ### no!!   ( | )\n"), ray);
     if (FACING_LEFT(ray.angle))
     {
-        ray.position.x = (int)(g->ply.position.x / g->tilesz) * g->tilesz - 0.0001;
+        ray.position.x = (int)(g->ply.position.x / g->tilesz) * g->tilesz - 1;
         ray.inc.x = -g->tilesz;
     }
     if (FACING_RIGHT(ray.angle))

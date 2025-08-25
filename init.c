@@ -28,13 +28,13 @@ void    init_player(t_game *g)
     g->ply.move_speed = g->tilesz / 10;
     if (g->tilesz < 10)
         g->ply.move_speed = 9;
-    g->ply.rotation_speed = deg_to_rad(2);
+    g->ply.rotation_speed = deg2rad(2);
     
     // ? Player's Postion
     g->ply.position.x = (4) * g->tilesz;
     g->ply.position.y = (4) * g->tilesz;
         // ? angle by rad
-    g->ply.angle = deg_to_rad(360-90);
+    g->ply.angle = deg2rad(360-90);
     // ? convert angle to vector
     // g->ply.direction.x = cos(g->ply.angle);
     // g->ply.direction.y = sin(g->ply.angle);
@@ -50,7 +50,7 @@ void    init_data(t_game *g)
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
 
     
-    g->fov = deg_to_rad(60);
+    g->fov = deg2rad(60);
     // g->plane.x = 0;
     // g->plane.y = 0.66;
     // ? Player
