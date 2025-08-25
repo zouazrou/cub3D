@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/24 15:40:13 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:35:14 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void fill_img(void *img, int col)
             put_pixel_in_image(img, x, y, col);
     }
 }
-void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
+void draw_dir(t_game *g, int len, int color)
 {
     // compute end point
-    float x2 = point.x + dir.x * len;
-    float y2 = point.y + dir.y * len;
+    float x2 = g->ply.position.x + cos(g->ply.angle) * len;
+    float y2 = g->ply.position.y + sin(g->ply.angle) * len;
 
-    float dx = x2 - point.x;
-    float dy = y2 - point.y;
+    float dx = x2 - g->ply.position.x;
+    float dy = y2 - g->ply.position.y;
 
     int steps = fabs(dy);
     if (fabs(dx) > fabs(dy))
@@ -71,14 +71,14 @@ void draw_dir(void *img, t_vi point, t_vd dir, int len, int color)
     float x_inc = dx / steps;
     float y_inc = dy / steps;
 
-    float x = point.x;
-    float y = point.y;
+    float x = g->ply.position.x;
+    float y = g->ply.position.y;
 
     for (int i = 0; i <= steps; i++)
     {
         if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
             break;
-        put_pixel_in_image(img, (int)x, (int)y, color);
+        put_pixel_in_image(g->img_2d, (int)x, (int)y, color);
         // printf("dir ply : x = %d ====== y = %d\n", (int)x, (int)y);
         x += x_inc;
         y += y_inc;
@@ -116,28 +116,22 @@ void draw_ray(void *img, t_vi p0, t_vd p1, int color)
         y += inc.y;
     }
 }
-void    display_2D(t_game *g, int size_pxl)
-{
-    g->tilesz = size_pxl;
-    fill_img(g->img_2d, 0x30302e);
-    fill_img(g->img_3d, 0x0);
-    draw_map2D(g);
-    ray_casting(g);
-    draw_big_point(g->img_2d, g->p.x, g->p.y, g->tilesz/10, RED);
-    draw_dir(g->img_2d, g->p, g->d, g->tilesz/4, RED);
-}
 
 void    display(t_game *g)
 {
 
     // printf("debug : draw_map2D()\n");
-    printf("\n-------------------------------------\n");
+    printf("\n====================================================\n");
     // ? Map
     
     // ? Ray-Casting
-    
+    fill_img(g->img_2d, 0x30302e);
+    fill_img(g->img_3d, 0x0);
+    draw_map2D(g);
+    ray_casting(g);
+    draw_big_point(g->img_2d, g->ply.position.x, g->ply.position.y, g->tilesz/10, RED);
+    draw_dir(g, g->tilesz/4, RED);
     // ? Player
-    display_2D(g, g->tilesz);
     mlx_put_image_to_window(g->mlx, g->win_3d, g->img_3d, 0, 0);
     mlx_put_image_to_window(g->mlx, g->win_2d, g->img_2d, 0, 0);
 }

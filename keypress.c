@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/23 20:42:09 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:39:59 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,51 @@
 
 void change_position(int keysym, t_game *g)
 {
-    t_vi    p = g->p;
-    int     speed = g->move_speed;
-
-    if (keysym == XK_w)
+    double  move;
+    t_vi    new_position;
+    
+    move = g->ply.move_speed;
+    new_position = g->ply.position;
+    if (keysym == XK_w) // forward
     {
-        if ((p.y - speed >= speed))
-            g->p.y -= speed;
-        else
-            g->p.y = speed;		
+        new_position.x += cos(g->ply.angle) * move;
+        new_position.y += sin(g->ply.angle) * move;
     }
-    else if (keysym == XK_s)
+    if (keysym == XK_s) // backward
     {
-        if ((p.y + speed < HEIGHT))
-            g->p.y += speed;
-        else
-            g->p.y = HEIGHT-speed;
+        new_position.x -= cos(g->ply.angle) * move;
+        new_position.y -= sin(g->ply.angle) * move;
     }
-    else if (keysym == XK_a)
+    if (keysym == XK_a)
     {
-        if ((p.x - speed >= speed))
-            g->p.x -= speed;
-        else
-            g->p.x = speed;		
+        new_position.x += cos(g->ply.angle - PI/2) * move;
+        new_position.y += sin(g->ply.angle - PI/2) * move;
     }
-    else if (keysym == XK_d)
+    if (keysym == XK_d)
     {
-        if ((p.x + speed < WIDTH))
-            g->p.x += speed;
-        else
-            g->p.x = WIDTH-speed;
+        new_position.x += cos(g->ply.angle + PI/2) * move;
+        new_position.y += sin(g->ply.angle + PI/2) * move;
     }
+    if (new_position.x < g->tilesz/10)
+        new_position.x = g->tilesz/10;
+    if (new_position.y < g->tilesz/10)
+        new_position.y = g->tilesz/10;
+    
+    if (new_position.x > WIDTH-g->tilesz/10)
+        new_position.x = WIDTH-g->tilesz/10;
+    if (new_position.y > HEIGHT-g->tilesz/10)
+        new_position.y = HEIGHT-g->tilesz/10;
+    g->ply.position = new_position;
 }
+
 void change_angle(int keysym, t_game *g)
 {
     if (keysym == XK_Left)
-        g->pa = normalize_angle(g->pa - g->rotation_speed);
+        g->ply.angle = normalize_angle(g->ply.angle - g->ply.rotation_speed);
     if (keysym == XK_Right)
-        g->pa = normalize_angle(g->pa + g->rotation_speed);
-    g->d.x = cos(g->pa);
-    g->d.y = sin(g->pa);
-    return;
+        g->ply.angle = normalize_angle(g->ply.angle + g->ply.rotation_speed);
+    // g->ply.direction.x = cos(g->ply.angle);
+    // g->ply.direction.y = sin(g->ply.angle);
 }
 int  close_win(void *ptr)
 {
@@ -64,15 +68,13 @@ int  close_win(void *ptr)
     exit(0);
 }
 
-
 int keyboard(int keysym, t_game *data)
 {
     if (keysym == XK_Escape)
-		exit((printf("Exit ! (esc)\n"), 0));
+		ft_clean(data, true);
+    
     change_position(keysym, data);
     change_angle(keysym, data);
-    
-
     display(data);
 	return (0);   
 }

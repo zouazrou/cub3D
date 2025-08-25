@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/24 17:55:01 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:58:15 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ bool no_intersection(t_vi player, t_vd p)
     return (false);
 }
 
-t_vd    nearest_wall(t_vi player, t_vd w1, t_vd w2)
+t_vd    nearest_wall(t_game *g, t_vd w1, t_vd w2)
 {
     int ret_1;
     int ret_2;
+    t_vi player = g->ply.position;
     
     ret_1 = no_intersection(player, w1);
     ret_2 = no_intersection(player, w2);
@@ -48,10 +49,10 @@ t_vd    nearest_wall(t_vi player, t_vd w1, t_vd w2)
         return (t_vd){0, 0};
     if (ret_1 == true)
         return w2;
-    if (ret_2 == true)
-        return w1;
-    if (distance(w1, player) < distance(w2, player))
-        return (w1);
+    // if (ret_2 == true)
+    //     return (g->ray_color = 160, w1);
+    // if (distance(w1, player) < distance(w2, player))
+    //     return (g->ray_color = 160, w1);
     return (w2);
 }
 
@@ -70,31 +71,52 @@ TODO : SO
 // }
 void ray_casting(t_game *g)
 {
-    t_vd w1 = {WIDTH/2, HEIGHT/2};
-    t_vd w2 = {WIDTH/2, HEIGHT/2};
+    t_ray   ray_h;
+    t_ray   ray_v;
     double  ray_angle;
     double  ray_inc;
-    int     ray;
-    t_vd    wall;
+    int     idx;
     
-    ray_angle = g->pa - (g->fov / 2);
+    ray_angle = g->ply.angle - (g->fov / 2);
     ray_inc = g->fov / g->num_rays;
-    ray = -1;
+    idx = -1;
     // printf("ply-angle [%.2f]\n", g->pa);
     // printf("fov [%.2f]\n", ((double)g->fov));
     // printf("fov/2 [%.2f]\n", ((double)g->fov / (double)2));
     // printf("ray-angle [%.2f]\n", ray_angle);
     // printf("ray-inc [%.2f]\n", ray_inc);
     
-    while (++ray < g->num_rays)
+    while (++idx < g->num_rays)
     {
-        w1 = horizontal_hit(g, normalize_angle(ray_angle));
-        w2 = vertical_hit(g, normalize_angle(ray_angle));
-        wall = nearest_wall(g->p, w1, w2);
+        ray_h = horizontal_hit(g, ray_angle);
+        ray_v = vertical_hit(g, ray_angle);
+        // g->ray[idx].position = nearest_wall(g, hit_pos_h, hit_pos_v);
+        if (ray_h.distance < ray_v.distance && ray_h.hit_wall == true)
+        {
+            g->ray[idx] = ray_h;
+            g->ray[idx].color = WHITE;
+        }
+        else if (ray_h.distance > ray_v.distance && ray_v.hit_wall == true)
+        {
+            g->ray[idx] = ray_v;
+            g->ray[idx].color = WHITE;
+        }
+        else if (ray_h.hit_wall == true)
+        {
+            g->ray[idx] = ray_h;
+            g->ray[idx].color = GREEN;
+        }
+        else if (ray_v.hit_wall == true)
+        {
+            g->ray[idx] = ray_v;
+            g->ray[idx].color = RED;
+        }
+        else
+            printf("-------ERROR-------ray num [%d] CHI 7AAAJA MAHIYACH HAN !!\n", idx);
         // printf("---------INTERSEC COORDINATE [%.2f, %.2f]\n", wall.x, wall.y);
-        draw_ray(g->img_2d, g->p, wall, YLW);
+        draw_ray(g->img_2d, g->ply.position, g->ray[idx].position, YLW);
         //!aaaaaaaaaaaaaaaaaaaaaaaa
-        draw_wall_3d(g, ray, ray_angle, distance(wall, g->p), 0xffffff);
+        draw_wall_3d(g, idx);
         ray_angle+= ray_inc;
     }
     

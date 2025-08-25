@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/24 17:59:07 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:42:22 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ void put_pixel_in_image(void *image, int x, int y, int col)
 
 bool    check_map_bound(t_game *g, t_vd position)
 {
-    int x;
-    int y;
-    
-    x = (int)(position.x) / g->tilesz;
-    y = (int)(position.y) / g->tilesz;
-    if (x < 0 || x >= g->mapx || y < 0 || y >= g->mapy)
+    if (position.x < 0 || position.x >= WIDTH)
+        return (false);
+    if (position.y < 0 || position.y >= HEIGHT)
         return (false);
     return (true);
 }
@@ -105,28 +102,34 @@ bool    FACING_LEFT(double angle)
     return (!FACING_RIGHT(angle)); 
 }
 
-void draw_wall_3d(t_game *g, int ray, double ray_angle, int distance_p_to_w, int col)
+void draw_wall_3d(t_game *g, int idx)
 {
     int y0;
     int x0;
     int wall_height_on_screen;
-    int dis_screen_to_w;
+    t_ray *r;
+
+    r = g->ray + idx;
     
-    dis_screen_to_w = cos(g->pa - ray_angle) * distance_p_to_w;
-    wall_height_on_screen = g->distance_to_plane * (double)(g->tilesz/(double)dis_screen_to_w);
-    x0 = ray * g->resolution;
+    r->distance = cos(g->ply.angle - r->angle) * r->distance;
+    wall_height_on_screen = g->distance_to_plane * (double)(g->tilesz/(double)r->distance);
+    x0 = idx * g->resolution;
     y0 = (HEIGHT/2) - (wall_height_on_screen/2);
     
     if (wall_height_on_screen >= HEIGHT)
         wall_height_on_screen = HEIGHT-1;
-    // col *= (60 / dis_screen_to_w);
-    // if 
     for (int y = 0; y < wall_height_on_screen; y++)
     {
         for (int x = 0; x < g->resolution; x+=1)
         {
             // if ((y0 + y) < HEIGHT)
-                put_pixel_in_image(g->img_3d, x0 + x, y0 + y, col);
+                put_pixel_in_image(g->img_3d, x0 + x, y0 + y, g->ray[idx].color);
         }
     }
 }
+
+int	create_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+

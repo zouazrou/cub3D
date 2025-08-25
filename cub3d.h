@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/24 17:30:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:35:57 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include "minilibx-linux/mlx.h"
 
 // if your game window is 640×480, the projection plane is also 640×480.
-#define WIDTH 600
+// #define WIDTH 600
+#define WIDTH 512
 #define HEIGHT 512
 #define tile_size 64
 
@@ -56,6 +57,30 @@ typedef struct s_vi
     int     y;
 } t_vi;
 
+typedef struct s_player
+{
+    t_vi    position;          // pixel
+    // t_vd    direction;
+    t_vd    plane;
+    double  angle;
+    
+    // ? mv & rot speed
+    int     move_speed; // pixel
+    double  rotation_speed;
+}           t_player;
+
+typedef struct s_ray
+{
+    int     color;
+    double  angle;    //
+    t_vd    position; //
+    double  distance; //
+    bool    hit_wall; //
+    t_vd    inc;      //
+
+
+}   t_ray;
+
 typedef struct s_game
 {
     void    *mlx;
@@ -70,47 +95,43 @@ typedef struct s_game
     int     tilesz;
     
     /*position Player*/
-    t_vi    p;          // pixel
-    double  pa;
-    t_vd    d;
-    t_vd    plane;
-    int     move_speed; // pixel
-    double  rotation_speed;
+    t_player    ply;
+
+    /*Ray*/
     
     /*tilesize*/
     double  fov;
     int     resolution; // pixel
+    // ray
     int     num_rays;
+    t_ray   *ray;
     // PLANE
     double  distance_to_plane;
     /*FPS*/
-    double  time;
-    double  oldtime;
+    // double  time;
+    // double  oldtime;
     // x-coordinate h
 }   t_game;
 
+int	create_rgb(int r, int g, int b);
 
-t_vd    horizontal_hit(t_game *g, double ray_angle);
-t_vd    vertical_hit(t_game *g, double ray_angle);
+
+t_ray    horizontal_hit(t_game *g, double ray_angle);
+t_ray    vertical_hit(t_game *g, double ray_angle);
 
 bool     check_map_bound(t_game *g, t_vd position);
-void    draw_big_point(void *img, int x, int y,  int r, int col);
 int     close_win(void *ptr);
-void    draw_ray(void *img, t_vi p0, t_vd p1, int color);
-// void    draw_line(void *img, t_vd p0, t_vd p1, int color);
-void    draw_dir(void *img, t_vi point, t_vd dir, int len, int color);
 void    display(t_game *data);
 
 int     distance(t_vd p0, t_vi p1);
 
 int		keyboard(int keysym, t_game *map);
 void    init_data(t_game *data);
-void    put_pixel_in_image(void *image, int x, int y, int col);
 int     close_win(void *ptr);
-double  deg_to_rad(int degree);
 bool    is_wall(t_game *g, t_vd position);
 double  normalize_angle(double radian);
-void draw_wall_3d(t_game *g, int ray, double ray_angle, int distance_p_to_w, int col);
+// void draw_wall_3d(t_game *g, int ray, double ray_angle, int distance_p_to_w);
+void draw_wall_3d(t_game *g, int idx);
 // 
 // void draw_wall_3d(t_game *g, int x0, int wall_height_on_screen, int col);
 
@@ -120,4 +141,33 @@ bool    FACING_RIGHT(double angle);
 bool    FACING_LEFT(double angle);
 void    ray_casting(t_game *g);
 
+// utils function
+void	*ft_calloc(size_t nmemb, size_t size);
+void    draw_big_point(void *img, int x, int y,  int r, int col);
+void    draw_ray(void *img, t_vi p0, t_vd p1, int color);
+void    put_pixel_in_image(void *image, int x, int y, int col);
+double  deg_to_rad(int degree);
+void    ft_clean(t_game *g, bool ter);
+
+
+
+
+
+
+// --------------------------
+// Reset
+# define RESET   "\033[0m"
+
+// Regular Colors
+# define TXT_BLACK   "\033[30m"
+# define TXT_RED     "\033[31m"
+# define TXT_GREEN   "\033[32m"
+# define TXT_YELLOW  "\033[33m"
+# define TXT_BLUE    "\033[34m"
+# define TXT_MAGENTA "\033[35m"
+# define TXT_CYAN    "\033[36m"
+# define TXT_WHITE   "\033[37m"
+
+// Bold
+# define BOLD    "\033[1m"
 #endif
