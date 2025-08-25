@@ -94,24 +94,28 @@ void ray_casting(t_game *g)
         if (ray_h.hit_wall && !ray_v.hit_wall)
         {
             g->ray[idx] = ray_h;
-            g->ray[idx].color = GREEN;
+            g->ray[idx].color = 160;
+            // g->ray[idx].color = GREEN;
         }
         else if (!ray_h.hit_wall && ray_v.hit_wall)
         {
             g->ray[idx] = ray_v;
-            g->ray[idx].color = GREEN;
+            g->ray[idx].color = 255;
+            // g->ray[idx].color = GREEN;
         }
         else if (ray_h.hit_wall && ray_v.hit_wall)
         {
             if (ray_h.distance < ray_v.distance)
             {
                 g->ray[idx] = ray_h;
-                g->ray[idx].color = WHITE;
+                g->ray[idx].color = 160;
+                // g->ray[idx].color = WHITE;
             }
             else
             {
                 g->ray[idx] = ray_v;
-                g->ray[idx].color = WHITE;
+                g->ray[idx].color = 255;
+                // g->ray[idx].color = WHITE;
             }
         }
         else

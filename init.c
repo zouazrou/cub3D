@@ -43,7 +43,7 @@ void    init_player(t_game *g)
 void    init_data(t_game *g)
 {
     // ? screen setting
-    g->resolution = 4;
+    g->resolution = 1;
     g->tilesz = 64;
     // g->num_rays = 6; // ! TMP
     g->num_rays = WIDTH / g->resolution;
