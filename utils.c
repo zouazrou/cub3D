@@ -83,8 +83,15 @@ void draw_wall_3d(t_game *g, int idx)
 
     r = g->ray + idx;
     
-    r->distance = cos(g->ply.angle - r->angle) * r->distance;
-    wall_height_on_screen = g->distance_to_plane * (double)(g->tilesz/(double)r->distance);
+    r->distance *= cos(g->ply.angle - r->angle) ;
+    /****LIGHT*****/
+    r->color *= (LIGHT_LVL / r->distance);
+    if (r->color < 0)
+        r->color = 0;
+    if (r->color > 255)
+        r->color = 255;
+    /*********/
+    wall_height_on_screen = g->distance_to_plane * (double)((g->tilesz)/(double)r->distance)/2;
     x0 = idx * g->resolution;
     y0 = (HEIGHT/2) - (wall_height_on_screen/2);
     if (y0 < 0)
@@ -96,7 +103,7 @@ void draw_wall_3d(t_game *g, int idx)
         for (x = 0; x < g->resolution; x++)
         {
             if (x0 + x < WIDTH && y0 + y < HEIGHT)
-                put_pixel_in_image(g->img_3d, x0 + x, y0 + y, g->ray[idx].color);
+                put_pixel_in_image(g->img_3d, x0 + x, y0 + y, create_rgb(g->ray[idx].color,g->ray[idx].color,g->ray[idx].color));
         }
     }
 }

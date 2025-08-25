@@ -32,6 +32,7 @@
 // #define HEIGHT 3000
 // #define PI 22/7
 #define PI 3.14159265358979323846
+#define LIGHT_LVL 100
 
 #define GREEN 0x00D100
 #define BLCK_SHDW 0Xbfafb2
