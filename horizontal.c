@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/25 11:02:11 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:24:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,21 @@ extern int map[8][8];
 
 void    init_ray_var(t_ray *ray, double ray_angle)
 {
-    ray->angle = normalize_angle(ray_angle);
-    ray->hit_wall = false;
     ray->color = RED;
+    ray->angle = normalize_angle(ray_angle);
     ray->position = (t_vd){INT_MAX, 0};
+    ray->distance = 0;
+    ray->hit_wall = false;
     ray->inc = (t_vd){0, 0};
+    ray->side = 0;
+}
+bool    check_map_bound(t_game *g, t_vd position)
+{
+    if (position.x < 0 || position.x >= WIDTH)
+        return (false);
+    if (position.y < 0 || position.y >= HEIGHT)
+        return (false);
+    return (true);
 }
 /*
     ! Horizontal (axix x)
@@ -68,11 +78,13 @@ t_ray    horizontal_hit(t_game *g, double ray_angle)
     {
         ray.position.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz - 1;
         ray.inc.y = -g->tilesz;
+        ray.side = NORTH;
     }
     if (FACING_DOWN(ray.angle))
     {
         ray.position.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz + g->tilesz;
         ray.inc.y = g->tilesz;
+        ray.side = SOUTH;
     }
     ray.position.x = g->ply.position.x + (ray.position.y - g->ply.position.y) / tan(ray.angle);
     ray.inc.x = ray.inc.y / tan(ray.angle);
@@ -113,11 +125,13 @@ t_ray vertical_hit(t_game *g, double ray_angle)
     {
         ray.position.x = (int)(g->ply.position.x / g->tilesz) * g->tilesz - 1;
         ray.inc.x = -g->tilesz;
+        ray.side = WEST;
     }
     if (FACING_RIGHT(ray.angle))
     {
         ray.position.x = (int)(g->ply.position.x / g->tilesz) * g->tilesz + g->tilesz;
         ray.inc.x = g->tilesz;
+        ray.side = EAST;
     }
     ray.position.y = g->ply.position.y + (ray.position.x - g->ply.position.x) * tan(ray.angle);
     ray.inc.y = ray.inc.x * tan(ray.angle);
