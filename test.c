@@ -1,13 +1,10 @@
 #include "cub3d.h"
-
+#include <float.h>
 int main(int argc, char const *argv[])
 {
-
-    double radian = -(PI);
-    radian = fmod(radian, (PI*2));
-    if (radian < 0)
-        radian += PI*2;
-    printf("rad {%.2f}\n", radian);
+    double nb = 4.999999999999999999999;
+    printf("before = %lf\n", DBL_MIN);
+    printf("after  = %lf\n", floor(DBL_MIN));
 
     return 0;
 }
