@@ -6,13 +6,34 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/25 12:39:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:40:19 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+extern int map[8][8];
 
+void check_wall(t_game *g, t_vi new_position)
+{
+    // if (new_position.x < g->tilesz / 10)
+    //     new_position.x = g->tilesz / 10;
+    // if (new_position.y < g->tilesz / 10)
+    //     new_position.y = g->tilesz / 10;
+    // if (new_position.x > WIDTH - g->tilesz / 10)
+    //     new_position.x = WIDTH - g->tilesz / 10;
+    // if (new_position.y > HEIGHT - g->tilesz / 10)
+    //     new_position.y = HEIGHT - g->tilesz / 10;
+    int index_x;
+    int index_y;
+
+    index_x = (int)(new_position.x) / g->tilesz;
+    index_y = (int)(new_position.y) / g->tilesz;
+    if (map[index_y][index_x] == 0)
+        g->ply.position = new_position;
+    else
+        printf(TXT_YELLOW"ERR : WALL !!\n"RESET);
+}
 void change_position(int keysym, t_game *g)
 {
     double  move;
@@ -44,12 +65,9 @@ void change_position(int keysym, t_game *g)
         new_position.x = g->tilesz/10;
     if (new_position.y < g->tilesz/10)
         new_position.y = g->tilesz/10;
-    
-    if (new_position.x > WIDTH-g->tilesz/10)
-        new_position.x = WIDTH-g->tilesz/10;
-    if (new_position.y > HEIGHT-g->tilesz/10)
-        new_position.y = HEIGHT-g->tilesz/10;
-    g->ply.position = new_position;
+    check_wall(g, new_position);
+    // if (!check_wall(g, new_position))
+        // g->ply.position = new_position;  
 }
 
 void change_angle(int keysym, t_game *g)

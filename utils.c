@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/25 10:42:22 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:23:59 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,7 @@ void put_pixel_in_image(void *image, int x, int y, int col)
     
 }
 
-bool    check_map_bound(t_game *g, t_vd position)
-{
-    if (position.x < 0 || position.x >= WIDTH)
-        return (false);
-    if (position.y < 0 || position.y >= HEIGHT)
-        return (false);
-    return (true);
-}
+
 
 int distance(t_vd p0, t_vi p1)
 {

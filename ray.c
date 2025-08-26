@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/25 10:58:15 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:57:29 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,7 @@ extern int map[8][8];
 /*
 ? Horizontal lines are parallel to the X-axis.
 * Vertical   lines are parallel to the Y-axis.
-! * handle if no intersections
 
-*/
-
-
-// bool no_intersection(t_vi player, t_vd p)
-// {
-//     // if (player.y == INT_MAX && player.x == INT_MAX)
-//     // {
-//     //     // printf("-----IS PLLLLLLLLLLLLLLLYER\n", p.x, p.y);
-//     //     return (true);
-//     // }
-//     if (p.x < 0 || p.y < 0)
-//         return (true);
-//     if (p.x > WIDTH || p.y > HEIGHT)
-//     {
-//         // printf("-----NO INTERSEC  (%.2f , %.2f)\n", p.x, p.y);
-//         return (1);
-//     }
-//     return (false);
-// }
-
-// t_vd    nearest_wall(t_game *g, t_vd w1, t_vd w2)
-// {
-//     int ret_1;
-//     int ret_2;
-//     t_vi player = g->ply.position;
-    
-//     ret_1 = no_intersection(player, w1);
-//     ret_2 = no_intersection(player, w2);
-//     if (ret_1 == true && ret_2 == true)
-//         return (t_vd){0, 0};
-//     if (ret_1 == true)
-//         return w2;
-//     // if (ret_2 == true)
-//     //     return (g->ray_color = 160, w1);
-//     // if (distance(w1, player) < distance(w2, player))
-//     //     return (g->ray_color = 160, w1);
-//     return (w2);
-// }
-
-/*
 
 TODO : WALL-HEIGHT/DIS-TO-WALL  = PROJECTED-WALL-HEIGHT / DIS-TO-PLANE
     ! DIS-TO-PLANE
@@ -66,10 +25,36 @@ TODO : WALL-HEIGHT/DIS-TO-WALL  = PROJECTED-WALL-HEIGHT / DIS-TO-PLANE
 TODO : SO
     ? PROJECTED-WALL-HEIGHT = DIS-TO-PLANE.(WALL-HEIGHT/DIS-TO-WALL)
 */
-// void    draw_wall_3D(t_game *g, t_vd wall)
-// {
-    
-// }
+
+void    choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
+{
+    if (ray_h->hit_wall && !ray_v->hit_wall)
+    {
+        *ray = *ray_h;
+        ray->color = 160;
+    }
+    else if (!ray_h->hit_wall && ray_v->hit_wall)
+    {
+        *ray = *ray_v;
+        ray->color = 255;
+    }
+    else if (ray_h->hit_wall && ray_v->hit_wall)
+    {
+        if (ray_h->distance < ray_v->distance)
+        {
+            *ray = *ray_h;
+            ray->color = 160;
+        }
+        else
+        {
+            *ray = *ray_v;
+            ray->color = 255;
+        }
+    }
+    else
+        printf(TXT_RED"-------ERROR-------ray num [%d] CHI 7AAAJA MAHIYACH HAN !!\n"RESET, index);
+}
+
 void ray_casting(t_game *g)
 {
     t_ray   ray_h;
@@ -91,40 +76,22 @@ void ray_casting(t_game *g)
     {
         ray_h = horizontal_hit(g, ray_angle);
         ray_v = vertical_hit(g, ray_angle);
-        if (ray_h.hit_wall && !ray_v.hit_wall)
-        {
-            g->ray[idx] = ray_h;
-            g->ray[idx].color = 160;
-            // g->ray[idx].color = GREEN;
-        }
-        else if (!ray_h.hit_wall && ray_v.hit_wall)
-        {
-            g->ray[idx] = ray_v;
-            g->ray[idx].color = 255;
-            // g->ray[idx].color = GREEN;
-        }
-        else if (ray_h.hit_wall && ray_v.hit_wall)
-        {
-            if (ray_h.distance < ray_v.distance)
-            {
-                g->ray[idx] = ray_h;
-                g->ray[idx].color = 160;
-                // g->ray[idx].color = WHITE;
-            }
-            else
-            {
-                g->ray[idx] = ray_v;
-                g->ray[idx].color = 255;
-                // g->ray[idx].color = WHITE;
-            }
-        }
-        else
-        {
-
-            printf("-------ERROR-------ray num [%d] CHI 7AAAJA MAHIYACH HAN !!\n", idx);
-        }
-        // printf("---------INTERSEC COORDINATE [%.2f, %.2f]\n", wall.x, wall.y);
-        draw_ray(g->img_2d, g->ply.position, g->ray[idx].position, YLW);
+        choose_nearest(g->ray + idx, &ray_h, &ray_v,    idx);
+        int col = WHITE;
+        if (g->ray[idx].side == NORTH)
+            col = RED;
+        // printf(TXT_RED"RAY\n"RESET);
+        if (g->ray[idx].side == SOUTH)
+            col = GREEN;
+        // printf(TXT_BLUE"RAY\n"RESET);
+        if (g->ray[idx].side == EAST)
+            col = BROWN;
+        // printf(TXT_MAGENTA"RAY\n"RESET);
+        if (g->ray[idx].side == WEST)
+            col = YLW;
+        // printf(TXT_GREEN"RAY\n"RESET);
+        draw_ray(g->img_2d, g->ply.position, g->ray[idx].position, col);
+        // draw_ray(g->img_2d, g->ply.position, g->ray[idx].position, g->ray[idx].color);
         //!aaaaaaaaaaaaaaaaaaaaaaaa
         draw_wall_3d(g, idx);
         ray_angle+= ray_inc;

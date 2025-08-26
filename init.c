@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/25 12:38:14 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/26 11:31:16 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void    init_data(t_game *g)
 
     
     g->fov = deg2rad(60);
-    // g->plane.x = 0;
-    // g->plane.y = 0.66;
     // ? Player
     init_player(g);
     
