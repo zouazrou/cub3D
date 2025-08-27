@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/26 16:13:06 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/27 13:42:21 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void draw_dir(t_game *g, int len, int color)
     }
 }
 
-void draw_ray(void *img, t_vi p0, t_vd p1, int color)
+void draw_ray(void *img, t_vd p0, t_vd p1, int color)
 {
     // compute end point
     t_vd    d;

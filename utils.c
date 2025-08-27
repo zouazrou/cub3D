@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/26 16:59:29 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/27 13:42:21 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void put_pixel_in_image(void *image, int x, int y, int col)
 
 
 
-int distance(t_vd p0, t_vi p1)
+int distance(t_vd p0, t_vd p1)
 {
     // printf("dis = %.2f", sqrt(pow(p0.x-p1.x, 2) + pow(p0.y-p1.y, 2)));
     return (sqrt(pow(p1.x-p0.x, 2) + pow(p1.y-p0.y, 2)));
