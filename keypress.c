@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/26 11:40:19 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/27 13:42:21 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int map[8][8];
 
-void check_wall(t_game *g, t_vi new_position)
+void check_wall(t_game *g, t_vd new_position)
 {
     // if (new_position.x < g->tilesz / 10)
     //     new_position.x = g->tilesz / 10;
@@ -37,7 +37,7 @@ void check_wall(t_game *g, t_vi new_position)
 void change_position(int keysym, t_game *g)
 {
     double  move;
-    t_vi    new_position;
+    t_vd    new_position;
     
     move = g->ply.move_speed;
     new_position = g->ply.position;

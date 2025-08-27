@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/26 16:43:43 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/27 13:42:21 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,9 @@ typedef struct s_vd
     double y;
 } t_vd;
 
-typedef struct s_vi
-{
-    int x;
-    int y;
-} t_vi;
-
 typedef struct s_player
 {
-    t_vi position; // pxl
+    t_vd position; // pxl
     double angle;  // rad
 
     // ? mv & rot speed
@@ -123,7 +117,7 @@ t_ray vertical_hit(t_game *g, double ray_angle);
 int close_win(void *ptr);
 void display(t_game *data);
 
-int distance(t_vd p0, t_vi p1);
+int distance(t_vd p0, t_vd p1);
 
 int keyboard(int keysym, t_game *map);
 void init_data(t_game *data);
@@ -142,7 +136,7 @@ void ray_casting(t_game *g);
 // utils function
 void *ft_calloc(size_t nmemb, size_t size);
 void draw_big_point(void *img, int x, int y, int r, int col);
-void draw_ray(void *img, t_vi p0, t_vd p1, int color);
+void draw_ray(void *img, t_vd p0, t_vd p1, int color);
 void put_pixel_in_image(void *image, int x, int y, int col);
 double deg2rad(int degree);
 void ft_clean(t_game *g, bool ter);

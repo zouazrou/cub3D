@@ -28,7 +28,7 @@ void	*mlx_init()
 	xvar->root = DefaultRootWindow(xvar->display);
 	xvar->cmap = DefaultColormap(xvar->display,xvar->screen);
 	xvar->depth = DefaultDepth(xvar->display,xvar->screen);
-	if (mlx_int_get_visual(xvar)==-1)
+	if (mlx_int_get_vdsual(xvar)==-1)
 	{
 		printf(ERR_NO_TRUECOLOR);
 		exit(1);

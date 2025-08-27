@@ -1,5 +1,5 @@
 /*
-** mlx_int_get_visual.c for MinilibX in 
+** mlx_int_get_vdsual.c for MinilibX in 
 ** 
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
@@ -18,7 +18,7 @@
 */
 
 
-int		mlx_int_get_visual(t_xvar *xvar)
+int		mlx_int_get_vdsual(t_xvar *xvar)
 {
   XVisualInfo	*vi;
   XVisualInfo	template;
