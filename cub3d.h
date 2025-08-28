@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/27 13:42:21 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 10:19:59 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@
 // #define WIDTH 600
 #define WIDTH 512
 #define HEIGHT 512
-#define tile_size 64
 
-// #define WIDTH 3000
-// #define HEIGHT 3000
 // #define PI 22/7
 #define PI 3.14159265358979323846
 #define LIGHT_LVL 40
@@ -60,14 +57,14 @@ typedef struct s_vd
     double y;
 } t_vd;
 
-typedef struct s_player
+typedef struct s_player // ! dir baalk
 {
     t_vd position; // pxl
     double angle;  // rad
 
     // ? mv & rot speed
-    int move_speed; // pxl
-    double rotation_speed;
+    double  move_speed; // pxl
+    double  rotation_speed;
 } t_player;
 
 typedef struct s_ray
@@ -114,10 +111,9 @@ int create_rgb(int r, int g, int b);
 t_ray horizontal_hit(t_game *g, double ray_angle);
 t_ray vertical_hit(t_game *g, double ray_angle);
 
-int close_win(void *ptr);
 void display(t_game *data);
 
-int distance(t_vd p0, t_vd p1);
+double distance(t_vd p0, t_vd p1);
 
 int keyboard(int keysym, t_game *map);
 void init_data(t_game *data);
@@ -134,12 +130,13 @@ bool FACING_LEFT(double angle);
 void ray_casting(t_game *g);
 
 // utils function
-void *ft_calloc(size_t nmemb, size_t size);
-void draw_big_point(void *img, int x, int y, int r, int col);
-void draw_ray(void *img, t_vd p0, t_vd p1, int color);
-void put_pixel_in_image(void *image, int x, int y, int col);
-double deg2rad(int degree);
-void ft_clean(t_game *g, bool ter);
+void    *ft_calloc(size_t nmemb, size_t size);
+void    draw_big_point(void *img, int x, int y, int r, int col);
+void    draw_ray(void *img, t_vd p0, t_vd p1, int color);
+void    put_pixel_in_image(void *image, int x, int y, int col);
+void    fill_img(void *img, int col, int h, int w);
+void    ft_clean(t_game *g, bool ter);
+double  deg2rad(int degree);
 
 // --------------------------
 // Reset

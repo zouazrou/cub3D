@@ -1,0 +1,15 @@
+cub3d.h
+main.c
+init.c
+disply.c
+horizontal.c
+check_direction.c
+utils.c
+clean.c
+utils2.c
+
+
+
+* You call mlx_get_data_addr() every time you put a pixel.
+This is very inefficient in a loop. Normally, you get the pointer
+once per frame and then write pixels directly
