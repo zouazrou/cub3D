@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/26 11:57:29 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:10:55 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,39 +61,44 @@ void ray_casting(t_game *g)
     t_ray   ray_v;
     double  ray_angle;
     double  ray_inc;
-    int     idx;
+    int     i;
     
     ray_angle = g->ply.angle - (g->fov / 2);
     ray_inc = g->fov / g->num_rays;
-    idx = -1;
+    i = -1;
     // printf("ply-angle [%.2f]\n", g->pa);
     // printf("fov [%.2f]\n", ((double)g->fov));
     // printf("fov/2 [%.2f]\n", ((double)g->fov / (double)2));
     // printf("ray-angle [%.2f]\n", ray_angle);
     // printf("ray-inc [%.2f]\n", ray_inc);
     
-    while (++idx < g->num_rays)
+    while (++i < g->num_rays)
     {
-        ray_h = horizontal_hit(g, ray_angle);
-        ray_v = vertical_hit(g, ray_angle);
-        choose_nearest(g->ray + idx, &ray_h, &ray_v,    idx);
+        ray_h = horizontal_hit(g, normalize_angle(ray_angle));
+        ray_v = vertical_hit(g, normalize_angle(ray_angle));
+        printf("\n[%d]\n", i);
+        printf("Horizontal wall [%.2f: %.2f]\n", ray_h.position.x, ray_h.position.y);
+        printf("vertical   wall [%.2f: %.2f]\n", ray_v.position.x, ray_v.position.y);
+        choose_nearest(g->ray + i, &ray_h, &ray_v,    i);
+        printf("nearest    wall [%.2f: %.2f]\n", g->ray[i].position.x, g->ray[i].position.y);
+        
         int col = WHITE;
-        if (g->ray[idx].side == NORTH)
+        if (g->ray[i].side == NORTH)
             col = RED;
         // printf(TXT_RED"RAY\n"RESET);
-        if (g->ray[idx].side == SOUTH)
+        if (g->ray[i].side == SOUTH)
             col = GREEN;
         // printf(TXT_BLUE"RAY\n"RESET);
-        if (g->ray[idx].side == EAST)
+        if (g->ray[i].side == EAST)
             col = BROWN;
         // printf(TXT_MAGENTA"RAY\n"RESET);
-        if (g->ray[idx].side == WEST)
+        if (g->ray[i].side == WEST)
             col = YLW;
         // printf(TXT_GREEN"RAY\n"RESET);
-        draw_ray(g->img_2d, g->ply.position, g->ray[idx].position, col);
-        // draw_ray(g->img_2d, g->ply.position, g->ray[idx].position, g->ray[idx].color);
+        // draw_ray(g->img_2d, g->ply.position, g->ray[i].position, col);
+        // draw_ray(g->img_2d, g->ply.position, g->ray[i].position, g->ray[i].color);
         //!aaaaaaaaaaaaaaaaaaaaaaaa
-        draw_wall_3d(g, idx);
+        draw_wall_3d(g, i);
         ray_angle+= ray_inc;
     }
     

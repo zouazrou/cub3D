@@ -1,7 +1,7 @@
 NAME = cub3D
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -lm
-CFLAGS = -g 
+CFLAGS = -Wall -Wextra -Werror 
+# CFLAGS = -g 
 MLX_FLAGS = -lXext -lX11
 
 SRC = main.c init.c utils.c utils2.c keypress.c ray.c\

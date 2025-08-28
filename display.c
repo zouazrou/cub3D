@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/27 13:42:21 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 08:25:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void    draw_map2D(t_game *g)
     }
 
 }
-void fill_img(void *img, int col)
+void fill_img(void *img, int col, int h, int w)
 {
     // printf("debug : fill_img()\n");
     // printf("bpp = %d| line_bytes = %d| endian=  %d\n", bpp, line_bytes, endian);
-    for (int y = 0; y < HEIGHT; y++)
+    for (int y = 0; y < h; y++)
     {
-        for (int x = 0; x < WIDTH; x++)
+        for (int x = 0; x < w; x++)
             put_pixel_in_image(img, x, y, col);
     }
 }
@@ -76,8 +76,8 @@ void draw_dir(t_game *g, int len, int color)
 
     for (int i = 0; i <= steps; i++)
     {
-        if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-            break;
+        // // if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+        // //     break;
         put_pixel_in_image(g->img_2d, (int)x, (int)y, color);
         // printf("dir ply : x = %d ====== y = %d\n", (int)x, (int)y);
         x += x_inc;
@@ -125,13 +125,13 @@ void    display(t_game *g)
     // ? Map
     
     // ? Ray-Casting
-    fill_img(g->img_2d, 0x30302e);
-    fill_img(g->img_3d, 0x0);
-    draw_map2D(g);
+    // fill_img(g->img_2d, 0x30302e);
+    fill_img(g->img_3d, 0x0, HEIGHT, WIDTH);
+    // draw_map2D(g);
     ray_casting(g);
-    draw_big_point(g->img_2d, g->ply.position.x, g->ply.position.y, g->tilesz/10, RED);
-    draw_dir(g, g->tilesz/4, RED);
+    // draw_big_point(g->img_2d, g->ply.position.x, g->ply.position.y, g->tilesz/10, RED);
+    // draw_dir(g, g->tilesz/4, RED);
     // ? Player
     mlx_put_image_to_window(g->mlx, g->win_3d, g->img_3d, 0, 0);
-    mlx_put_image_to_window(g->mlx, g->win_2d, g->img_2d, 0, 0);
+    // mlx_put_image_to_window(g->mlx, g->win_2d, g->img_2d, 0, 0);
 }

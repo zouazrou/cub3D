@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/26 16:58:51 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:46:56 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ void    init_ray(t_game *g)
 
 void    init_player(t_game *g)
 {
-    g->ply.move_speed = g->tilesz / 10;
-    if (g->tilesz < 10)
-        g->ply.move_speed = 9;
-    g->ply.rotation_speed = deg2rad(2);
+    g->ply.move_speed = 0.3 * g->tilesz;
+    g->ply.rotation_speed = deg2rad(1);
     
     // ? Player's Postion
-    g->ply.position.x = (4) * g->tilesz;
-    g->ply.position.y = (4) * g->tilesz;
+    g->ply.position.x = (1) * g->tilesz;
+    g->ply.position.y = (1) * g->tilesz;
         // ? angle by rad
-    g->ply.angle = deg2rad(360-90);
+    g->ply.angle = deg2rad(20);
     // ? convert angle to vector
     // g->ply.direction.x = cos(g->ply.angle);
     // g->ply.direction.y = sin(g->ply.angle);
@@ -44,7 +42,7 @@ void    init_data(t_game *g)
 {
     // ? screen setting
     g->resolution = 1;
-    g->tilesz = 64;
+    g->tilesz = 1;
     // g->num_rays = 6; // ! TMP
     g->num_rays = WIDTH / g->resolution;
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
@@ -62,27 +60,27 @@ void    init_data(t_game *g)
     /***********/
     g->mlx = mlx_init();
     if (!g->mlx)
-        exit((printf("-------------------mlx_init \n"), 1));
+        exit((printf(TXT_RED"-------------------mlx_init \n"RESET), 1));
     /***********/
-    g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "2D");
-    if (!g->win_2d)
-        exit((printf("-------------------mlx_new_win 2D \n"), 42));
-    g->img_2d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-    if (!g->img_2d)
-        exit((printf("-------------------mlx_new_img 2D\n"), 42));
+    // g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "2D");
+    // if (!g->win_2d)
+        // exit((printf("-------------------mlx_new_win 2D \n"), 42));
+    // g->img_2d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+    // if (!g->img_2d)
+        // exit((printf("-------------------mlx_new_img 2D\n"), 42));
     /***********/
     g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
     if (!g->win_3d)
-        exit((printf("-------------------mlx_new_win 3D \n"), 42));
+        exit((printf(TXT_RED"-------------------mlx_new_win 3D \n"RESET), 42));
     g->img_3d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
     if (!g->img_3d)
-        exit((printf("-------------------mlx_new_img 3D\n"), 42));
+        exit((printf(TXT_RED"-------------------mlx_new_img 3D\n"RESET), 42));
     
     // ? Plane
         // * <=> DIS-TO-PLANE = WIDTH / TAN(FOV/2)
-    g->distance_to_plane = WIDTH / tan(g->fov/2);
+    g->distance_to_plane = WIDTH / (2*tan(g->fov/2));
     // g->distance_to_plane *= 0.66;
-    printf("distance to plane [%.2f]\n", g->distance_to_plane);
+    printf(TXT_CYAN"distance to plane [%.2f]\n"RESET, g->distance_to_plane);
 
     // ? ray
 

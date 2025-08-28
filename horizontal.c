@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/26 17:00:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:01:22 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void    init_ray_var(t_ray *ray, double ray_angle)
 
 bool    check_win_bound(t_game *g, t_vd position)
 {
-    if (position.x < 0 || position.x >= WIDTH)
+    if (position.x < 0 || position.x >= g->mapx * g->tilesz)
         return (false);
-    if (position.y < 0 || position.y >= HEIGHT)
+    if (position.y < 0 || position.y >= g->mapy * g->tilesz)
         return (false);
     return (true);
 }
@@ -139,7 +139,7 @@ t_ray vertical_hit(t_game *g, double ray_angle)
         ray.side = EAST;
     }
     else
-        printf(TXT_RED"NOT UP OR DOWN !!"RESET);
+        printf(TXT_RED"NOT LEFT OR RIGHT !!"RESET);
 
     ray.position.y = g->ply.position.y + (ray.position.x - g->ply.position.x) * tan(ray.angle);
     ray.inc.y = ray.inc.x * tan(ray.angle);
