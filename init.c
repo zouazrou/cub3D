@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 16:23:52 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:12:14 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void    init_data(t_game *g)
 {
     // ? screen setting
     g->resolution = 1;
-    g->tilesz = 1;
-    // g->num_rays = 6; // ! TMP
+    g->tilesz = 16;
     g->num_rays = WIDTH / g->resolution;
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
 
@@ -62,12 +61,12 @@ void    init_data(t_game *g)
     if (!g->mlx)
         exit((printf(TXT_RED"-------------------mlx_init \n"RESET), 1));
     /***********/
-    // g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "2D");
-    // if (!g->win_2d)
-        // exit((printf("-------------------mlx_new_win 2D \n"), 42));
-    // g->img_2d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-    // if (!g->img_2d)
-        // exit((printf("-------------------mlx_new_img 2D\n"), 42));
+    g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "2D");
+    if (!g->win_2d)
+        exit((printf("-------------------mlx_new_win 2D \n"), 42));
+    g->img_2d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+    if (!g->img_2d)
+        exit((printf("-------------------mlx_new_img 2D\n"), 42));
     /***********/
     g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
     if (!g->win_3d)
@@ -78,7 +77,7 @@ void    init_data(t_game *g)
     
     // ? Plane
         // * <=> DIS-TO-PLANE = WIDTH / TAN(FOV/2)
-    g->distance_to_plane = (WIDTH/2.0) / (tan(g->fov/2.0));
+    g->distance_to_plane = (WIDTH/2.0) / (tan(g->fov/2.0)); // 
     // g->distance_to_plane *= 0.66;
     printf(TXT_CYAN"distance to plane [%.2f]\n"RESET, g->distance_to_plane);
 

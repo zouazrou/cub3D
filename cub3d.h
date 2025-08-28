@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 16:13:10 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:48:51 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 
 // if your game window is 640×480, the projection plane is also 640×480.
 // #define WIDTH 600
-#define WIDTH 512
-#define HEIGHT 512
+#define WIDTH 800
+#define HEIGHT 600
 
 // #define PI 22/7
 #define PI 3.14159265358979323846
 #define LIGHT_LVL 40
-
+#define MINIMAP_SIZE 0.2
 #define GREEN 0x00D100
 #define BLCK_SHDW 0Xbfafb2
 #define BLUE 0x3C6CAB
@@ -39,6 +39,9 @@
 #define WHITE 0xffffff
 #define YLW 0XFFFF00
 #define RED 0XFF0000
+#define LIGHT_BLUE 0x87CEEB
+#define DARK_GRAY 0x444444
+
 /*
 
 */

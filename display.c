@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 16:20:31 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 22:58:25 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,14 @@ void    display(t_game *g)
     // ? Map
     
     // ? Ray-Casting
-    // fill_img(g->img_2d, 0x30302e);
+    fill_img(g->img_2d, 0x30302e, HEIGHT, WIDTH);
     fill_img(g->img_3d, 0x0, HEIGHT, WIDTH);
-    // draw_map2D(g);
+    draw_map2D(g);
     ray_casting(g);
     printf(TXT_BLUE"Ply [%.2f:%.2f]\n"RESET, g->ply.position.x, g->ply.position.y);
-    // draw_big_point(g->img_2d, g->ply.position.x, g->ply.position.y, g->tilesz/10, RED);
-    // draw_dir(g, g->tilesz/4, RED);
+    draw_big_point(g->img_2d, g->ply.position.x, g->ply.position.y, g->tilesz/10, RED);
+    draw_dir(g, g->tilesz/4, RED);
     // ? Player
     mlx_put_image_to_window(g->mlx, g->win_3d, g->img_3d, 0, 0);
-    // mlx_put_image_to_window(g->mlx, g->win_2d, g->img_2d, 0, 0);
+    mlx_put_image_to_window(g->mlx, g->win_2d, g->img_2d, 0, 0);
 }
