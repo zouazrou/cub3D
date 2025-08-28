@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 10:19:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 16:13:10 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_vd
 
 typedef struct s_player // ! dir baalk
 {
-    t_vd position; // pxl
-    double angle;  // rad
+    t_vd    position; // pxl
+    double  angle;  // rad
 
     // ? mv & rot speed
     double  move_speed; // pxl
@@ -69,22 +69,22 @@ typedef struct s_player // ! dir baalk
 
 typedef struct s_ray
 {
-    int color;
-    double angle;    // rad
-    t_vd position;   // pxl
-    double distance; //
-    bool hit_wall;   //
-    t_vd inc;        // pxl
-    t_dir side;
+    int     color;
+    double  angle;    // rad
+    t_vd    position;   // pxl
+    double  distance; //
+    bool    hit_wall;   //
+    t_vd    inc;        // pxl
+    t_dir   side;
 } t_ray;
 
 typedef struct s_game
 {
-    void *mlx;
-    void *win_2d;
-    void *win_3d;
-    void *img_2d;
-    void *img_3d;
+    void    *mlx;
+    void    *win_2d;
+    void    *win_3d;
+    void    *img_2d;
+    void    *img_3d;
 
     /*MAP*/
     int mapx;

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 11:14:41 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 16:16:14 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void check_wall(t_game *g, t_vd new_position)
     int index_x;
     int index_y;
 
-    index_x = (int)(new_position.x);
-    index_y = (int)(new_position.y);
+    index_x = (new_position.x / g->tilesz);
+    index_y = (new_position.y / g->tilesz);
     if (map[index_y][index_x] == 0)
         g->ply.position = new_position;
     else

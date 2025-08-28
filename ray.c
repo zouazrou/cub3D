@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 11:10:55 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 16:00:41 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void ray_casting(t_game *g)
         printf("\n[%d]\n", i);
         printf("Horizontal wall [%.2f: %.2f]\n", ray_h.position.x, ray_h.position.y);
         printf("vertical   wall [%.2f: %.2f]\n", ray_v.position.x, ray_v.position.y);
-        choose_nearest(g->ray + i, &ray_h, &ray_v,    i);
+        choose_nearest(g->ray + i, &ray_h, &ray_v, i);
         printf("nearest    wall [%.2f: %.2f]\n", g->ray[i].position.x, g->ray[i].position.y);
         
         int col = WHITE;
