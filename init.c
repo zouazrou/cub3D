@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:26:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:52:39 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    init_ray(t_game *g)
 void    init_player(t_game *g)
 {
     g->ply.move_speed = 0.1 * g->tilesz;
-    g->ply.rotation_speed = deg2rad(1);
+    g->ply.rotation_speed = deg2rad(3);
     
     // ? Player's Postion
     g->ply.position.x = (1) * g->tilesz;
@@ -42,7 +42,7 @@ void    init_data(t_game *g)
 {
     // ? screen setting
     g->resolution = 1;
-    g->tilesz = 16;
+    g->tilesz = 32;
     g->num_rays = WIDTH / g->resolution;
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
 

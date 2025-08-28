@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:06:43 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:46:40 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int keyboard(int keysym, t_game *data)
     
     change_position(keysym, data);
     change_angle(keysym, data);
-    display(data);
+    // display(data);
 	return (0);   
 }

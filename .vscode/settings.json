@@ -13,6 +13,7 @@
         "iterator": "c",
         "cmath": "cpp",
         "limits.h": "c",
-        "complex": "c"
+        "complex": "c",
+        "cstdlib": "c"
     }
 }

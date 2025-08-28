@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:29:44 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:51:43 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,45 @@ int handling_mouse_event(int x, int y, void *g)
     if (x > last_pos)
         change_angle(XK_Right, g);
     last_pos = x;
-    display(g);
+    // display(g);
     return (0);
 }
 
+t_ms	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((t_ms)(time.tv_sec * 1000 + time.tv_usec / 1000));
+}
+
+int frames(t_game *data)
+{
+    static t_ms last_frame;
+    static int diff = 1000 / FPS;
+
+    if (get_time() - last_frame >= diff)
+    {
+        last_frame = get_time();
+        display(data);
+        printf(TXT_CYAN"\n====================================================\n"RESET);
+    }
+    return (0);
+}
+void hooks(t_game *data)
+{
+    /******/
+    // mlx_hook(data->win_2d, DestroyNotify, 0, ft_clean, NULL);
+    // mlx_hook(data->win_3d, DestroyNotify, 0, ft_clean, NULL);
+    /******/
+    
+    
+    mlx_hook(data->win_3d, MotionNotify, PointerMotionMask, handling_mouse_event, data);
+    /*******/
+    mlx_hook(data->win_2d, KeyPress, KeyPressMask, keyboard, data);
+    mlx_hook(data->win_3d, KeyPress, KeyPressMask, keyboard, data);
+    mlx_loop_hook(data->mlx, frames, data);
+}
 int main(int argc, char const *argv[])
 {
 	t_game data;
@@ -62,17 +97,7 @@ int main(int argc, char const *argv[])
     init_data(&data);
 
     display(&data);
-    /******/
-    // mlx_hook(data.win_2d, DestroyNotify, 0, ft_clean, NULL);
-    // mlx_hook(data.win_3d, DestroyNotify, 0, ft_clean, NULL);
-    /******/
-    
-    
-    mlx_hook(data.win_3d, MotionNotify, PointerMotionMask, handling_mouse_event, &data);
-    /*******/
-    mlx_hook(data.win_2d, KeyPress, KeyPressMask, keyboard, &data);
-    mlx_hook(data.win_3d, KeyPress, KeyPressMask, keyboard, &data);
-    // mlx_loop_hook(data.mlx)
+    hooks(&data);
 	mlx_loop(data.mlx);
 }
 
