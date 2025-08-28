@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 17:05:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:00:01 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int main(int argc, char const *argv[])
     // mlx_hook(data.win_2d, DestroyNotify, 0, ft_clean, NULL);
     // mlx_hook(data.win_3d, DestroyNotify, 0, ft_clean, NULL);
     /******/
-    // mlx_hook(data.win_2d, KeyPress, KeyPressMask, keyboard, &data);
+    
+    
+    // mlx_mouse_hook(data.win_3d, mouse_hook, &data);
+    mlx_hook(data.win_2d, KeyPress, KeyPressMask, keyboard, &data);
     mlx_hook(data.win_3d, KeyPress, KeyPressMask, keyboard, &data);
 	mlx_loop(data.mlx);
 }
