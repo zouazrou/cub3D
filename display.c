@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 22:58:25 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:22:49 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void    display(t_game *g)
     fill_img(g->img_3d, 0x0, HEIGHT, WIDTH);
     draw_map2D(g);
     ray_casting(g);
-    printf(TXT_BLUE"Ply [%.2f:%.2f]\n"RESET, g->ply.position.x, g->ply.position.y);
+    // printf(TXT_BLUE"Ply [%.2f:%.2f]\n"RESET, g->ply.position.x, g->ply.position.y);
     draw_big_point(g->img_2d, g->ply.position.x, g->ply.position.y, g->tilesz/10, RED);
     draw_dir(g, g->tilesz/4, RED);
     // ? Player

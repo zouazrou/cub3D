@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 23:48:51 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:04:06 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void    put_pixel_in_image(void *image, int x, int y, int col);
 void    fill_img(void *img, int col, int h, int w);
 void    ft_clean(t_game *g, bool ter);
 double  deg2rad(int degree);
+void change_angle(int keysym, t_game *g);
 
 // --------------------------
 // Reset

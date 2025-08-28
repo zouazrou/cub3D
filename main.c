@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:00:01 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:29:44 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ int line_bytes;
 int endian;
 
 
+int handling_mouse_event(int x, int y, void *g)
+{
+    static int last_pos;
+    printf(TXT_RED"mouse [%d, %d]\n"RESET, x, y);
+
+    if (x < last_pos)
+        change_angle(XK_Left, g);
+    if (x > last_pos)
+        change_angle(XK_Right, g);
+    last_pos = x;
+    display(g);
+    return (0);
+}
 
 int main(int argc, char const *argv[])
 {
@@ -55,9 +68,11 @@ int main(int argc, char const *argv[])
     /******/
     
     
-    // mlx_mouse_hook(data.win_3d, mouse_hook, &data);
+    mlx_hook(data.win_3d, MotionNotify, PointerMotionMask, handling_mouse_event, &data);
+    /*******/
     mlx_hook(data.win_2d, KeyPress, KeyPressMask, keyboard, &data);
     mlx_hook(data.win_3d, KeyPress, KeyPressMask, keyboard, &data);
+    // mlx_loop_hook(data.mlx)
 	mlx_loop(data.mlx);
 }
 
