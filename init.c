@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 11:46:56 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/28 16:23:52 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    init_ray(t_game *g)
 void    init_player(t_game *g)
 {
     g->ply.move_speed = 0.3 * g->tilesz;
-    g->ply.rotation_speed = deg2rad(1);
+    g->ply.rotation_speed = deg2rad(3);
     
     // ? Player's Postion
     g->ply.position.x = (1) * g->tilesz;
@@ -78,7 +78,7 @@ void    init_data(t_game *g)
     
     // ? Plane
         // * <=> DIS-TO-PLANE = WIDTH / TAN(FOV/2)
-    g->distance_to_plane = WIDTH / (2*tan(g->fov/2));
+    g->distance_to_plane = (WIDTH/2.0) / (tan(g->fov/2.0));
     // g->distance_to_plane *= 0.66;
     printf(TXT_CYAN"distance to plane [%.2f]\n"RESET, g->distance_to_plane);
 
