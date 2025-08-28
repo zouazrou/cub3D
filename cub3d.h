@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:04:06 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:53:59 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include "minilibx-linux/mlx.h"
+#include <sys/time.h>
 
 // if your game window is 640×480, the projection plane is also 640×480.
 // #define WIDTH 600
 #define WIDTH 800
 #define HEIGHT 600
+#define FPS 90
 
 // #define PI 22/7
 #define PI 3.14159265358979323846
@@ -45,6 +47,8 @@
 /*
 
 */
+
+typedef long long t_ms;
 
 typedef enum e_dir
 {
