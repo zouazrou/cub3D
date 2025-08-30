@@ -15,6 +15,7 @@
         "limits.h": "c",
         "complex": "c",
         "cstdlib": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "structures.h": "c"
     }
 }

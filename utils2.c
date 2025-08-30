@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 09:41:10 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:55:37 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void put_pixel_in_image(void *image, int x, int y, int col)
         return ;
     data_img = mlx_get_data_addr(image, &bpp, &line_bytes, &endian);
     offset = (y * line_bytes) + (x * (bpp / 8));
-    *(int *)(data_img + offset) = col;
+    *(unsigned int *)(data_img + offset) = col;
     
 }
 

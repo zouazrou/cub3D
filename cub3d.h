@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 09:42:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:14:36 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,14 @@
 #include <math.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
-#include "minilibx-linux/mlx.h"
 #include <sys/time.h>
+#include "minilibx-linux/mlx.h"
+#include "structures.h"
 
-// if your game window is 640×480, the projection plane is also 640×480.
-// #define WIDTH 600
 #define WIDTH 800
 #define HEIGHT 600
 #define FPS 30
 
-// #define PI 22/7
 #define PI 3.14159265358979323846
 #define LIGHT_LVL 40
 #define MINIMAP_SIZE 0.2
@@ -48,68 +46,6 @@
 
 */
 
-typedef long long t_ms;
-
-typedef enum e_dir
-{
-    NORTH = 1, // UP
-    SOUTH,     // DOWN
-    EAST,      // RIGHT
-    WEST,      // LEFT
-} t_dir;
-
-typedef struct s_vd
-{
-    double x;
-    double y;
-} t_vd;
-
-typedef struct s_player // ! dir baalk
-{
-    t_vd    position; // pxl
-    double  angle;  // rad
-
-    // ? mv & rot speed
-    double  move_speed; // pxl
-    double  rotation_speed;
-} t_player;
-
-typedef struct s_ray
-{
-    int     color;
-    double  angle;    // rad
-    t_vd    position;   // pxl
-    double  distance; //
-    bool    hit_wall;   //
-    t_vd    inc;        // pxl
-    t_dir   side;
-} t_ray;
-
-typedef struct s_game
-{
-    void    *mlx;
-    void    *win_3d;
-    void    *img_3d;
-
-    /*MAP*/
-    int mapx;
-    int mapy;
-    int tilesz;
-
-    /*position Player*/
-    t_player ply;
-
-    /*Ray*/
-
-    /*tilesize*/
-    double fov;
-    int resolution; // pixel
-    // ray
-    int num_rays;
-    t_ray *ray;
-    // PLANE
-    double distance_to_plane;
-} t_game;
 
 int create_rgb(int r, int g, int b);
 
@@ -145,6 +81,7 @@ void    fill_img(void *img, int col, int h, int w);
 int     ft_clean(int keysym, t_game *g);
 double  deg2rad(int degree);
 void    change_angle(int keysym, t_game *g);
+int    get_pixel_color(t_game *g, int x, int y);
 
 // --------------------------
 // Reset
@@ -161,5 +98,5 @@ void    change_angle(int keysym, t_game *g);
 #define TXT_WHITE "\033[37m"
 
 // Bold
-#define BOLD "\033[1m"
+#define TXT_BOLD "\033[1m"
 #endif

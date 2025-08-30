@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 08:21:38 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 11:27:26 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ void    init_player(t_game *g)
     // g->ply.direction.y = sin(g->ply.angle);
 }
 
+void    init_textures(t_game *g)
+{
+    // * PATH XMP IMGS
+    g->north->file_name = "image/wall.xpm";
+    g->south->file_name = "image/wall.xpm";
+    g->west->file_name = "image/wall.xpm";
+    g->east->file_name = "image/wall.xpm";
+
+    // * CONVERT 'xpm' TO 'IMG' 
+    g->north->img = mlx_xpm_file_to_image(g->mlx, g->north->file_name, &g->north->w, &g->north->h);
+    g->south->img = mlx_xpm_file_to_image(g->mlx, g->south->file_name, &g->south->w, &g->south->h);
+    g->west->img = mlx_xpm_file_to_image(g->mlx, g->west->file_name, &g->west->w, &g->west->h);
+    g->east->img = mlx_xpm_file_to_image(g->mlx, g->east->file_name, &g->east->w, &g->east->h);
+    if (!g->north->img || !g->south->img || !g->west->img || !g->east->img)
+        exit((printf(TXT_RED"img\n"RESET), 1));
+
+    // 
+    g->north->pixels = mlx_get_data_addr(g->north->img, &g->north->bpp, &g->north->line, &g->north->endian);
+    g->south->pixels = mlx_get_data_addr(g->south->img, &g->south->bpp, &g->south->line, &g->south->endian);
+    g->west->pixels = mlx_get_data_addr(g->west->img, &g->west->bpp, &g->west->line, &g->west->endian);
+    g->east->pixels = mlx_get_data_addr(g->east->img, &g->east->bpp, &g->east->line, &g->east->endian);
+    if (!g->north->pixels || !g->south->pixels || !g->west->pixels || !g->east->pixels)
+        exit((printf(TXT_RED"pixels\n"RESET), 1));
+}
 void    init_data(t_game *g)
 {
     // ? screen setting
@@ -74,7 +98,8 @@ void    init_data(t_game *g)
     g->distance_to_plane = (WIDTH/2.0) / (tan(g->fov/2.0)); // 
     // g->distance_to_plane *= 0.66;
     printf(TXT_CYAN"distance to plane [%.2f]\n"RESET, g->distance_to_plane);
-
+    g->ceiling_color = LIGHT_BLUE;
+    g->floor_color = DARK_GRAY;
     // ? ray
 
     // printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", g->pa, g->d.x, g->d.y);

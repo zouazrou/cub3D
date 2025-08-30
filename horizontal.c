@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 08:21:15 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:34:51 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void    init_ray_var(t_ray *ray, double ray_angle)
     ray->hit_wall = false;
     ray->inc = (t_vd){0, 0};
     ray->side = 0;
+    ray->axis = 0;
 }
 
 bool    check_win_bound(t_game *g, t_vd position)
@@ -72,6 +73,7 @@ t_ray    horizontal_hit(t_game *g, double ray_angle)
     t_ray ray;
 
     init_ray_var(&ray, ray_angle);
+    ray.axis = HORIZONTAL;
     //test whether the ray is almost horizontal or almost vertical.
     if (fabs(sin(ray.angle)) < 1e-6) 
         return (printf("        @@@\n"), ray);
@@ -119,6 +121,7 @@ t_ray vertical_hit(t_game *g, double ray_angle)
     t_ray ray;
 
     init_ray_var(&ray, ray_angle);
+    ray.axis = VERTICAL;
     // ! Find the first intersection point
     // if (ray.angle == PI / 2 || ray.angle == PI * 3 / 2) // ray_angley is vertical, no intersection
     if (fabs(cos(ray.angle)) < 1e-6)

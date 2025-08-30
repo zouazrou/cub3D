@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 09:42:01 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 10:04:14 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void hooks(t_game *data)
     /******/
     mlx_hook(data->win_3d, DestroyNotify, 0, ft_clean, NULL);
     /******/
-    
     
     mlx_hook(data->win_3d, MotionNotify, PointerMotionMask, handling_mouse_event, data);
     /*******/
