@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:52:39 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 08:21:38 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,6 @@ void    init_data(t_game *g)
     if (!g->mlx)
         exit((printf(TXT_RED"-------------------mlx_init \n"RESET), 1));
     /***********/
-    g->win_2d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "2D");
-    if (!g->win_2d)
-        exit((printf("-------------------mlx_new_win 2D \n"), 42));
-    g->img_2d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-    if (!g->img_2d)
-        exit((printf("-------------------mlx_new_img 2D\n"), 42));
     /***********/
     g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
     if (!g->win_3d)

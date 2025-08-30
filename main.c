@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:51:43 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:42:01 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int endian;
 int handling_mouse_event(int x, int y, void *g)
 {
     static int last_pos;
-    printf(TXT_RED"mouse [%d, %d]\n"RESET, x, y);
-
+    // printf(TXT_RED"mouse [%d, %d]\n"RESET, x, y);
+    (void)y;
     if (x < last_pos)
         change_angle(XK_Left, g);
     if (x > last_pos)
@@ -76,14 +76,12 @@ int frames(t_game *data)
 void hooks(t_game *data)
 {
     /******/
-    // mlx_hook(data->win_2d, DestroyNotify, 0, ft_clean, NULL);
-    // mlx_hook(data->win_3d, DestroyNotify, 0, ft_clean, NULL);
+    mlx_hook(data->win_3d, DestroyNotify, 0, ft_clean, NULL);
     /******/
     
     
     mlx_hook(data->win_3d, MotionNotify, PointerMotionMask, handling_mouse_event, data);
     /*******/
-    mlx_hook(data->win_2d, KeyPress, KeyPressMask, keyboard, data);
     mlx_hook(data->win_3d, KeyPress, KeyPressMask, keyboard, data);
     mlx_loop_hook(data->mlx, frames, data);
 }
