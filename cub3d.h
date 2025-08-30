@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:53:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:42:46 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // #define WIDTH 600
 #define WIDTH 800
 #define HEIGHT 600
-#define FPS 90
+#define FPS 30
 
 // #define PI 22/7
 #define PI 3.14159265358979323846
@@ -88,9 +88,7 @@ typedef struct s_ray
 typedef struct s_game
 {
     void    *mlx;
-    void    *win_2d;
     void    *win_3d;
-    void    *img_2d;
     void    *img_3d;
 
     /*MAP*/
@@ -122,9 +120,10 @@ void display(t_game *data);
 
 double distance(t_vd p0, t_vd p1);
 
+bool    is_outside_window(int x, int y);
 int keyboard(int keysym, t_game *map);
 void init_data(t_game *data);
-int close_win(void *ptr);
+// int close_win(void *ptr);
 bool is_wall(t_game *g, t_vd position);
 double normalize_angle(double radian);
 void draw_wall_3d(t_game *g, int idx);
@@ -135,6 +134,7 @@ bool FACING_DOWN(double angle);
 bool FACING_RIGHT(double angle);
 bool FACING_LEFT(double angle);
 void ray_casting(t_game *g);
+double  fix_fish_eye(t_game *g, int index);
 
 // utils function
 void    *ft_calloc(size_t nmemb, size_t size);
@@ -142,9 +142,9 @@ void    draw_big_point(void *img, int x, int y, int r, int col);
 void    draw_ray(void *img, t_vd p0, t_vd p1, int color);
 void    put_pixel_in_image(void *image, int x, int y, int col);
 void    fill_img(void *img, int col, int h, int w);
-void    ft_clean(t_game *g, bool ter);
+int     ft_clean(int keysym, t_game *g);
 double  deg2rad(int degree);
-void change_angle(int keysym, t_game *g);
+void    change_angle(int keysym, t_game *g);
 
 // --------------------------
 // Reset

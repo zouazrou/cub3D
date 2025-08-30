@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 11:01:22 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 08:21:15 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ t_ray    horizontal_hit(t_game *g, double ray_angle)
     
     // *: check grid cell at point 'r'
     increment_to_other_point(g, &ray);
-    
-    // draw_ray(g->img_2d, g->ply.position, r, YLW);  
     return (ray);   
 }
 
@@ -146,6 +144,5 @@ t_ray vertical_hit(t_game *g, double ray_angle)
     
     // * check grid cell at point 'r'
     increment_to_other_point(g, &ray);
-    // draw_ray(g->img_2d, g->ply.position, r, BLACK);
     return (ray);
 }

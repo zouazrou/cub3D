@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 23:20:49 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:41:10 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ double  deg2rad(int degree)
 {
     return (degree * (PI / 180));
 }
+
 
 double  normalize_angle(double radian)
 {
@@ -79,4 +80,9 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (NULL);
 	ft_bzero(p, nmemb * size);
 	return (p);
+}
+
+double  fix_fish_eye(t_game *g, int index)
+{
+    return  (g->ray[index].distance * cos(g->ply.angle - g->ray[index].angle));
 }

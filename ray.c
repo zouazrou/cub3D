@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:23:11 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 08:24:41 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ void ray_casting(t_game *g)
         if (g->ray[i].side == WEST)
             col = YLW;
         // printf(TXT_GREEN"RAY\n"RESET);
-        // draw_ray(g->img_2d, g->ply.position, g->ray[i].position, col);
-        // draw_ray(g->img_2d, g->ply.position, g->ray[i].position, g->ray[i].color);
         //!aaaaaaaaaaaaaaaaaaaaaaaa
         draw_wall_3d(g, i);
         ray_angle+= ray_inc;

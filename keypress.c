@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/29 00:46:40 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 08:23:01 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void change_angle(int keysym, t_game *g)
 int keyboard(int keysym, t_game *data)
 {
     if (keysym == XK_Escape)
-		ft_clean(data, true);
+		ft_clean(keysym, data);
     
     change_position(keysym, data);
     change_angle(keysym, data);

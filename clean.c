@@ -6,22 +6,20 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:32:19 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/28 08:32:26 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/30 08:24:10 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_clean(t_game *g, bool ter)
+int ft_clean(int keysym, t_game *g)
 {
+    if (keysym != XK_Escape)
+        return (0);
     free(g->ray);
-
-    // mlx_destroy_window(g->mlx, g->win_2d);
     mlx_destroy_window(g->mlx, g->win_3d);
-    // mlx_destroy_image(g->mlx, g->img_2d);
     mlx_destroy_image(g->mlx, g->img_3d);
     mlx_destroy_display(g->mlx);
     free(g->mlx);
-    if (ter == true)
-        exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }
