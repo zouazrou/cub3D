@@ -7,7 +7,7 @@ MLX_FLAGS = -lXext -lX11
 
 SRC = main.c init.c utils.c utils2.c keypress.c raycasting.c\
 	horizontal.c display.c clean.c check_direction.c\
-	3d_view.c
+	3d_view.c draw_texture.c
 
 MLX_PATH = minilibx-linux/
 

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 16:14:36 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:24:57 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void    fill_img(void *img, int col, int h, int w);
 int     ft_clean(int keysym, t_game *g);
 double  deg2rad(int degree);
 void    change_angle(int keysym, t_game *g);
-int    get_pixel_color(t_game *g, int x, int y);
+char	*ft_strdup(const char *s);
+// int    get_pixel_color(t_game *g, int x, int y);
 
 // --------------------------
 // Reset

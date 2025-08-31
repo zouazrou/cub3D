@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 16:55:37 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:25:26 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,31 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (p);
 }
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
+char	*ft_strdup(const char *s)
+{
+	char	*p;
+	size_t	i;
+
+	i = 0;
+	p = malloc((ft_strlen(s) + 1));
+	if (p == NULL)
+		return (p);
+	while (i < ft_strlen(s) + 1)
+	{
+		*(p + i) = s[i];
+		i++;
+	}
+	return (p);
+}
 double  fix_fish_eye(t_game *g, int index)
 {
     return  (g->ray[index].distance * cos(g->ply.angle - g->ray[index].angle));

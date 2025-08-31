@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 16:56:13 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:46:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,63 +80,51 @@ void draw_wall_3d(t_game *g, int idx)
         begin_y = 0;
     if (wall_height >= HEIGHT)
         wall_height = HEIGHT-1;
-    // texturing calculations
-    
-    printf("begin_x [%.2f]\n", begin_x);
-    printf("begin_y [%.2f]\n\n", begin_y);
-    //
+    // printf("begin_x [%.2f]\n", begin_x);
+    // printf("begin_y [%.2f]\n\n", begin_y);
     draw_ceiling(g, begin_x, begin_y);
-    draw_wall(g, idx, begin_x, begin_y, wall_height);
+    // draw_wall(g, idx, begin_x, begin_y, wall_height);
+    draw_textured_wall(g, idx, begin_x, begin_y, wall_height);
     draw_floor(g, begin_x, begin_y + wall_height);
 }
 
 // !=========================
-void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
-{
-    int x;
-    int y;
+// void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
+// {
+//     int x;
+//     int end_y;
+//     int color;
     
-    for (y = 0; y < wall_height; y++)
-    {
-        for (x = 0; x < g->resolution; x++)
-        {
-            // if (!is_outside_window(begin_x + x, begin_y + y))
-                put_pixel_in_image(g->img_3d, begin_x + x, begin_y + y, create_rgb(g->ray[idx].color,g->ray[idx].color,g->ray[idx].color));
-        }
-    }
-}
+//     end_y = begin_y + wall_height;
+//     while (begin_y <= end_y)
+//     {
+//         x = 0;
+//         while (x < g->resolution)
+//         {
+//             // color = create_rgb(g->ray[idx].color,g->ray[idx].color,g->ray[idx].color);
+//             color = get_pixel_color_from_texture(g, g->ray+idx, begin_x + x, begin_y, wall_height);
+//             // if (!is_outside_window(begin_x + x, begin_y + y))
+//                 put_pixel_in_image(g->img_3d, begin_x + x, begin_y, color);
+//             x++;
+//         }
+//         begin_y++;
+//     }
+// }
+
+
 /*
-
-int    get_pixel_color(t_game *g, int x, int y)
-{
-    int offset;
-    int tex_x;
-    int tex_y;
-    
-    if (x < 0 || y < 0)
-        return (0);
-    if (x >= 64 ||y >= 64)
-        return (0); 
-    offset = (y * g->west->line) + (x * (g->west->bpp / 8));
-    return (*(unsigned int *)(g->west->pixels + offset));
-}
-
-void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
-{
-    int x;
-    int y;
-    int tex_x;
-    int tex_y;
-    
-    for (y = 0; y < wall_height; y++)
-    {
-        for (x = 0; x < g->resolution; x++)
-        {
-            tex_x = (int)((x / wall_height) * 64);
-            tex_y = (int)((y / wall_height) * 64);
-            put_pixel_in_image(g->img_3d, begin_x + x, begin_y + y, get_pixel_color(g, tex_x , y));   
-        }
-    }
-    
-}
+! H
+   * intersection position (x, y)
+   * position = decimal_part(X / tilesz)
+   * 0 <= position <= 1
+   * Tex_X = Position * TEX_WIDTH
+   * 0 <= Tex_X <= TEX_WIDTH
+   * LOOP TEX_Y , WHEN DRAWING THE WALL
+! v
+   * intersection position (x, y)
+   * position = decimal_part(y / tilesz)
+   * 0 <= position <= 1
+   * Tex_X = Position * TEX_WIDTH
+   * 0 <= Tex_X <= TEX_WIDTH
+   * LOOP TEX_Y , WHEN DRAWING THE WALL
 */
