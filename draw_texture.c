@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 20:59:17 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 22:05:59 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ unsigned int    get_pixel_color(t_texture *texture, int x, int y)
 }
 
 // * This calculates which column (x-coordinate) of the texture to use:
-int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture) // !
+int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
+// ! side = 0 => Vertical
+// ! side = 1 => Horizontal
 {
     double wall_x;
     int tex_x;
@@ -48,17 +50,17 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture) // !
     tex_x = (int)(wall_x * (double)texture->w);
     
     // Adjust for texture orientation
-    if ((ray->axis == HORIZONTAL && sin(ray->angle) > 0) || 
-        (ray->axis == VERTICAL && cos(ray->angle) < 0))
+    if ((ray->axis == VERTICAL && cos(ray->angle) < 0) ||
+        (ray->axis == HORIZONTAL && sin(ray->angle) > 0))
         tex_x = texture->w - tex_x - 1;
     
     return (tex_x);
 }
 
-void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
+void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height)
 {
     int y;
-    int end_y;
+    ;
     int color;
     int tex_x;
     int tex_y;
@@ -70,26 +72,23 @@ void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int wal
     tex_x = calculate_tex_x(g, ray, texture);
     tex_step = (double)texture->h / wall_height;
     tex_pos = (begin_y - (HEIGHT/2.0) + wall_height/2.0) * tex_step;
-    if (begin_y < 0)
-    {
-        tex_pos -= begin_y * tex_step;
-        begin_y = 0;
-    }
 
-    end_y = begin_y + wall_height;
-    if (end_y > HEIGHT)
-        end_y = HEIGHT;
-    if (begin_y < 0)
-        begin_y = 0;
+
     
     y = begin_y;
     while (y < end_y)
     {
         tex_y = tex_pos;
         if (tex_y < 0)
+        {
+            printf("WAAAAAAAAAAAH\n");
             tex_y = 0;
+        }
         if (tex_y >= texture->h)
+        {
+            printf("WAAAAAAAAAAAH\n");
             tex_y = texture->h - 1;
+        }
         tex_pos += tex_step;
         
         // Get color from texture
@@ -97,7 +96,13 @@ void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int wal
         // x = 0;
         // while (x < g->resolution)
         // {
-            put_pixel_in_image(g->img_3d, begin_x, y, color);
+        int x = 0;
+        for (int x = 0; x < g->resolution; x++)
+        {
+            /* code */
+            put_pixel_in_image(g->img_3d, begin_x + x, y, color);
+        }
+        
         //     x++;
         // }
         y++;

@@ -16,6 +16,9 @@
         "complex": "c",
         "cstdlib": "c",
         "time.h": "c",
-        "structures.h": "c"
+        "structures.h": "c",
+        "stdbool.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c"
     }
 }

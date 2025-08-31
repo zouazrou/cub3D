@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 21:12:09 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 22:08:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ void    draw_floor(t_game *g, int begin_x, int begin_y)
 */
 void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height);
 
-void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height);
+void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height);
 
 void draw_wall_3d(t_game *g, int idx)
 {
     double begin_x;
     double begin_y;
     double wall_height;
+    int    end_y;
     t_ray *r;
 
     r = g->ray + idx;
@@ -84,32 +85,33 @@ void draw_wall_3d(t_game *g, int idx)
     // printf("begin_y [%.2f]\n\n", begin_y);
     draw_ceiling(g, begin_x, begin_y);
     // draw_wall(g, idx, begin_x, begin_y, wall_height);
-    draw_textured_wall(g, idx, begin_x, begin_y, wall_height);
-    draw_floor(g, begin_x, begin_y + wall_height);
+    end_y = begin_y + wall_height;
+    if (end_y > HEIGHT)
+        end_y = HEIGHT;
+    draw_textured_wall(g, idx, begin_x, begin_y, end_y, wall_height);
+    draw_floor(g, begin_x, end_y);
 }
 
 // !=========================
-// void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
-// {
-//     int x;
-//     int end_y;
-//     int color;
+void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
+{
+    int x;
+    int end_y;
+    int color;
     
-//     end_y = begin_y + wall_height;
-//     while (begin_y <= end_y)
-//     {
-//         x = 0;
-//         while (x < g->resolution)
-//         {
-//             // color = create_rgb(g->ray[idx].color,g->ray[idx].color,g->ray[idx].color);
-//             color = get_pixel_color_from_texture(g, g->ray+idx, begin_x + x, begin_y, wall_height);
-//             // if (!is_outside_window(begin_x + x, begin_y + y))
-//                 put_pixel_in_image(g->img_3d, begin_x + x, begin_y, color);
-//             x++;
-//         }
-//         begin_y++;
-//     }
-// }
+    end_y = begin_y + wall_height;
+    while (begin_y <= end_y)
+    {
+        x = 0;
+        while (x < g->resolution)
+        {
+            color = create_rgb(g->ray[idx].color,g->ray[idx].color,g->ray[idx].color);
+            put_pixel_in_image(g->img_3d, begin_x + x, begin_y, color);
+            x++;
+        }
+        begin_y++;
+    }
+}
 
 
 /*
