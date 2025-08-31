@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 11:38:00 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 21:17:14 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void    init_player(t_game *g)
 void    init_textures(t_game *g)
 {
     // * PATH XMP IMGS
-    g->north.file_name = "image/wall.xpm";
-    g->south.file_name = "image/wall.xpm";
-    g->west.file_name = "image/wall.xpm";
-    g->east.file_name = "image/wall.xpm";
+    g->north.file_name = "image/eagle.xpm";
+    g->south.file_name = "image/eagle.xpm";
+    g->west.file_name = "image/eagle.xpm";
+    g->east.file_name = "image/eagle.xpm";
 
     // * CONVERT 'xpm' TO 'IMG' 
     g->north.img = mlx_xpm_file_to_image(g->mlx, g->north.file_name, &g->north.w, &g->north.h);
@@ -66,7 +66,7 @@ void    init_data(t_game *g)
 {
     // ? screen setting
     g->resolution = 1;
-    g->tilesz = 32;
+    g->tilesz = 1;
     g->num_rays = WIDTH / g->resolution;
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
 
