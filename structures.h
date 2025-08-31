@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 16:23:01 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:31:02 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ typedef struct s_game
     void        *win_3d;
     void        *img_3d;
     
-    t_texture   *north;
-    t_texture   *south;
-    t_texture   *west;
-    t_texture   *east;
+    t_texture   north;
+    t_texture   south;
+    t_texture   west;
+    t_texture   east;
 
     int floor_color;
     int ceiling_color;
