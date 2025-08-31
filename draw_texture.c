@@ -6,40 +6,31 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 11:49:57 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 20:59:17 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int get_pixel_color(t_texture *texture, int x, int y)
+unsigned int    get_pixel_color(t_texture *texture, int x, int y)
 {
     int offset;
 
-    if (x < 0)
+    if (x < 0 || x >= texture->w)
     {
-        x = 0;
         printf(TXT_BLUE"get_pxl_color()\n"RESET);
+        return (0);
     }
     
-    if (x >= texture->w)
+    if (y < 0 || y >= texture->h)
     {
         printf(TXT_BLUE"get_pxl_color()\n"RESET);
-        x = texture->w - 1;
-    }
-    if (y < 0)
-    {
-        printf(TXT_BLUE"get_pxl_color()\n"RESET);
-        y = 0;
-    }
-    if (y >= texture->h)
-    {
-        printf(TXT_BLUE"get_pxl_color()\n"RESET);
-        y = texture->h - 1;
+        return (0);
     }
     offset = (y * texture->line) + (x * (texture->bpp / 8));
-    return (*(unsigned int *)(texture->pixels + offset));
+    return ((*(unsigned int *)(texture->pixels + offset))& 0x00FFFFFF);
 }
+
 // * This calculates which column (x-coordinate) of the texture to use:
 int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture) // !
 {
@@ -48,8 +39,10 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture) // !
     
     if (ray->axis == HORIZONTAL)
         wall_x = g->ply.position.x + ray->distance * cos(ray->angle);
-    else
+    else if (ray->axis == VERTICAL)
         wall_x = g->ply.position.y + ray->distance * sin(ray->angle);
+    else
+        printf("debug: not H nor V !!\n");
     
     wall_x -= floor(wall_x);
     tex_x = (int)(wall_x * (double)texture->w);
@@ -64,44 +57,49 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture) // !
 
 void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
 {
-    int x;
     int y;
     int end_y;
     int color;
     int tex_x;
     int tex_y;
-    int tex_step;
-    int tex_pos;
+    double tex_step;
+    double tex_pos;
+    t_ray *ray = g->ray + idx;
     t_texture *texture = &g->west; // TMP
     
-    tex_x = calculate_tex_x(g, g->ray+idx, texture);
-    tex_step = 1.0 * texture->h / wall_height;
-    tex_pos = (begin_y - HEIGHT/2.0 + wall_height/2.0) * tex_step;
-    
+    tex_x = calculate_tex_x(g, ray, texture);
+    tex_step = (double)texture->h / wall_height;
+    tex_pos = (begin_y - (HEIGHT/2.0) + wall_height/2.0) * tex_step;
+    if (begin_y < 0)
+    {
+        tex_pos -= begin_y * tex_step;
+        begin_y = 0;
+    }
+
     end_y = begin_y + wall_height;
     if (end_y > HEIGHT)
         end_y = HEIGHT;
+    if (begin_y < 0)
+        begin_y = 0;
     
-    y = (int)begin_y;
+    y = begin_y;
     while (y < end_y)
     {
-        // Calculate texture Y coordinate
-        tex_y = (int)tex_pos;
+        tex_y = tex_pos;
+        if (tex_y < 0)
+            tex_y = 0;
         if (tex_y >= texture->h)
             tex_y = texture->h - 1;
         tex_pos += tex_step;
         
         // Get color from texture
         color = get_pixel_color(texture, tex_x, tex_y);
-        
-        // Apply lighting (uncomment and adjust as needed)
-        
-        x = 0;
-        while (x < g->resolution)
-        {
-            put_pixel_in_image(g->img_3d, begin_x + x, y, color);
-            x++;
-        }
+        // x = 0;
+        // while (x < g->resolution)
+        // {
+            put_pixel_in_image(g->img_3d, begin_x, y, color);
+        //     x++;
+        // }
         y++;
     }
 }
