@@ -6,41 +6,43 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 11:24:57 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 22:57:58 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include <stdio.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
-#include <sys/time.h>
-#include "minilibx-linux/mlx.h"
-#include "structures.h"
+# include <stdio.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <sys/time.h>
+# include "minilibx-linux/mlx.h"
+# include "structures.h"
 
-#define WIDTH 800
-#define HEIGHT 600
-#define FPS 30
+# define WIDTH 800
+# define HEIGHT 600
+# define FPS 30
 
-#define PI 3.14159265358979323846
-#define LIGHT_LVL 40
-#define MINIMAP_SIZE 0.2
-#define GREEN 0x00D100
-#define BLCK_SHDW 0Xbfafb2
-#define BLUE 0x3C6CAB
-#define BROWN 0x61212D
-#define BLACK 0x0
-#define WHITE 0xffffff
-#define YLW 0XFFFF00
-#define RED 0XFF0000
-#define LIGHT_BLUE 0x87CEEB
-#define DARK_GRAY 0x444444
+# define PI 3.14159265358979323846
+# define LIGHT_LVL 40
+# define MINIMAP_SIZE 0.2
+# define GREEN 0x00D100
+# define BLCK_SHDW 0Xbfafb2
+# define BLUE 0x3C6CAB
+# define BROWN 0x61212D
+# define BLACK 0x0
+# define WHITE 0xffffff
+# define YLW 0XFFFF00
+# define RED 0XFF0000
+# define LIGHT_BLUE 0x87CEEB
+# define DARK_GRAY 0x444444
+# define CYAN 0x00FFFF
+
 
 /*
 
@@ -62,7 +64,7 @@ void init_data(t_game *data);
 // int close_win(void *ptr);
 bool is_wall(t_game *g, t_vd position);
 double normalize_angle(double radian);
-void draw_wall_3d(t_game *g, int idx);
+void draw_3d_view(t_game *g, int idx);
 //
 
 bool FACING_UP(double angle);

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 22:05:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 08:17:46 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
 
 void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height)
 {
+    int x;
     int y;
-    ;
     int color;
     int tex_x;
     int tex_y;
@@ -93,18 +93,9 @@ void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end
         
         // Get color from texture
         color = get_pixel_color(texture, tex_x, tex_y);
-        // x = 0;
-        // while (x < g->resolution)
-        // {
-        int x = 0;
-        for (int x = 0; x < g->resolution; x++)
-        {
-            /* code */
-            put_pixel_in_image(g->img_3d, begin_x + x, y, color);
-        }
-        
-        //     x++;
-        // }
+        x = 0;
+        while (x < g->resolution)
+            put_pixel_in_image(g->img_3d, begin_x + x++, y, color);
         y++;
     }
 }

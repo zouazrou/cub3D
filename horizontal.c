@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 15:34:51 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 22:50:19 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern int map[8][8];
 
 void    init_ray_var(t_ray *ray, double ray_angle)
 {
-    ray->color = RED;
+    ray->color = 255;
     ray->angle = normalize_angle(ray_angle);
     ray->position = (t_vd){INT_MAX, 0};
     ray->distance = 0;

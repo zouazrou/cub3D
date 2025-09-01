@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 08:24:41 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/08/31 22:50:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,15 @@ TODO : SO
 void    choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
 {
     if (ray_h->hit_wall && !ray_v->hit_wall)
-    {
         *ray = *ray_h;
-        ray->color = 160;
-    }
     else if (!ray_h->hit_wall && ray_v->hit_wall)
-    {
         *ray = *ray_v;
-        ray->color = 255;
-    }
     else if (ray_h->hit_wall && ray_v->hit_wall)
     {
         if (ray_h->distance < ray_v->distance)
-        {
             *ray = *ray_h;
-            ray->color = 160;
-        }
         else
-        {
             *ray = *ray_v;
-            ray->color = 255;
-        }
     }
     else
         printf(TXT_RED"-------ERROR-------ray num [%d] CHI 7AAAJA MAHIYACH HAN !!\n"RESET, index);
@@ -96,7 +84,7 @@ void ray_casting(t_game *g)
             col = YLW;
         // printf(TXT_GREEN"RAY\n"RESET);
         //!aaaaaaaaaaaaaaaaaaaaaaaa
-        draw_wall_3d(g, i);
+        draw_3d_view(g, i);
         ray_angle+= ray_inc;
     }
     
