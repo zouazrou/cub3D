@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 22:57:58 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:29:33 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ bool is_wall(t_game *g, t_vd position);
 double normalize_angle(double radian);
 void draw_3d_view(t_game *g, int idx);
 //
+void fill_img(t_img *img, int col, int h, int w);
 
 bool FACING_UP(double angle);
 bool FACING_DOWN(double angle);
@@ -76,10 +77,9 @@ double  fix_fish_eye(t_game *g, int index);
 
 // utils function
 void    *ft_calloc(size_t nmemb, size_t size);
-void    draw_big_point(void *img, int x, int y, int r, int col);
-void    draw_ray(void *img, t_vd p0, t_vd p1, int color);
-void    put_pixel_in_image(void *image, int x, int y, int col);
-void    fill_img(void *img, int col, int h, int w);
+void    draw_big_point(t_img *img, int x, int y, int r, int col);
+void    draw_ray(t_img *img, t_vd p0, t_vd p1, int color);
+void    put_pixel_in_image(t_img *image, int x, int y, int col);
 int     ft_clean(int keysym, t_game *g);
 double  deg2rad(int degree);
 void    change_angle(int keysym, t_game *g);

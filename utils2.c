@@ -6,29 +6,27 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 08:24:18 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:15:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int bpp;
-extern int line_bytes;
-extern int endian;
+// extern int bpp;
+// extern int line_bytes;
+// extern int endian;
 
 extern int map[8][8];
 
-void put_pixel_in_image(void *image, int x, int y, int col)
+void put_pixel_in_image(t_img *image, int x, int y, int col)
 {
     int     offset;
     char    *data_img;
     
     if (x < 0 || y < 0)
         return ;
-    data_img = mlx_get_data_addr(image, &bpp, &line_bytes, &endian);
-    offset = (y * line_bytes) + (x * (bpp / 8));
-    *(unsigned int *)(data_img + offset) = col;
-    
+    offset = (y * image->line) + (x * (image->bpp / 8));
+    *(unsigned int *)(image->pixels + offset) = col;
 }
 
 double distance(t_vd p0, t_vd p1)

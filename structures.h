@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 11:31:02 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:20:30 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,30 @@ typedef struct s_ray
     t_axis  axis; // v or h
 } t_ray;
 
+typedef struct s_img
+{
+    void    *img;
+    char    *pixels;
+    int     bpp;
+    int     line;
+    int     endian;
+}   t_img;
+
 typedef struct s_texture
 {
     int     w;
     int     h;
-    char    *file_name;
-    void    *img;
-    char    *pixels;
-
+    char    *filename;
+    
     /*******/
-    int bpp;
-    int line;
-    int endian;
+    t_img   image;
 }   t_texture;
 
 typedef struct s_game
 {
     void        *mlx;
     void        *win_3d;
-    void        *img_3d;
+    t_img       img_3d;
     
     t_texture   north;
     t_texture   south;

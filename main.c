@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 21:30:31 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:10:54 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int map[8][8] = {
 //     {1, 1, 1, 1, 1, 1, 1, 1},
 // };
 
-int bpp;
-int line_bytes;
-int endian;
+// int bpp;
+// int line_bytes;
+// int endian;
 
 
 int handling_mouse_event(int x, int y, void *g)
