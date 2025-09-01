@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 08:21:58 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:29:43 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,31 @@ void    init_player(t_game *g)
 void    init_textures(t_game *g)
 {
     // * PATH XMP IMGS
-    g->north.file_name = "image/eagle.xpm";
-    g->south.file_name = "image/eagle.xpm";
-    g->west.file_name = "image/eagle.xpm";
-    g->east.file_name = "image/eagle.xpm";
+    g->north.filename = "image/eagle.xpm";
+    g->south.filename = "image/grey_wall.xpm";
+    g->west.filename = "image/blue_wall.xpm";
+    g->east.filename = "image/orange_wall.xpm";
 
     // * CONVERT 'xpm' TO 'IMG' 
-    g->north.img = mlx_xpm_file_to_image(g->mlx, g->north.file_name, &g->north.w, &g->north.h);
-    g->south.img = mlx_xpm_file_to_image(g->mlx, g->south.file_name, &g->south.w, &g->south.h);
-    g->west.img = mlx_xpm_file_to_image(g->mlx, g->west.file_name, &g->west.w, &g->west.h);
-    g->east.img = mlx_xpm_file_to_image(g->mlx, g->east.file_name, &g->east.w, &g->east.h);
-    if (!g->north.img || !g->south.img || !g->west.img || !g->east.img)
+    g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename, &g->north.w, &g->north.h);
+    g->south.image.img = mlx_xpm_file_to_image(g->mlx, g->south.filename, &g->south.w, &g->south.h);
+    g->west.image.img = mlx_xpm_file_to_image(g->mlx, g->west.filename, &g->west.w, &g->west.h);
+    g->east.image.img = mlx_xpm_file_to_image(g->mlx, g->east.filename, &g->east.w, &g->east.h);
+    if (!g->north.image.img || !g->south.image.img || !g->west.image.img || !g->east.image.img)
         exit((perror("mlx_xpm_file_to_image()"), 1));
 
     // 
-    g->north.pixels = mlx_get_data_addr(g->north.img, &g->north.bpp, &g->north.line, &g->north.endian);
-    g->south.pixels = mlx_get_data_addr(g->south.img, &g->south.bpp, &g->south.line, &g->south.endian);
-    g->west.pixels = mlx_get_data_addr(g->west.img, &g->west.bpp, &g->west.line, &g->west.endian);
-    g->east.pixels = mlx_get_data_addr(g->east.img, &g->east.bpp, &g->east.line, &g->east.endian);
-    if (!g->north.pixels || !g->south.pixels || !g->west.pixels || !g->east.pixels)
+    g->north.image.pixels = mlx_get_data_addr(g->north.image.img, &g->north.image.bpp, &g->north.image.line, &g->north.image.endian);
+    g->south.image.pixels = mlx_get_data_addr(g->south.image.img, &g->south.image.bpp, &g->south.image.line, &g->south.image.endian);
+    g->west.image.pixels = mlx_get_data_addr(g->west.image.img, &g->west.image.bpp, &g->west.image.line, &g->west.image.endian);
+    g->east.image.pixels = mlx_get_data_addr(g->east.image.img, &g->east.image.bpp, &g->east.image.line, &g->east.image.endian);
+    if (!g->north.image.pixels || !g->south.image.pixels || !g->west.image.pixels || !g->east.image.pixels)
         exit((perror("mlx_get_data_addr()"), 1));
 }
 void    init_data(t_game *g)
 {
     // ? screen setting
-    g->resolution = 1   ;
+    g->resolution = 1;
     g->tilesz = 1;
     g->num_rays = WIDTH / g->resolution;
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
@@ -89,9 +89,12 @@ void    init_data(t_game *g)
     g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
     if (!g->win_3d)
         exit((perror("mlx_new_window()"), 42));
-    g->img_3d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-    if (!g->img_3d)
+    g->img_3d.img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+    if (!g->img_3d.img)
         exit((perror("mlx_new_image()"), 42));
+    g->img_3d.pixels = mlx_get_data_addr(g->img_3d.img, &g->img_3d.bpp, &g->img_3d.line, &g->img_3d.endian);
+    if (!g->img_3d.pixels)
+        exit((perror("mlx_get_data_addr()"), 42));
     // ! TEXTURES
     init_textures(g);
     
@@ -107,7 +110,7 @@ void    init_data(t_game *g)
 }
 
 
-void    draw_big_point(void *img, int x, int y,  int r, int col)
+void    draw_big_point(t_img *img, int x, int y,  int r, int col)
 {
     for (int dx = -r; dx <= r; dx++)
     {

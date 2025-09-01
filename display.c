@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 08:29:04 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:33:40 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void drow_quade(t_game *g, int x0, int y0, int col)
         {
             if (!y || !x || y == g->tilesz-1 || y == g->tilesz-1)
             ;
-                // put_pixel_in_image(g->img_2d, x0 + x, y0 + y, BLACK);
-            // else
-                // put_pixel_in_image(g->img_2d, x0 + x, y0 + y, col);
         }
     }
 }
@@ -45,7 +42,7 @@ void    draw_map2D(t_game *g)
     }
 
 }
-void fill_img(void *img, int col, int h, int w)
+void fill_img(t_img *img, int col, int h, int w)
 {
     // printf("debug : fill_img()\n");
     // printf("bpp = %d| line_bytes = %d| endian=  %d\n", bpp, line_bytes, endian);
@@ -76,16 +73,12 @@ void draw_dir(t_game *g, int len, int color)
 
     for (int i = 0; i <= steps; i++)
     {
-        // // if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-        // //     break;
-        // put_pixel_in_image(g->img_2d, (int)x, (int)y, color);
-        // printf("dir ply : x = %d ====== y = %d\n", (int)x, (int)y);
         x += x_inc;
         y += y_inc;
         
     }
 }
-void draw_ray(void *img, t_vd p0, t_vd p1, int color)
+void draw_ray(t_img *img, t_vd p0, t_vd p1, int color)
 {
     // compute end point
     t_vd    d;
@@ -123,9 +116,9 @@ void    display(t_game *g)
     // ? Map
     
     // ? Ray-Casting
-    fill_img(g->img_3d, 0x0, HEIGHT, WIDTH);
+    fill_img(&g->img_3d, 0x0, HEIGHT, WIDTH);
     ray_casting(g);
     // printf(TXT_BLUE"Ply [%.2f:%.2f]\n"RESET, g->ply.position.x, g->ply.position.y);
     // ? Player
-    mlx_put_image_to_window(g->mlx, g->win_3d, g->img_3d, 0, 0);
+    mlx_put_image_to_window(g->mlx, g->win_3d, g->img_3d.img, 0, 0);
 }
