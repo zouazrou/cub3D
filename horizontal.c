@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 22:50:19 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:45:52 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    init_ray_var(t_ray *ray, double ray_angle)
 {
     ray->color = 255;
     ray->angle = normalize_angle(ray_angle);
-    ray->position = (t_vd){INT_MAX, 0};
+    ray->inter = (t_vd){INT_MAX, 0};
     ray->distance = 0;
     ray->hit_wall = false;
     ray->inc = (t_vd){0, 0};
@@ -39,17 +39,17 @@ bool    check_win_bound(t_game *g, t_vd position)
 // ! Has problem in this fn
 void    increment_to_other_point(t_game *g, t_ray *ray)
 {
-    while (check_win_bound(g, ray->position))
+    while (check_win_bound(g, ray->inter))
     {
-        if (is_wall(g, ray->position) == true)
+        if (is_wall(g, ray->inter) == true)
         {
             ray->hit_wall = true;
             break;
         }
-        ray->position.x += ray->inc.x;
-        ray->position.y += ray->inc.y;
+        ray->inter.x += ray->inc.x;
+        ray->inter.y += ray->inc.y;
     }
-    ray->distance = distance(ray->position, g->ply.position);
+    ray->distance = distance(ray->inter, g->ply.position);
 }
 
 /*
@@ -80,19 +80,19 @@ t_ray    horizontal_hit(t_game *g, double ray_angle)
     // *: Find the first Intersection Point
     if (FACING_UP(ray.angle))
     {
-        ray.position.y = floor(g->ply.position.y / g->tilesz) * g->tilesz - 1e-6;
+        ray.inter.y = floor(g->ply.position.y / g->tilesz) * g->tilesz - 1e-6;
         ray.inc.y = -g->tilesz;
         ray.side = NORTH;
     }
     else if (FACING_DOWN(ray.angle))
     {
-        ray.position.y = floor(g->ply.position.y / g->tilesz) * g->tilesz + g->tilesz;
+        ray.inter.y = floor(g->ply.position.y / g->tilesz) * g->tilesz + g->tilesz;
         ray.inc.y = g->tilesz;
         ray.side = SOUTH;
     }
     else
         printf(TXT_RED"NOT UP OR DOWN !!"RESET);
-    ray.position.x = g->ply.position.x + (ray.position.y - g->ply.position.y) / tan(ray.angle);
+    ray.inter.x = g->ply.position.x + (ray.inter.y - g->ply.position.y) / tan(ray.angle);
     ray.inc.x = ray.inc.y / tan(ray.angle);
     
     // *: check grid cell at point 'r'
@@ -129,20 +129,20 @@ t_ray vertical_hit(t_game *g, double ray_angle)
 
     if (FACING_LEFT(ray.angle))
     {
-        ray.position.x = floor(g->ply.position.x / g->tilesz) * g->tilesz - 1e-6;
+        ray.inter.x = floor(g->ply.position.x / g->tilesz) * g->tilesz - 1e-6;
         ray.inc.x = -g->tilesz;
         ray.side = WEST;
     }
     else if (FACING_RIGHT(ray.angle))
     {
-        ray.position.x = floor(g->ply.position.x / g->tilesz) * g->tilesz + g->tilesz;
+        ray.inter.x = floor(g->ply.position.x / g->tilesz) * g->tilesz + g->tilesz;
         ray.inc.x = g->tilesz;
         ray.side = EAST;
     }
     else
         printf(TXT_RED"NOT LEFT OR RIGHT !!"RESET);
 
-    ray.position.y = g->ply.position.y + (ray.position.x - g->ply.position.x) * tan(ray.angle);
+    ray.inter.y = g->ply.position.y + (ray.inter.x - g->ply.position.x) * tan(ray.angle);
     ray.inc.y = ray.inc.x * tan(ray.angle);
     
     // * check grid cell at point 'r'

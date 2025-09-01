@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 11:20:30 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:44:10 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_ray
 {
     int     color;
     double  angle;    // rad
-    t_vd    position;   // pxl
+    t_vd    inter;   // pxl
     double  distance; //
     bool    hit_wall;   //
     t_vd    inc;        // pxl
