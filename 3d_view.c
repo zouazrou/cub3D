@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 22:08:35 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 08:23:56 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void    draw_floor(t_game *g, int begin_x, int begin_y)
     ! texture
     * indicate any cell in map ray hit (x, y) 
 */
-void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height);
+void    draw_colorful_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height);
 
 void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height);
 
-void draw_wall_3d(t_game *g, int idx)
+void draw_3d_view(t_game *g, int idx)
 {
     double begin_x;
     double begin_y;
@@ -67,13 +67,6 @@ void draw_wall_3d(t_game *g, int idx)
     
     // ? fix fish eye 
     r->distance = fix_fish_eye(g, idx);
-    /****LIGHT*****/
-    // r->color *= (LIGHT_LVL / r->distance);
-    // if (r->color < 0)
-    //     r->color = 0;
-    // if (r->color > 255)
-    //     r->color = 255;
-    /*********/
     wall_height = (g->tilesz * g->distance_to_plane) / r->distance;
     begin_x = idx * g->resolution;
     begin_y = (HEIGHT/2.0) - (wall_height/2.0);
@@ -84,20 +77,19 @@ void draw_wall_3d(t_game *g, int idx)
     // printf("begin_x [%.2f]\n", begin_x);
     // printf("begin_y [%.2f]\n\n", begin_y);
     draw_ceiling(g, begin_x, begin_y);
-    // draw_wall(g, idx, begin_x, begin_y, wall_height);
     end_y = begin_y + wall_height;
-    if (end_y > HEIGHT)
-        end_y = HEIGHT;
+    // draw_colorful_wall(g, idx, begin_x, begin_y, wall_height);
     draw_textured_wall(g, idx, begin_x, begin_y, end_y, wall_height);
     draw_floor(g, begin_x, end_y);
 }
 
 // !=========================
-void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
+void    draw_colorful_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
 {
     int x;
     int end_y;
     int color;
+    t_ray *ray = g->ray + idx;
     
     end_y = begin_y + wall_height;
     while (begin_y <= end_y)
@@ -105,7 +97,9 @@ void    draw_wall(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
         x = 0;
         while (x < g->resolution)
         {
-            color = create_rgb(g->ray[idx].color,g->ray[idx].color,g->ray[idx].color);
+            color = CYAN;
+            // color = create_rgb(ray->color,ray->color,ray->color);
+            if(ray->axis == HORIZONTAL) color = (color >> 1) & 8355711;
             put_pixel_in_image(g->img_3d, begin_x + x, begin_y, color);
             x++;
         }

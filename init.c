@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 21:34:18 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/01 08:21:58 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void    init_ray(t_game *g)
 {
     g->ray = calloc(g->num_rays, sizeof(t_ray));
     if (!g->ray)
-        exit((printf("calloc \n"), 1));
+        exit((perror("malloc()"), 1));
 }
 
 void    init_player(t_game *g)
@@ -29,8 +29,8 @@ void    init_player(t_game *g)
     g->ply.rotation_speed = deg2rad(3);
     
     // ? Player's Postion
-    g->ply.position.x = (1) * g->tilesz;
-    g->ply.position.y = (1) * g->tilesz;
+    g->ply.position.x = (1.5) * g->tilesz;
+    g->ply.position.y = (1.5) * g->tilesz;
         // ? angle by rad
     g->ply.angle = deg2rad(20);
     // ? convert angle to vector
@@ -52,7 +52,7 @@ void    init_textures(t_game *g)
     g->west.img = mlx_xpm_file_to_image(g->mlx, g->west.file_name, &g->west.w, &g->west.h);
     g->east.img = mlx_xpm_file_to_image(g->mlx, g->east.file_name, &g->east.w, &g->east.h);
     if (!g->north.img || !g->south.img || !g->west.img || !g->east.img)
-        exit((printf(TXT_RED"img\n"RESET), 1));
+        exit((perror("mlx_xpm_file_to_image()"), 1));
 
     // 
     g->north.pixels = mlx_get_data_addr(g->north.img, &g->north.bpp, &g->north.line, &g->north.endian);
@@ -60,12 +60,12 @@ void    init_textures(t_game *g)
     g->west.pixels = mlx_get_data_addr(g->west.img, &g->west.bpp, &g->west.line, &g->west.endian);
     g->east.pixels = mlx_get_data_addr(g->east.img, &g->east.bpp, &g->east.line, &g->east.endian);
     if (!g->north.pixels || !g->south.pixels || !g->west.pixels || !g->east.pixels)
-        exit((printf(TXT_RED"pixels\n"RESET), 1));
+        exit((perror("mlx_get_data_addr()"), 1));
 }
 void    init_data(t_game *g)
 {
     // ? screen setting
-    g->resolution = 1;
+    g->resolution = 1   ;
     g->tilesz = 1;
     g->num_rays = WIDTH / g->resolution;
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
@@ -83,15 +83,15 @@ void    init_data(t_game *g)
     /***********/
     g->mlx = mlx_init();
     if (!g->mlx)
-        exit((printf(TXT_RED"-------------------mlx_init \n"RESET), 1));
+        exit((perror("mlx_int()"), 1));
     /***********/
     /***********/
     g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
     if (!g->win_3d)
-        exit((printf(TXT_RED"-------------------mlx_new_win 3D \n"RESET), 42));
+        exit((perror("mlx_new_window()"), 42));
     g->img_3d = mlx_new_image(g->mlx, WIDTH, HEIGHT);
     if (!g->img_3d)
-        exit((printf(TXT_RED"-------------------mlx_new_img 3D\n"RESET), 42));
+        exit((perror("mlx_new_image()"), 42));
     // ! TEXTURES
     init_textures(g);
     
