@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:22:14 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:46:09 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void display(t_game *data);
 
 double distance(t_vd p0, t_vd p1);
 
-bool    is_outside_window(int x, int y);
 int keyboard(int keysym, t_game *map);
 void init_data(t_game *data);
 // int close_win(void *ptr);
@@ -61,6 +60,8 @@ bool is_wall(t_game *g, t_vd position);
 double normalize_angle(double radian);
 void draw_3d_view(t_game *g, int idx);
 //
+void    draw_cube(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height);
+// void    draw_colorful_cube(t_game *g, int idx, int begin_x, int begin_y, int wall_height);
 
 bool facing_up(double angle);
 bool facing_down(double angle);

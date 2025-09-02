@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:12:30 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:46:02 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 
 extern int map[16][16];
 
-void put_pixel_in_image(t_img *image, int x, int y, int col)
-{
-    int     offset;
-    
-    if (x < 0 || y < 0)
-        return ;
-    offset = (y * image->line) + (x * (image->bpp / 8));
-    *(unsigned int *)(image->pixels + offset) = col;
-}
+
 
 double distance(t_vd p0, t_vd p1)
 {
