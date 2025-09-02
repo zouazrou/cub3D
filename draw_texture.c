@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 11:32:13 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:02:28 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,14 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
     
     if (ray->axis == HORIZONTAL)
         wall_x = ray->inter.x;
-    else if (ray->axis == VERTICAL)
-        wall_x = ray->inter.y;
     else
-        printf("debug: not H nor V !!\n");
+        wall_x = ray->inter.y;
     
     wall_x -= floor(wall_x / g->tilesz) * g->tilesz;
     tex_x = (int)(wall_x / g->tilesz * texture->w);
     
-    // Adjust for texture orientation
     if ((ray->axis == VERTICAL && cos(ray->angle) < 0) ||
-        (ray->axis == HORIZONTAL && sin(ray->angle) > 0))
+        (ray->axis == HORIZONTAL && sin(ray->angle) > 0)) // ! KHASK TBDLHA !!
     {
         printf("waaah\n");
         tex_x = texture->w - tex_x - 1;

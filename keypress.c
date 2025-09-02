@@ -6,13 +6,13 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/30 08:23:01 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 21:33:02 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int map[8][8];
+extern int map[16][16];
 
 void check_wall(t_game *g, t_vd new_position)
 {

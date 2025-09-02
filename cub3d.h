@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 11:29:33 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:22:14 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,7 @@
 # define CYAN 0x00FFFF
 
 
-/*
 
-*/
-
-
-int create_rgb(int r, int g, int b);
 
 t_ray horizontal_hit(t_game *g, double ray_angle);
 t_ray vertical_hit(t_game *g, double ray_angle);
@@ -66,31 +61,26 @@ bool is_wall(t_game *g, t_vd position);
 double normalize_angle(double radian);
 void draw_3d_view(t_game *g, int idx);
 //
-void fill_img(t_img *img, int col, int h, int w);
 
-bool FACING_UP(double angle);
-bool FACING_DOWN(double angle);
-bool FACING_RIGHT(double angle);
-bool FACING_LEFT(double angle);
+bool facing_up(double angle);
+bool facing_down(double angle);
+bool facing_right(double angle);
+bool facing_left(double angle);
 void ray_casting(t_game *g);
 double  fix_fish_eye(t_game *g, int index);
 
 // utils function
 void    *ft_calloc(size_t nmemb, size_t size);
-void    draw_big_point(t_img *img, int x, int y, int r, int col);
-void    draw_ray(t_img *img, t_vd p0, t_vd p1, int color);
 void    put_pixel_in_image(t_img *image, int x, int y, int col);
 int     ft_clean(int keysym, t_game *g);
 double  deg2rad(int degree);
 void    change_angle(int keysym, t_game *g);
 char	*ft_strdup(const char *s);
-// int    get_pixel_color(t_game *g, int x, int y);
 
 // --------------------------
-// Reset
-#define RESET "\033[0m"
 
 // Regular Colors
+#define RESET "\033[0m"
 #define TXT_BLACK "\033[30m"
 #define TXT_RED "\033[31m"
 #define TXT_GREEN "\033[32m"
@@ -100,6 +90,4 @@ char	*ft_strdup(const char *s);
 #define TXT_CYAN "\033[36m"
 #define TXT_WHITE "\033[37m"
 
-// Bold
-#define TXT_BOLD "\033[1m"
 #endif

@@ -17,11 +17,11 @@ LIBS = minilibx-linux/libmlx.a $(MLX_FLAGS) -lm
 all : $(NAME)
 
 $(NAME) : $(OBJ) 
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "\\033[1m\\033[36mexec:⚙️\\033[0m"
 
 $(OBJ) : $(SRC) $(HEADER_FILE) Makefile
-	@$(CC) -c $(CFLAGS) $(SRC)
+	$(CC) -c $(CFLAGS) $(SRC)
 	@echo "\\033[1m\\033[32mOBJ:📁\\033[0m"
 
 re : fclean all
