@@ -37,7 +37,7 @@ bool    check_win_bound(t_game *g, t_vd position)
 }
 
 // ! Has problem in this fn
-void    increment_to_other_point(t_game *g, t_ray *ray)
+void    increment_to_the_wall(t_game *g, t_ray *ray)
 {
     while (check_win_bound(g, ray->inter))
     {
@@ -96,7 +96,7 @@ t_ray    horizontal_hit(t_game *g, double ray_angle)
     ray.inc.x = ray.inc.y / tan(ray.angle);
     
     // *: check grid cell at point 'r'
-    increment_to_other_point(g, &ray);
+    increment_to_the_wall(g, &ray);
     return (ray);   
 }
 
@@ -146,6 +146,6 @@ t_ray vertical_hit(t_game *g, double ray_angle)
     ray.inc.y = ray.inc.x * tan(ray.angle);
     
     // * check grid cell at point 'r'
-    increment_to_other_point(g, &ray);
+    increment_to_the_wall(g, &ray);
     return (ray);
 }
