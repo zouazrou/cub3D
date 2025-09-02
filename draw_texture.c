@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:45:02 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:09:46 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void    draw_cube(t_game *g, int idx, int begin_x, int begin_y, int end_y, int w
     texture = select_texture(g, ray);
     tex_x = calculate_tex_x(g, ray, texture);
     tex_step = (double)texture->h / wall_height;
-    tex_pos = (begin_y - HEIGHT/2.0 + wall_height/2.0) * tex_step;
+    tex_pos = (begin_y - g->height/2.0 + wall_height/2.0) * tex_step;
     y = begin_y-1;
     while (++y < end_y)
     {
@@ -87,6 +87,6 @@ void    draw_cube(t_game *g, int idx, int begin_x, int begin_y, int end_y, int w
         color = get_pixel_color(texture, tex_x, tex_y);
         x = -1;
         while (++x < g->resolution)
-            put_pixel_in_image(&g->img_3d, begin_x + x, y, color);
+            put_pixel_in_image(g, &g->img_3d, begin_x + x, y, color);
     }
 }

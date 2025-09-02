@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:31:54 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:34:03 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,45 @@ void    init_ray(t_game *g)
         exit((perror("malloc()"), 1));
 }
 
+void    init_screen(t_game *g)
+{
+    g->resolution = 1;
+    g->tilesz = 64;
+    g->num_rays = g->width / g->resolution;
+    g->fov = deg2rad(60);
+    g->distance_to_plane = (g->width/2.0) / (tan(g->fov/2.0)); // 
+    printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
+}
+
+/*
+    ! 0    'W'
+    ! 180  'E'
+    ! 90   'S'
+    ! 270  'N'
+*/
 void    init_player(t_game *g)
 {
     g->ply.move_speed = 0.1 * g->tilesz;
     g->ply.rotation_speed = deg2rad(3);
-    
-    // ? Player's Postion
     g->ply.position.x = (1.5) * g->tilesz;
     g->ply.position.y = (1.5) * g->tilesz;
-        // ? angle by rad
-    g->ply.angle = deg2rad(20);
-    // ? convert angle to vector
-    // g->ply.direction.x = cos(g->ply.angle);
-    // g->ply.direction.y = sin(g->ply.angle);
+    g->ply.angle = deg2rad(270);
 }
-
+void    init_minilibx(t_game *g)
+{
+    g->mlx = mlx_init();
+    if (!g->mlx)
+        exit((perror("mlx_int()"), 1));
+    g->win_3d = mlx_new_window(g->mlx, g->width, g->height, "3D");
+    if (!g->win_3d)
+        exit((perror("mlx_new_window()"), 42));
+    g->img_3d.img = mlx_new_image(g->mlx, g->width, g->height);
+    if (!g->img_3d.img)
+        exit((perror("mlx_new_image()"), 42));
+    g->img_3d.pixels = mlx_get_data_addr(g->img_3d.img, &g->img_3d.bpp, &g->img_3d.line, &g->img_3d.endian);
+    if (!g->img_3d.pixels)
+        exit((perror("mlx_get_data_addr()"), 42));
+}
 void    init_textures(t_game *g)
 {
     // * PATH XMP IMGS
@@ -50,7 +74,7 @@ void    init_textures(t_game *g)
     if (!g->north.image.img || !g->south.image.img || !g->west.image.img || !g->east.image.img)
         exit((perror("mlx_xpm_file_to_image()"), 1));
 
-    // 
+    //
     g->north.image.pixels = mlx_get_data_addr(g->north.image.img, &g->north.image.bpp, &g->north.image.line, &g->north.image.endian);
     g->south.image.pixels = mlx_get_data_addr(g->south.image.img, &g->south.image.bpp, &g->south.image.line, &g->south.image.endian);
     g->west.image.pixels = mlx_get_data_addr(g->west.image.img, &g->west.image.bpp, &g->west.image.line, &g->west.image.endian);
@@ -60,49 +84,21 @@ void    init_textures(t_game *g)
 }
 void    init_data(t_game *g)
 {
-    // ? screen setting
-    g->resolution = 1;
-    g->tilesz = 64;
-    g->num_rays = WIDTH / g->resolution;
-    printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
-
+    ft_bzero(g, sizeof(t_game));
     
-    g->fov = deg2rad(60);
-    // ? Player
-    init_player(g);
-    
-    init_ray(g);
-
-    // ? MAP & MLX
     g->mapx = 16;
     g->mapy = 16;
-    /***********/
-    g->mlx = mlx_init();
-    if (!g->mlx)
-        exit((perror("mlx_int()"), 1));
-    /***********/
-    /***********/
-    g->win_3d = mlx_new_window(g->mlx, WIDTH, HEIGHT, "3D");
-    if (!g->win_3d)
-        exit((perror("mlx_new_window()"), 42));
-    g->img_3d.img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-    if (!g->img_3d.img)
-        exit((perror("mlx_new_image()"), 42));
-    g->img_3d.pixels = mlx_get_data_addr(g->img_3d.img, &g->img_3d.bpp, &g->img_3d.line, &g->img_3d.endian);
-    if (!g->img_3d.pixels)
-        exit((perror("mlx_get_data_addr()"), 42));
-    // ! TEXTURES
-    init_textures(g);
-    
-    // ? Plane
-        // * <=> DIS-TO-PLANE = WIDTH / TAN(FOV/2)
-    g->distance_to_plane = (WIDTH/2.0) / (tan(g->fov/2.0)); // 
-    // g->distance_to_plane *= 0.66;
-    printf(TXT_CYAN"distance to plane [%.2f]\n"RESET, g->distance_to_plane);
+    g->width = WIDTH;
+    g->height = HEIGHT;
     g->ceiling_color = LIGHT_BLUE;
     g->floor_color = DARK_GRAY;
-    // ? ray
-    // printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", g->pa, g->d.x, g->d.y);
+    
+    init_screen(g);
+    init_player(g);
+    init_ray(g);
+    init_minilibx(g);
+    init_textures(g);
+    
 }
 
 /*

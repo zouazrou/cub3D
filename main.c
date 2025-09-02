@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:07:10 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:10:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ void hooks(t_game *data)
 }
 int main(int argc, char const *argv[])
 {
-	t_game data;
+	t_game game;
 
     (void)argc;
     (void)argv;
-    printf(TXT_YELLOW"WIDTH = %d | HEIGHT = %d\n"RESET, WIDTH, HEIGHT);
-    init_data(&data);
+    printf(TXT_YELLOW"WIDTH = %d | g->height = %d\n"RESET, game.width, game.height);
+    init_data(&game);
 
-    display(&data);
-    hooks(&data);
-	mlx_loop(data.mlx);
+    display(&game);
+    hooks(&game);
+	mlx_loop(game.mlx);
 }
 

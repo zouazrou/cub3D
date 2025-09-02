@@ -6,25 +6,12 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:25:07 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:51:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 extern int map[16][16];
-
-/*
-? Horizontal lines are parallel to the X-axis.
-* Vertical   lines are parallel to the Y-axis.
-
-
-TODO : WALL-HEIGHT/DIS-TO-WALL  = PROJECTED-WALL-HEIGHT / DIS-TO-PLANE
-    ! DIS-TO-PLANE
-        *     TAN(FOV/2) = WIDTH / DIS-TO-PLANE
-        * <=> DIS-TO-PLANE = WIDTH / TAN(FOV/2)
-TODO : SO
-    ? PROJECTED-WALL-HEIGHT = DIS-TO-PLANE.(WALL-HEIGHT/DIS-TO-WALL)
-*/
 
 void    choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
 {

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:46:09 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:31:23 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,11 @@ double  fix_fish_eye(t_game *g, int index);
 
 // utils function
 void    *ft_calloc(size_t nmemb, size_t size);
-void    put_pixel_in_image(t_img *image, int x, int y, int col);
+void    put_pixel_in_image(t_game *g, t_img *image, int x, int y, int col);
 int     ft_clean(int keysym, t_game *g);
 double  deg2rad(int degree);
 void    change_angle(int keysym, t_game *g);
+void	ft_bzero(void *s, size_t n);
 char	*ft_strdup(const char *s);
 
 // --------------------------
