@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:34:03 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:36:34 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ void    init_textures(t_game *g)
     g->east.image.img = mlx_xpm_file_to_image(g->mlx, g->east.filename, &g->east.w, &g->east.h);
     if (!g->north.image.img || !g->south.image.img || !g->west.image.img || !g->east.image.img)
         exit((perror("mlx_xpm_file_to_image()"), 1));
-
-    //
+    // * CONVERT TEXTURE TO buffer 'char *'
     g->north.image.pixels = mlx_get_data_addr(g->north.image.img, &g->north.image.bpp, &g->north.image.line, &g->north.image.endian);
     g->south.image.pixels = mlx_get_data_addr(g->south.image.img, &g->south.image.bpp, &g->south.image.line, &g->south.image.endian);
     g->west.image.pixels = mlx_get_data_addr(g->west.image.img, &g->west.image.bpp, &g->west.image.line, &g->west.image.endian);
