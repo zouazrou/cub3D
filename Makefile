@@ -1,7 +1,7 @@
 NAME = cub3D
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror  -g
-CFLAGS = -g 
+CFLAGS = -Wall -Wextra -Werror  -g
+# CFLAGS = -g 
 HEADER_FILE = cub3d.h  structures.h
 MLX_FLAGS = -lXext -lX11
 

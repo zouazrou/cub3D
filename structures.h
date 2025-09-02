@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 11:44:10 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:06:30 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,24 @@ typedef struct s_vd
 
 typedef struct s_player // ! dir baalk
 {
-    t_vd    position; // pxl
-    double  angle;  // rad
+    t_vd    position;
+    double  angle;
 
     // ? mv & rot speed
-    double  move_speed; // pxl
+    double  move_speed;
     double  rotation_speed;
 } t_player;
 
 typedef struct s_ray
 {
     int     color;
-    double  angle;    // rad
-    t_vd    inter;   // pxl
-    double  distance; //
-    bool    hit_wall;   //
-    t_vd    inc;        // pxl
+    double  angle;
+    t_vd    inter;
+    double  distance;
+    bool    hit_wall;
+    t_vd    inc;
     t_dir   side;
-    t_axis  axis; // v or h
+    t_axis  axis;
 } t_ray;
 
 typedef struct s_img
@@ -70,11 +70,9 @@ typedef struct s_texture
 {
     int     w;
     int     h;
-    char    *filename;
-    
-    /*******/
     t_img   image;
-}   t_texture;
+    char    *filename;
+} t_texture;
 
 typedef struct s_game
 {
@@ -92,21 +90,18 @@ typedef struct s_game
 
     /*MAP*/
     int mapx;
+    int width;
+    int height;
     int mapy;
     int tilesz;
 
-    /*position Player*/
     t_player ply;
 
-    /*Ray*/
 
-    /*tilesize*/
     double fov;
-    int resolution; // pixel
-    // ray
+    int resolution;
     int num_rays;
     t_ray *ray;
-    // PLANE
     double distance_to_plane;
 } t_game;
 

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:45:38 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:09:38 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    draw_ceiling(t_game *g, int begin_x, int begin_y)
     {
         x = -1;
         while (++x < g->resolution)
-            put_pixel_in_image(&g->img_3d, begin_x+x, y, g->ceiling_color);
+            put_pixel_in_image(g, &g->img_3d, begin_x+x, y, g->ceiling_color);
     }
 }
 
@@ -34,11 +34,11 @@ void    draw_floor(t_game *g, int begin_x, int begin_y)
     int y;
 
     y = begin_y-1;
-    while (++y < HEIGHT)
+    while (++y < g->height)
     {
         x = -1;
         while (++x < g->resolution)
-                put_pixel_in_image(&g->img_3d, begin_x+x, y, g->floor_color);
+            put_pixel_in_image(g, &g->img_3d, begin_x+x, y, g->floor_color);
     }
 }
 
@@ -62,8 +62,8 @@ void draw_3d_view(t_game *g, int idx)
     r->distance = fix_fish_eye(g, idx);
     wall_height = (g->tilesz * g->distance_to_plane) / r->distance;
     
-    begin_y = (HEIGHT / 2) - (wall_height / 2);
-    end_y = (HEIGHT / 2) + (wall_height / 2);
+    begin_y = (g->height / 2) - (wall_height / 2);
+    end_y = (g->height / 2) + (wall_height / 2);
     begin_x = idx * g->resolution;
     
     draw_ceiling(g, begin_x, begin_y);
@@ -87,7 +87,7 @@ void draw_3d_view(t_game *g, int idx)
 //         {
 //             color = CYAN;
 //             if(ray->axis == HORIZONTAL) color = (color >> 1) & 8355711;
-//             put_pixel_in_image(&g->img_3d, begin_x + x, begin_y, color);
+//             put_pixel_in_image(g, &g->img_3d, begin_x + x, begin_y, color);
 //             x++;
 //         }
 //         begin_y++;
