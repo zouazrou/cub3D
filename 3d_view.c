@@ -6,27 +6,26 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 11:27:10 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 21:58:38 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int bpp;
-extern int line_bytes;
-extern int endian;
-extern int map[8][8];
+extern int map[16][16];
 
 void    draw_ceiling(t_game *g, int begin_x, int begin_y)
 {
     int x;
     int y;
 
-    for (y = 0; y < begin_y; y++)
+    y = -1;
+    while (++y < begin_y)
     {
-        for (x = 0; x < g->resolution; x++)
+        x = -1;
+        while (++x < g->resolution)
         {
-            // if (!is_outside_window(begin_x + x, y))
+            if (!is_outside_window(begin_x + x, y))
                 put_pixel_in_image(&g->img_3d, begin_x+x, y, g->ceiling_color);
         }
     }
@@ -37,9 +36,11 @@ void    draw_floor(t_game *g, int begin_x, int begin_y)
     int x;
     int y;
 
-    for (y = begin_y; y < HEIGHT; y++)
+    y = begin_y-1;
+    while (++y < HEIGHT)
     {
-        for (x = 0; x < g->resolution; x++)
+        x = -1;
+        while (++x < g->resolution)
         {
             if (!is_outside_window(begin_x + x, y))
                 put_pixel_in_image(&g->img_3d, begin_x+x, y, g->floor_color);
@@ -94,7 +95,6 @@ void    draw_colorful_wall(t_game *g, int idx, int begin_x, int begin_y, int wal
         while (x < g->resolution)
         {
             color = CYAN;
-            // color = create_rgb(ray->color,ray->color,ray->color);
             if(ray->axis == HORIZONTAL) color = (color >> 1) & 8355711;
             if (!is_outside_window(begin_x + x, begin_y))
                 put_pixel_in_image(&g->img_3d, begin_x + x, begin_y, color);

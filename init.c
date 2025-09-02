@@ -6,15 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 11:29:43 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 21:58:09 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-extern int bpp;
-extern int line_bytes;
-extern int endian;
 
 void    init_ray(t_game *g)
 {
@@ -42,9 +38,9 @@ void    init_textures(t_game *g)
 {
     // * PATH XMP IMGS
     g->north.filename = "image/eagle.xpm";
-    g->south.filename = "image/eagle.xpm";
-    g->west.filename = "image/eagle.xpm";
-    g->east.filename = "image/eagle.xpm";
+    g->south.filename = "image/blue_wall.xpm";
+    g->west.filename = "image/grey_wall.xpm";
+    g->east.filename = "image/orange_wall.xpm";
 
     // * CONVERT 'xpm' TO 'IMG' 
     g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename, &g->north.w, &g->north.h);
@@ -78,8 +74,8 @@ void    init_data(t_game *g)
     init_ray(g);
 
     // ? MAP & MLX
-    g->mapx = 8;
-    g->mapy = 8;
+    g->mapx = 16;
+    g->mapy = 16;
     /***********/
     g->mlx = mlx_init();
     if (!g->mlx)
@@ -109,18 +105,6 @@ void    init_data(t_game *g)
     // printf("debug: angle [%f]>>dx[%f]>>dy[%f]\n\n", g->pa, g->d.x, g->d.y);
 }
 
-
-void    draw_big_point(t_img *img, int x, int y,  int r, int col)
-{
-    for (int dx = -r; dx <= r; dx++)
-    {
-        for (int dy = -r; dy <= r; dy++)
-        {
-            if (dx*dx + dy*dy <= r*r) // inside circle
-                put_pixel_in_image(img, x + dx, y + dy, col);
-        }
-    }
-}
 /*
 ? Wall-Height / dis-to-the-Wall
 !            == 

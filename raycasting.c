@@ -6,12 +6,12 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/08/31 22:50:05 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:25:07 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-extern int map[8][8];
+extern int map[16][16];
 
 /*
 ? Horizontal lines are parallel to the X-axis.
@@ -54,38 +54,22 @@ void ray_casting(t_game *g)
     ray_angle = g->ply.angle - (g->fov / 2);
     ray_inc = g->fov / g->num_rays;
     i = -1;
-    // printf("ply-angle [%.2f]\n", g->pa);
-    // printf("fov [%.2f]\n", ((double)g->fov));
-    // printf("fov/2 [%.2f]\n", ((double)g->fov / (double)2));
-    // printf("ray-angle [%.2f]\n", ray_angle);
-    // printf("ray-inc [%.2f]\n", ray_inc);
-    
     while (++i < g->num_rays)
     {
         ray_h = horizontal_hit(g, normalize_angle(ray_angle));
         ray_v = vertical_hit(g, normalize_angle(ray_angle));
-        // printf("\n[%d]\n", i);
-        // printf("Horizontal wall [%.2f: %.2f]\n", ray_h.position.x, ray_h.position.y);
-        // printf("vertical   wall [%.2f: %.2f]\n", ray_v.position.x, ray_v.position.y);
         choose_nearest(g->ray + i, &ray_h, &ray_v, i);
-        // printf("nearest    wall [%.2f: %.2f]\n", g->ray[i].position.x, g->ray[i].position.y);
         
         int col = WHITE;
         if (g->ray[i].side == NORTH)
             col = RED;
-        // printf(TXT_RED"RAY\n"RESET);
         if (g->ray[i].side == SOUTH)
             col = GREEN;
-        // printf(TXT_BLUE"RAY\n"RESET);
         if (g->ray[i].side == EAST)
             col = BROWN;
-        // printf(TXT_MAGENTA"RAY\n"RESET);
         if (g->ray[i].side == WEST)
             col = YLW;
-        // printf(TXT_GREEN"RAY\n"RESET);
-        //!aaaaaaaaaaaaaaaaaaaaaaaa
         draw_3d_view(g, i);
         ray_angle+= ray_inc;
     }
-    
 }
