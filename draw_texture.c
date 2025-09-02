@@ -46,20 +46,20 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
     double wall_x;
     
     if (ray->axis == HORIZONTAL)
-        wall_x = g->ply.position.x + ray->distance * cos(ray->angle);
+        wall_x = ray->inter.x;
     else if (ray->axis == VERTICAL)
-        wall_x = g->ply.position.y + ray->distance * sin(ray->angle);
+        wall_x = ray->inter.y;
     else
         printf("debug: not H nor V !!\n");
     
-    wall_x -= floor(wall_x);
-    tex_x = (int)(wall_x * texture->w);
+    wall_x -= floor(wall_x / g->tilesz) * g->tilesz;
+    tex_x = (int)(wall_x / g->tilesz * texture->w);
     
     // Adjust for texture orientation
     if ((ray->axis == VERTICAL && cos(ray->angle) < 0) ||
         (ray->axis == HORIZONTAL && sin(ray->angle) > 0))
     {
-        printf("HHHHHH\n");
+        printf("waaah\n");
         tex_x = texture->w - tex_x - 1;
     }
     return (tex_x);
@@ -97,7 +97,7 @@ void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end
         {
             if (begin_x + x < WIDTH && y < HEIGHT && begin_x + x >= 0 && y >= 0)
                 put_pixel_in_image(&g->img_3d, begin_x + x, y, color);
-            x++;
+            // x++;
         }
         y++;
     }

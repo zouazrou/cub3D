@@ -42,9 +42,9 @@ void    init_textures(t_game *g)
 {
     // * PATH XMP IMGS
     g->north.filename = "image/eagle.xpm";
-    g->south.filename = "image/grey_wall.xpm";
-    g->west.filename = "image/blue_wall.xpm";
-    g->east.filename = "image/orange_wall.xpm";
+    g->south.filename = "image/eagle.xpm";
+    g->west.filename = "image/eagle.xpm";
+    g->east.filename = "image/eagle.xpm";
 
     // * CONVERT 'xpm' TO 'IMG' 
     g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename, &g->north.w, &g->north.h);
@@ -66,7 +66,7 @@ void    init_data(t_game *g)
 {
     // ? screen setting
     g->resolution = 1;
-    g->tilesz = 1;
+    g->tilesz = 64;
     g->num_rays = WIDTH / g->resolution;
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
 

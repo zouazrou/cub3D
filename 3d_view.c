@@ -41,7 +41,7 @@ void    draw_floor(t_game *g, int begin_x, int begin_y)
     {
         for (x = 0; x < g->resolution; x++)
         {
-            // if (!is_outside_window(begin_x + x, y))
+            if (!is_outside_window(begin_x + x, y))
                 put_pixel_in_image(&g->img_3d, begin_x+x, y, g->floor_color);
         }
     }
@@ -71,14 +71,8 @@ void draw_3d_view(t_game *g, int idx)
     
     begin_y = (HEIGHT / 2) - (wall_height / 2);
     end_y = (HEIGHT / 2) + (wall_height / 2);
-    if (begin_y < 0)
-        begin_y = 0;
-    if (end_y > HEIGHT)
-        end_y = HEIGHT;
     begin_x = idx * g->resolution;
     
-    // printf("begin_x [%.2f]\n", begin_x);
-    // printf("begin_y [%.2f]\n\n", begin_y);
     draw_ceiling(g, begin_x, begin_y);
     draw_textured_wall(g, idx, begin_x, begin_y, end_y, wall_height);
     // draw_colorful_wall(g, idx, begin_x, begin_y, wall_height);
@@ -102,7 +96,8 @@ void    draw_colorful_wall(t_game *g, int idx, int begin_x, int begin_y, int wal
             color = CYAN;
             // color = create_rgb(ray->color,ray->color,ray->color);
             if(ray->axis == HORIZONTAL) color = (color >> 1) & 8355711;
-            put_pixel_in_image(&g->img_3d, begin_x + x, begin_y, color);
+            if (!is_outside_window(begin_x + x, begin_y))
+                put_pixel_in_image(&g->img_3d, begin_x + x, begin_y, color);
             x++;
         }
         begin_y++;
