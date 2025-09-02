@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:02:28 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:45:02 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ unsigned int    get_pixel_color(t_texture *texture, int x, int y)
     return ((*(unsigned int *)(texture->image.pixels + offset))& 0x00FFFFFF);
 }
 
-// * This calculates which column (x-coordinate) of the texture to use:
 int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
 {
     int tex_x;
@@ -62,7 +61,9 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
     return (tex_x);
 }
 
-void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height)
+
+// static void    draw_wall
+void    draw_cube(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height)
 {
     int     color;
     int     x;
@@ -78,24 +79,14 @@ void    draw_textured_wall(t_game *g, int idx, int begin_x, int begin_y, int end
     tex_x = calculate_tex_x(g, ray, texture);
     tex_step = (double)texture->h / wall_height;
     tex_pos = (begin_y - HEIGHT/2.0 + wall_height/2.0) * tex_step;
-
-
-    
-    y = begin_y;
-    while (y < end_y)
+    y = begin_y-1;
+    while (++y < end_y)
     {
         tex_y = (int)tex_pos & (texture->h - 1);
         tex_pos += tex_step;
-        
-        // Get color from texture
         color = get_pixel_color(texture, tex_x, tex_y);
-        x = 0;
-        // while (x < g->resolution)
-        {
-            if (begin_x + x < WIDTH && y < HEIGHT && begin_x + x >= 0 && y >= 0)
-                put_pixel_in_image(&g->img_3d, begin_x + x, y, color);
-            // x++;
-        }
-        y++;
+        x = -1;
+        while (++x < g->resolution)
+            put_pixel_in_image(&g->img_3d, begin_x + x, y, color);
     }
 }
