@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:09:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/03 10:23:54 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ unsigned int    get_pixel_color(t_texture *texture, int x, int y)
     int offset;
 
     if (x < 0 || x >= texture->w || y < 0 || y >= texture->h)
-    {
-        printf(TXT_BLUE"get_pxl_color()\n"RESET);
         return (0);
-    }
-    
     offset = (y * texture->image.line) + (x * (texture->image.bpp / 8));
     return ((*(unsigned int *)(texture->image.pixels + offset))& 0x00FFFFFF);
 }

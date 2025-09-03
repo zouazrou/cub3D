@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:46:02 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/03 09:27:33 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double  normalize_angle(double radian)
 {
     radian = fmod(radian, (PI*2));
     if (radian <  0)
-        radian += (PI*2), printf(TXT_RED"normalize angle fn\n"RESET);
+        radian += (PI*2);
     return (radian);
 }
 

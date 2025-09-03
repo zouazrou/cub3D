@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:36:34 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/03 09:31:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    init_ray(t_game *g)
 void    init_screen(t_game *g)
 {
     g->resolution = 1;
-    g->tilesz = 64;
+    g->tilesz = 1;
     g->num_rays = g->width / g->resolution;
     g->fov = deg2rad(60);
     g->distance_to_plane = (g->width/2.0) / (tan(g->fov/2.0)); // 
@@ -41,7 +41,7 @@ void    init_player(t_game *g)
     g->ply.rotation_speed = deg2rad(3);
     g->ply.position.x = (1.5) * g->tilesz;
     g->ply.position.y = (1.5) * g->tilesz;
-    g->ply.angle = deg2rad(270);
+    g->ply.angle = deg2rad(90);
 }
 void    init_minilibx(t_game *g)
 {
@@ -61,10 +61,10 @@ void    init_minilibx(t_game *g)
 void    init_textures(t_game *g)
 {
     // * PATH XMP IMGS
-    g->north.filename = "image/eagle.xpm";
+    g->north.filename = "image/orange_wall.xpm";
     g->south.filename = "image/blue_wall.xpm";
-    g->west.filename = "image/grey_wall.xpm";
-    g->east.filename = "image/orange_wall.xpm";
+    g->west.filename = "image/eagle.xpm";
+    g->east.filename = "image/grey_wall.xpm";
 
     // * CONVERT 'xpm' TO 'IMG' 
     g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename, &g->north.w, &g->north.h);
