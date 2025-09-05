@@ -46,16 +46,6 @@ void ray_casting(t_game *g)
         ray_h = horizontal_hit(g, normalize_angle(ray_angle));
         ray_v = vertical_hit(g, normalize_angle(ray_angle));
         choose_nearest(g->ray + i, &ray_h, &ray_v, i);
-        
-        int col = WHITE;
-        if (g->ray[i].side == NORTH)
-            col = RED;
-        if (g->ray[i].side == SOUTH)
-            col = GREEN;
-        if (g->ray[i].side == EAST)
-            col = BROWN;
-        if (g->ray[i].side == WEST)
-            col = YLW;
         draw_3d_view(g, i);
         ray_angle+= ray_inc;
     }

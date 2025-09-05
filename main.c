@@ -66,8 +66,8 @@ int main(int argc, char const *argv[])
 
     (void)argc;
     (void)argv;
-    printf(TXT_YELLOW"WIDTH = %d | g->height = %d\n"RESET, game.width, game.height);
     init_data(&game);
+    printf(TXT_YELLOW"WIDTH = %d | g->height = %d\n"RESET, game.width, game.height);
 
     display(&game);
     hooks(&game);
