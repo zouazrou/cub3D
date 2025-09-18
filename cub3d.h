@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:31:23 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:56:10 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ double distance(t_vd p0, t_vd p1);
 int keyboard(int keysym, t_game *map);
 void init_data(t_game *data);
 // int close_win(void *ptr);
-bool is_wall(t_game *g, t_vd position);
+bool is_wall(t_game *g, t_ray *ray);
 double normalize_angle(double radian);
 void draw_3d_view(t_game *g, int idx);
 //

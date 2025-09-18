@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:36:34 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:51:04 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void    init_data(t_game *g)
 {
     ft_bzero(g, sizeof(t_game));
     
-    g->mapx = 16;
-    g->mapy = 16;
+    g->mapx = 100;
+    g->mapy = 100;
     g->width = WIDTH;
     g->height = HEIGHT;
     g->ceiling_color = LIGHT_BLUE;

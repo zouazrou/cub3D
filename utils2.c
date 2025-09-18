@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:46:02 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:59:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ double  normalize_angle(double radian)
 {
     radian = fmod(radian, (PI*2));
     if (radian <  0)
-        radian += (PI*2), printf(TXT_RED"normalize angle fn\n"RESET);
+        radian += (PI*2);
     return (radian);
 }
 
-bool    is_wall(t_game *g, t_vd position)
+bool    is_wall(t_game *g, t_ray *ray)
 {
-    if (map[(int)position.y/g->tilesz][(int)position.x/g->tilesz] > 0)
+    if (map[(int)ray->inter.y/g->tilesz][(int)ray->inter.x/g->tilesz] > 0)
+	{
+		ray->hit_wall = true;
         return (true);
+	}
     return (false);
 }
 

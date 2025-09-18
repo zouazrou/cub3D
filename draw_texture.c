@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:09:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:25:09 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
     if ((ray->axis == VERTICAL && cos(ray->angle) < 0) ||
         (ray->axis == HORIZONTAL && sin(ray->angle) > 0)) // ! KHASK TBDLHA !!
     {
-        printf("waaah\n");
+        // printf("waaah\n");
         tex_x = texture->w - tex_x - 1;
     }
     return (tex_x);

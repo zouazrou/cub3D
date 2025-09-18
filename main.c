@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:10:35 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:24:47 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int main(int argc, char const *argv[])
 
     (void)argc;
     (void)argv;
-    printf(TXT_YELLOW"WIDTH = %d | g->height = %d\n"RESET, game.width, game.height);
     init_data(&game);
+    printf(TXT_YELLOW"WIDTH = %d | g->height = %d\n"RESET, game.width, game.height);
 
     display(&game);
     hooks(&game);
