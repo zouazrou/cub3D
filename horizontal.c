@@ -6,14 +6,12 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/18 18:03:52 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 09:32:19 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "cub3d.h"
-
-extern int map[8][8];
 
 void    init_ray_var(t_ray *ray, double ray_angle)
 {
@@ -25,6 +23,21 @@ void    init_ray_var(t_ray *ray, double ray_angle)
     ray->inc = (t_vd){0, 0};
     ray->side = 0;
     ray->axis = 0;
+}
+
+bool    is_wall(t_game *g, t_ray *ray)
+{
+	int	x;
+	int	y;
+
+ 	x = (int)ray->inter.x / g->tilesz;
+	y = (int)ray->inter.y / g->tilesz;
+    if (g->map[y][x] == '1')
+	{
+		ray->hit_wall = true;
+        return (true);
+	}
+    return (false);
 }
 
 bool    check_win_bound(t_game *g, t_ray *ray)

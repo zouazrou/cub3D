@@ -6,12 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 22:51:05 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 21:04:45 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-extern int map[16][16];
 
 void    choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
 {

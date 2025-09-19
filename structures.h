@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:06:30 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 09:31:31 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef structures_h
+#ifndef STRUCTURES_H
 # define STRUCTURES_H
 
 typedef long long t_ms;
@@ -53,7 +53,7 @@ typedef struct s_ray
     double  distance;
     bool    hit_wall;
     t_vd    inc;
-    t_dir   side;
+    t_dir   side; // tmp
     t_axis  axis;
 } t_ray;
 
@@ -89,11 +89,12 @@ typedef struct s_game
     int ceiling_color;
 
     /*MAP*/
-    int mapx;
-    int width;
-    int height;
-    int mapy;
-    int tilesz;
+    char    **map;
+    int     mapx;
+    int     mapy;
+    int     width;
+    int     height;
+    int     tilesz;
 
     t_player ply;
 
@@ -105,4 +106,17 @@ typedef struct s_game
     double distance_to_plane;
 } t_game;
 
+typedef struct data
+{
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	int		C;
+	int		F;
+	int		player_x;
+	int		player_y;
+	int		player_d;
+	char	**map;
+}			t_data;
 #endif

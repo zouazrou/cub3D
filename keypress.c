@@ -6,27 +6,23 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 21:33:02 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 21:08:00 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int map[16][16];
-
-void check_wall(t_game *g, t_vd new_position)
+void check_empty_space(t_game *g, t_vd new_position)
 {
     int index_x;
     int index_y;
 
     index_x = (new_position.x / g->tilesz);
     index_y = (new_position.y / g->tilesz);
-    if (map[index_y][index_x] == 0)
+    if (g->map[index_y][index_x] == '0')
         g->ply.position = new_position;
-    else
-        printf(TXT_YELLOW"ERR : WALL !!\n"RESET);
-    
 }
+
 void change_position(int keysym, t_game *g)
 {
     double  move;
@@ -54,7 +50,7 @@ void change_position(int keysym, t_game *g)
         new_position.x += cos(g->ply.angle + PI/2) * move;
         new_position.y += sin(g->ply.angle + PI/2) * move;
     }
-    check_wall(g, new_position);
+    check_empty_space(g, new_position);
 }
 
 void change_angle(int keysym, t_game *g)

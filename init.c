@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/18 17:51:04 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 09:54:06 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void    init_ray(t_game *g)
 void    init_screen(t_game *g)
 {
     g->resolution = 1;
-    g->tilesz = 64;
+    g->tilesz = 1;
     g->num_rays = g->width / g->resolution;
     g->fov = deg2rad(60);
-    g->distance_to_plane = (g->width/2.0) / (tan(g->fov/2.0)); // 
+    g->distance_to_plane = (g->width/2.0) / (tan(g->fov/2.0));
     printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
 }
 
@@ -39,8 +39,8 @@ void    init_player(t_game *g)
 {
     g->ply.move_speed = 0.1 * g->tilesz;
     g->ply.rotation_speed = deg2rad(3);
-    g->ply.position.x = (1.5) * g->tilesz;
-    g->ply.position.y = (1.5) * g->tilesz;
+    g->ply.position.x = (8.5) * g->tilesz;
+    g->ply.position.y = (8.5) * g->tilesz;
     g->ply.angle = deg2rad(270);
 }
 void    init_minilibx(t_game *g)
@@ -81,7 +81,7 @@ void    init_textures(t_game *g)
     if (!g->north.image.pixels || !g->south.image.pixels || !g->west.image.pixels || !g->east.image.pixels)
         exit((perror("mlx_get_data_addr()"), 1));
 }
-void    init_data(t_game *g)
+void    init_game(t_game *g)
 {
     ft_bzero(g, sizeof(t_game));
     

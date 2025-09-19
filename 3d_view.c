@@ -6,13 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 23:09:38 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 21:04:38 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-extern int map[16][16];
 
 void    draw_ceiling(t_game *g, int begin_x, int begin_y)
 {

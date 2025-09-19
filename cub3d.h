@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/18 17:56:10 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/18 21:43:04 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/time.h>
 # include "minilibx-linux/mlx.h"
 # include "structures.h"
+# include "libft/libft.h"
 
 # define WIDTH 800
 # define HEIGHT 600
@@ -54,7 +55,7 @@ void display(t_game *data);
 double distance(t_vd p0, t_vd p1);
 
 int keyboard(int keysym, t_game *map);
-void init_data(t_game *data);
+void init_game(t_game *data);
 // int close_win(void *ptr);
 bool is_wall(t_game *g, t_ray *ray);
 double normalize_angle(double radian);
@@ -79,6 +80,7 @@ void    change_angle(int keysym, t_game *g);
 void	ft_bzero(void *s, size_t n);
 char	*ft_strdup(const char *s);
 
+t_data	*parse_input(char *input);
 // --------------------------
 
 // Regular Colors

@@ -6,15 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/18 17:59:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 09:31:54 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-extern int map[16][16];
-
-
 
 double distance(t_vd p0, t_vd p1)
 {
@@ -35,15 +31,6 @@ double  normalize_angle(double radian)
     return (radian);
 }
 
-bool    is_wall(t_game *g, t_ray *ray)
-{
-    if (map[(int)ray->inter.y/g->tilesz][(int)ray->inter.x/g->tilesz] > 0)
-	{
-		ray->hit_wall = true;
-        return (true);
-	}
-    return (false);
-}
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -70,15 +57,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (p);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
 char	*ft_strdup(const char *s)
 {
 	char	*p;
@@ -95,6 +73,7 @@ char	*ft_strdup(const char *s)
 	}
 	return (p);
 }
+
 double  fix_fish_eye(t_game *g, int index)
 {
     return  (g->ray[index].distance * cos(g->ply.angle - g->ray[index].angle));

@@ -1,29 +1,8 @@
-#include "get_line/get_next_line.h"
+#include "get_next_line.h"
 #include "libft/libft.h"
-#include "minilibx-linux/mlx.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
 #include <fcntl.h>
-#include <limits.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-typedef struct data
-{
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	int		C;
-	int		F;
-	int		player_x;
-	int		player_y;
-	int		player_d;
-	char	**map;
-}			t_data;
+#include "cub3d.h"
 
 int after_last_line(t_data *data){
 	int i = 0,j = 0;
@@ -68,7 +47,7 @@ void	free_data(t_data *data)
 		free(data->EA);
 	if (data->map)
 		free_str_array(data->map);
-	g_next_line(-1);
+	get_next_line(-1);
 	free(data);
 }
 
@@ -208,7 +187,7 @@ int	read_map(int fd, t_data *data)
 	char	*line;
 
 	count = 0;
-	while ((line = g_next_line(fd)))
+	while ((line = get_next_line(fd)))
 	{
 		char *x = skip_ws(line);
 		if((ft_strlen(x) == 1 && x[0] == '\n') && (count == 0)){
@@ -390,7 +369,7 @@ static int	parse_identifiers_and_map(int fd, t_data *data)
 
 	i = 0;
 	flag = 0;
-	while (i < 6 && (str = g_next_line(fd)))
+	while (i < 6 && (str = get_next_line(fd)))
 	{
 		tmp = skip_ws(str);
 		if (*tmp != '\0' && *tmp != '\n')
@@ -426,35 +405,35 @@ t_data	*parse_input(char *input)
 }
 
 
-int	main(int argc, char **argv)
-{
-	t_data	*data;
+// int	main(int argc, char **argv)
+// {
+// 	t_data	*data;
 
-	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: %s <map_file.cub>\n", argv[0]);
-		return (1);
-	}
-	data = parse_input(argv[1]);
-	if (!data)
-	{
-		fprintf(stderr, "Failed to parse map or map invalid.\n");
-		return (1);
-	}
-	printf("Textures:\n");
-	printf("NO: %s\n", data->NO);
-	printf("SO: %s\n", data->SO);
-	printf("WE: %s\n", data->WE);
-	printf("EA: %s\n", data->EA);
-	printf("Colors:\n");
-	printf("F: %06X\n", data->F);
-	printf("C: %06X\n", data->C);
-	printf("Player:\n");
-	printf("Position: (%d, %d)\n", data->player_x, data->player_y);
-	printf("Direction: %c\n", data->player_d);
-	printf("Map:");
-	for (int i = 0; data->map[i]; i++)
-		printf("%s\n", data->map[i]);
-	free_data(data);
-	return (0);
-}
+// 	if (argc != 2)
+// 	{
+// 		fprintf(stderr, "Usage: %s <map_file.cub>\n", argv[0]);
+// 		return (1);
+// 	}
+// 	data = parse_input(argv[1]);
+// 	if (!data)
+// 	{
+// 		fprintf(stderr, "Failed to parse map or map invalid.\n");
+// 		return (1);
+// 	}
+// 	printf("Textures:\n");
+// 	printf("NO: %s\n", data->NO);
+// 	printf("SO: %s\n", data->SO);
+// 	printf("WE: %s\n", data->WE);
+// 	printf("EA: %s\n", data->EA);
+// 	printf("Colors:\n");
+// 	printf("F: %06X\n", data->F);
+// 	printf("C: %06X\n", data->C);
+// 	printf("Player:\n");
+// 	printf("Position: (%d, %d)\n", data->player_x, data->player_y);
+// 	printf("Direction: %c\n", data->player_d);
+// 	printf("Map:");
+// 	for (int i = 0; data->map[i]; i++)
+// 		printf("%s\n", data->map[i]);
+// 	free_data(data);
+// 	return (0);
+// }
