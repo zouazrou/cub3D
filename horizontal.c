@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/19 11:12:32 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 11:47:11 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ bool    check_win_bound(t_game *g, t_ray *ray)
 
     x = (int)(ray->inter.x / g->tilesz);
     y = (int)(ray->inter.y / g->tilesz);
-    // if (y < 0 || !g->map[y])
     if (y < 0 || y >= g->mapy)
         return (false);
     printf("x = %d | y = %d >= mapy = %d\n", x, y, g->mapy);
