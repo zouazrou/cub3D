@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/19 09:32:19 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 11:12:32 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ void    init_ray_var(t_ray *ray, double ray_angle)
     ray->axis = 0;
 }
 
+static int  row_len(const char *row)
+{
+    int i = 0;
+    if (!row) return 0;
+    while (row[i] && row[i] != '\n')
+        i++;
+    return i;
+}
+
 bool    is_wall(t_game *g, t_ray *ray)
 {
 	int	x;
@@ -32,6 +41,11 @@ bool    is_wall(t_game *g, t_ray *ray)
 
  	x = (int)ray->inter.x / g->tilesz;
 	y = (int)ray->inter.y / g->tilesz;
+    if (g->map[y][x] == ' ')
+    {
+        printf("is sp\n");
+        return (true);
+    }
     if (g->map[y][x] == '1')
 	{
 		ray->hit_wall = true;
@@ -42,17 +56,29 @@ bool    is_wall(t_game *g, t_ray *ray)
 
 bool    check_win_bound(t_game *g, t_ray *ray)
 {
-    if (ray->inter.x < 0 || ray->inter.x >= g->mapx * g->tilesz)
+    int x;
+    int y;
+    int width;
+
+    x = (int)(ray->inter.x / g->tilesz);
+    y = (int)(ray->inter.y / g->tilesz);
+    // if (y < 0 || !g->map[y])
+    if (y < 0 || y >= g->mapy)
         return (false);
-    if (ray->inter.y < 0 || ray->inter.y >= g->mapy * g->tilesz)
+    printf("x = %d | y = %d >= mapy = %d\n", x, y, g->mapy);
+    printf("content [%c]\n", g->map[y][x]);
+    width = row_len(g->map[y]);
+    if (x < 0 || x >= width)
         return (false);
     return (true);
 }
 
 void    increment_to_the_wall(t_game *g, t_ray *ray)
 {
-    while (check_win_bound(g, ray) && is_wall(g, ray) == false)
+    while (check_win_bound(g, ray))
     {
+        if (is_wall(g, ray) == true)
+            break;
         ray->inter.x += ray->inc.x;
         ray->inter.y += ray->inc.y;
     }

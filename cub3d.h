@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/18 21:43:04 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 10:59:41 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define FPS 30
+# define FPS 10
 
 # define PI 3.14159265358979323846
 # define LIGHT_LVL 40

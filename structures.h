@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/19 09:31:31 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/19 11:21:41 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ typedef struct s_game
 
     /*MAP*/
     char    **map;
-    int     mapx;
     int     mapy;
     int     width;
     int     height;
