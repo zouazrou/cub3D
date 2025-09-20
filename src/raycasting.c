@@ -6,46 +6,48 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 16:54:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:19:11 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void    choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
+void	choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
 {
-    if (ray_h->hit_wall && !ray_v->hit_wall)
-        *ray = *ray_h;
-    else if (!ray_h->hit_wall && ray_v->hit_wall)
-        *ray = *ray_v;
-    else if (ray_h->hit_wall && ray_v->hit_wall)
-    {
-        if (ray_h->distance < ray_v->distance)
-            *ray = *ray_h;
-        else
-            *ray = *ray_v;
-    }
-    else
-        printf(TXT_RED"-------ERROR-------ray num [%d] CHI 7AAAJA MAHIYACH HAN !!\n"RESET, index);
+	if (ray_h->hit_wall && !ray_v->hit_wall)
+		*ray = *ray_h;
+	else if (!ray_h->hit_wall && ray_v->hit_wall)
+		*ray = *ray_v;
+	else if (ray_h->hit_wall && ray_v->hit_wall)
+	{
+		if (ray_h->distance < ray_v->distance)
+			*ray = *ray_h;
+		else
+			*ray = *ray_v;
+	}
+	else
+	{
+		printf(TXT_RED "-------ERROR:ray num [%d] CHI 7AAAJA\n" RESET, index);
+	}
 }
 
-void ray_casting(t_game *g)
+void	ray_casting(t_game *g)
 {
-    t_ray   ray_h;
-    t_ray   ray_v;
-    double  ray_angle;
-    double  ray_inc;
-    int     i;
-    
-    ray_angle = g->ply.angle - (g->fov / 2);
-    ray_inc = g->fov / g->num_rays;
-    i = -1;
-    while (++i < g->num_rays)
-    {
-        ray_h = horizontal_hit(normalize_angle(ray_angle));
-        ray_v = vertical_hit(normalize_angle(ray_angle));
-        choose_nearest(g->ray + i, &ray_h, &ray_v, i);
-        draw_3d_view(i);
-        ray_angle+= ray_inc;
-    }
+	t_ray	ray_h;
+	t_ray	ray_v;
+	double	ray_angle;
+	double	ray_inc;
+	int		i;
+
+	ray_angle = g->ply.angle - (g->fov / 2);
+	ray_inc = g->fov / g->num_rays;
+	i = -1;
+	while (++i < g->num_rays)
+	{
+		ray_h = horizontal_hit(normalize_angle(ray_angle));
+		ray_v = vertical_hit(normalize_angle(ray_angle));
+		choose_nearest(g->ray + i, &ray_h, &ray_v, i);
+		draw_3d_view(i);
+		ray_angle += ray_inc;
+	}
 }

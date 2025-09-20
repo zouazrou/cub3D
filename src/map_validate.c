@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 02:59:24 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 16:53:01 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:21:13 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	validate_map(t_data *data)
 		}
 		y++;
 	}
-	// printf("mapy [%d]\n", y);
 	data->map_y = y;
 	if (!player_found)
 		return (write(2, "Error: No player in map\n", 24), 0);

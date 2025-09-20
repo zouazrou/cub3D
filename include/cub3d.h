@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 16:46:40 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:45:21 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define FPS 10
+# define FPS 60
 
 # define PI 3.14159265358979323846
 # define LIGHT_LVL 40
@@ -62,6 +62,7 @@ void init_game(t_game *data);
 bool is_wall(t_ray *ray);
 double normalize_angle(double radian);
 void draw_3d_view(int idx);
+int     frames(t_game *data);
 //
 void    draw_cube(int idx, int begin_y, int end_y, int wall_height);
 // void    draw_colorful_cube(int idx, int begin_x, int begin_y, int wall_height);
@@ -84,6 +85,7 @@ char	*ft_strdup(const char *s);
 
 // ! Parsing Part
 int		validate_rgb_part(char *part, int *value);
+void	init_ray_struct(t_ray *ray, double ray_angle);
 t_data	*init_data(char *input, int *fd);
 int		parse_identifiers_and_map(int fd, t_data *data);
 int		is_color_line(char *s);
