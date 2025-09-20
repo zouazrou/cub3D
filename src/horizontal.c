@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:22:15 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ static int  row_len(const char *row)
     return i;
 }
 
-bool    is_wall(t_game *g, t_ray *ray)
+bool    is_wall(t_ray *ray)
 {
 	int	x;
 	int	y;
+    t_game *g;
 
+    
+    g = get_addr_t_game(NULL);
  	x = (int)ray->inter.x / g->tilesz;
 	y = (int)ray->inter.y / g->tilesz;
     if (g->map[y][x] == ' ')
@@ -54,29 +57,34 @@ bool    is_wall(t_game *g, t_ray *ray)
     return (false);
 }
 
-bool    check_win_bound(t_game *g, t_ray *ray)
+bool    check_win_bound(t_ray *ray)
 {
     int x;
     int y;
     int width;
-
+    t_game *g;
+    
+    g = get_addr_t_game(NULL);
     x = (int)(ray->inter.x / g->tilesz);
     y = (int)(ray->inter.y / g->tilesz);
     if (y < 0 || y >= g->mapy)
         return (false);
-    printf("x = %d | y = %d >= mapy = %d\n", x, y, g->mapy);
-    printf("content [%c]\n", g->map[y][x]);
+    // printf("x = %d | y = %d >= mapy = %d\n", x, y, g->mapy);
+    // printf("content [%c]\n", g->map[y][x]);
     width = row_len(g->map[y]);
     if (x < 0 || x >= width)
         return (false);
     return (true);
 }
 
-void    increment_to_the_wall(t_game *g, t_ray *ray)
+void    increment_to_the_wall(t_ray *ray)
 {
-    while (check_win_bound(g, ray))
+    t_game *g;
+    
+    g = get_addr_t_game(NULL);
+    while (check_win_bound(ray))
     {
-        if (is_wall(g, ray) == true)
+        if (is_wall(ray) == true)
             break;
         ray->inter.x += ray->inc.x;
         ray->inter.y += ray->inc.y;
@@ -84,10 +92,12 @@ void    increment_to_the_wall(t_game *g, t_ray *ray)
     ray->distance = distance(ray->inter, g->ply.position);
 }
 
-t_ray    horizontal_hit(t_game *g, double ray_angle)
+t_ray    horizontal_hit(double ray_angle)
 {   
     t_ray ray;
+    t_game *g;
 
+    g = get_addr_t_game(NULL);
     init_ray_var(&ray, ray_angle);
     ray.axis = HORIZONTAL;
     if (fabs(sin(ray.angle)) < 1e-6) 
@@ -106,14 +116,16 @@ t_ray    horizontal_hit(t_game *g, double ray_angle)
     }
     ray.inter.x = g->ply.position.x + (ray.inter.y - g->ply.position.y) / tan(ray.angle);
     ray.inc.x = ray.inc.y / tan(ray.angle);
-    increment_to_the_wall(g, &ray);
+    increment_to_the_wall(&ray);
     return (ray);   
 }
 
-t_ray vertical_hit(t_game *g, double ray_angle)
+t_ray vertical_hit(double ray_angle)
 {
     t_ray ray;
-
+    t_game *g;
+    
+    g = get_addr_t_game(NULL);
     init_ray_var(&ray, ray_angle);
     ray.axis = VERTICAL;
     if (fabs(cos(ray.angle)) < 1e-6)
@@ -132,6 +144,6 @@ t_ray vertical_hit(t_game *g, double ray_angle)
     }
     ray.inter.y = g->ply.position.y + (ray.inter.x - g->ply.position.x) * tan(ray.angle);
     ray.inc.y = ray.inc.x * tan(ray.angle);
-    increment_to_the_wall(g, &ray);
+    increment_to_the_wall(&ray);
     return (ray);
 }

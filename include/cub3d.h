@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:11:43 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:46:40 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define FPS 60
+# define FPS 10
 
 # define PI 3.14159265358979323846
 # define LIGHT_LVL 40
@@ -49,8 +49,8 @@
 
 
 
-t_ray horizontal_hit(t_game *g, double ray_angle);
-t_ray vertical_hit(t_game *g, double ray_angle);
+t_ray horizontal_hit(double ray_angle);
+t_ray vertical_hit(double ray_angle);
 
 void display(t_game *data);
 
@@ -59,23 +59,23 @@ double distance(t_vd p0, t_vd p1);
 int keyboard(int keysym, t_game *map);
 void init_game(t_game *data);
 // int close_win(void *ptr);
-bool is_wall(t_game *g, t_ray *ray);
+bool is_wall(t_ray *ray);
 double normalize_angle(double radian);
-void draw_3d_view(t_game *g, int idx);
+void draw_3d_view(int idx);
 //
-void    draw_cube(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height);
-// void    draw_colorful_cube(t_game *g, int idx, int begin_x, int begin_y, int wall_height);
+void    draw_cube(int idx, int begin_y, int end_y, int wall_height);
+// void    draw_colorful_cube(int idx, int begin_x, int begin_y, int wall_height);
 
 bool facing_up(double angle);
 bool facing_down(double angle);
 bool facing_right(double angle);
 bool facing_left(double angle);
 void ray_casting(t_game *g);
-double  fix_fish_eye(t_game *g, int index);
+double  fix_fish_eye(int index);
 
 // utils function
 void    *ft_calloc(size_t nmemb, size_t size);
-void    put_pixel_in_image(t_game *g, t_img *image, int x, int y, int col);
+void    put_pixel_in_image(int x, int y, int col);
 int     ft_clean(int keysym, t_game *g);
 double  deg2rad(int degree);
 void    change_angle(int keysym, t_game *g);
@@ -105,6 +105,7 @@ int		is_all_digits(const char *str);
 char	*print_error(char *error, int flag);
 t_data	*parse_input(char *input);
 // --------------------------
+t_game *get_addr_t_game(t_game *ptr);
 
 // Regular Colors
 #define RESET "\033[0m"

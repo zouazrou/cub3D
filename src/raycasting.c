@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:54:46 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,10 @@ void ray_casting(t_game *g)
     i = -1;
     while (++i < g->num_rays)
     {
-        ray_h = horizontal_hit(g, normalize_angle(ray_angle));
-        ray_v = vertical_hit(g, normalize_angle(ray_angle));
+        ray_h = horizontal_hit(normalize_angle(ray_angle));
+        ray_v = vertical_hit(normalize_angle(ray_angle));
         choose_nearest(g->ray + i, &ray_h, &ray_v, i);
-        
-        int col = WHITE;
-        if (g->ray[i].side == NORTH)
-            col = RED;
-        if (g->ray[i].side == SOUTH)
-            col = GREEN;
-        if (g->ray[i].side == EAST)
-            col = BROWN;
-        if (g->ray[i].side == WEST)
-            col = YLW;
-        draw_3d_view(g, i);
+        draw_3d_view(i);
         ray_angle+= ray_inc;
     }
 }

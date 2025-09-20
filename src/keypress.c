@@ -6,17 +6,19 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:30:48 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void check_empty_space(t_game *g, t_vd new_position)
+void check_empty_space(t_vd new_position)
 {
     int index_x;
     int index_y;
+    t_game *g;
 
+    g = get_addr_t_game(NULL);
     index_x = (new_position.x / g->tilesz);
     index_y = (new_position.y / g->tilesz);
     if (g->map[index_y][index_x] != '1')
@@ -50,7 +52,7 @@ void change_position(int keysym, t_game *g)
         new_position.x += cos(g->ply.angle + PI/2) * move;
         new_position.y += sin(g->ply.angle + PI/2) * move;
     }
-    check_empty_space(g, new_position);
+    check_empty_space(new_position);
 }
 
 void change_angle(int keysym, t_game *g)

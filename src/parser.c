@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 03:46:40 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 13:32:39 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_all_exist(t_data *data)
 {
-	return (data->NO && data->SO && data->WE && data->EA && data->F >= 0
-		&& data->C >= 0);
+	return (data->no && data->so && data->we && data->ea && data->f >= 0
+		&& data->c >= 0);
 }
 
 static int	process_after_identifiers(int fd, t_data *data, int flag)

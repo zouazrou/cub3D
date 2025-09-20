@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:30:35 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 13:34:32 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	free_data(t_data *data)
 {
 	if (!data)
 		return ;
-	if (data->NO)
-		free(data->NO);
-	if (data->SO)
-		free(data->SO);
-	if (data->WE)
-		free(data->WE);
-	if (data->EA)
-		free(data->EA);
+	if (data->no)
+		free(data->no);
+	if (data->so)
+		free(data->so);
+	if (data->we)
+		free(data->we);
+	if (data->ea)
+		free(data->ea);
 	if (data->map)
 		free_str_array(data->map);
 	get_next_line(-1);
@@ -32,14 +32,15 @@ void	free_data(t_data *data)
 
 void	data_init(t_data *data)
 {
-	data->NO = NULL;
-	data->SO = NULL;
-	data->WE = NULL;
-	data->EA = NULL;
-	data->C = -1;
-	data->F = -1;
+	data->no = NULL;
+	data->so = NULL;
+	data->we = NULL;
+	data->ea = NULL;
+	data->c = -1;
+	data->f = -1;
 	data->player_d = -1;
 	data->player_x = -1;
 	data->player_y = -1;
+	data->map_y = -1;
 	data->map = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 10:46:25 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:40:53 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,18 @@ typedef struct s_texture
     char    *filename;
 } t_texture;
 
+typedef struct s_data_tex
+{
+    int     x;
+    int     y;
+    int     tex_x;
+    int     tex_y;
+    int     color;
+    double  tex_step;
+    double  tex_pos;
+    t_texture *texture;
+} t_data_tex;
+
 typedef struct s_game
 {
     void        *mlx;
@@ -107,15 +119,16 @@ typedef struct s_game
 
 typedef struct s_data
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	int		C;
-	int		F;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		c;
+	int		f;
 	int		player_x;
 	int		player_y;
 	int		player_d;
+    int     map_y;
 	char	**map;
 }			t_data;
 

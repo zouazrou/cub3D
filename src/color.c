@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:29:46 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 13:32:39 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	parse_color(char *color, t_data *data)
 		free_str_array(str);
 		return ;
 	}
-	if (color[0] == 'F' && data->F < 0)
-		data->F = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
-	else if (color[0] == 'C' && data->C < 0)
-		data->C = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	if (color[0] == 'F' && data->f < 0)
+		data->f = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	else if (color[0] == 'C' && data->c < 0)
+		data->c = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
 	free_str_array(str);
 }

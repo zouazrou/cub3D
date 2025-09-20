@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:32:20 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ char	*ft_strdup(const char *s)
 	return (p);
 }
 
-double  fix_fish_eye(t_game *g, int index)
+double  fix_fish_eye(int index)
 {
+	t_game *g;
+	
+    g = get_addr_t_game(NULL);
     return  (g->ray[index].distance * cos(g->ply.angle - g->ray[index].angle));
 }

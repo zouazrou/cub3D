@@ -6,37 +6,41 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:39:08 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void    draw_ceiling(t_game *g, int begin_x, int begin_y)
+void    draw_ceiling(int begin_x, int begin_y)
 {
     int x;
     int y;
+    t_game *g;
 
+    g = get_addr_t_game(NULL);
     y = -1;
     while (++y < begin_y)
     {
         x = -1;
         while (++x < g->resolution)
-            put_pixel_in_image(g, &g->img_3d, begin_x+x, y, g->ceiling_color);
+            put_pixel_in_image(begin_x+x, y, g->ceiling_color);
     }
 }
 
-void    draw_floor(t_game *g, int begin_x, int begin_y)
+void    draw_floor(int begin_x, int begin_y)
 {
     int x;
     int y;
+    t_game *g;
 
+    g = get_addr_t_game(NULL);
     y = begin_y-1;
     while (++y < g->height)
     {
         x = -1;
         while (++x < g->resolution)
-            put_pixel_in_image(g, &g->img_3d, begin_x+x, y, g->floor_color);
+            put_pixel_in_image(begin_x+x, y, g->floor_color);
     }
 }
 
@@ -46,31 +50,30 @@ void    draw_floor(t_game *g, int begin_x, int begin_y)
 */
 
 
-void draw_3d_view(t_game *g, int idx)
+void draw_3d_view(int idx)
 {
     int begin_x;
     int begin_y;
     int end_y;
     int wall_height;
-    t_ray *r;
+    t_game *g;
 
-    r = g->ray + idx;
-    
+    g = get_addr_t_game(NULL);
     // ? fix fish eye 
-    r->distance = fix_fish_eye(g, idx);
-    wall_height = (g->tilesz * g->distance_to_plane) / r->distance;
+    g->ray[idx].distance = fix_fish_eye(idx);
+    wall_height = (g->tilesz * g->distance_to_plane) / g->ray[idx].distance;
     
     begin_y = (g->height / 2) - (wall_height / 2);
     end_y = (g->height / 2) + (wall_height / 2);
     begin_x = idx * g->resolution;
     
-    draw_ceiling(g, begin_x, begin_y);
-    draw_cube(g, idx, begin_x, begin_y, end_y, wall_height);
-    // draw_colorful_cube(g, idx, begin_x, begin_y, wall_height);
-    draw_floor(g, begin_x, end_y);
+    draw_ceiling(begin_x, begin_y);
+    draw_cube(idx, begin_y, end_y, wall_height);
+    // draw_colorful_cube(idx, begin_x, begin_y, wall_height);
+    draw_floor(begin_x, end_y);
 }
 
-// void    draw_colorful_cube(t_game *g, int idx, int begin_x, int begin_y, int wall_height)
+// void    draw_colorful_cube(int idx, int begin_x, int begin_y, int wall_height)
 // {
 //     int x;
 //     int end_y;
@@ -85,7 +88,7 @@ void draw_3d_view(t_game *g, int idx)
 //         {
 //             color = CYAN;
 //             if(ray->axis == HORIZONTAL) color = (color >> 1) & 8355711;
-//             put_pixel_in_image(g, &g->img_3d, begin_x + x, begin_y, color);
+//             put_pixel_in_image(g, begin_x + x, begin_y, color);
 //             x++;
 //         }
 //         begin_y++;

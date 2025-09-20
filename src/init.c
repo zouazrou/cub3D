@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:13:28 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:33:00 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    init_ray(t_game *g)
 {
-    g->ray = calloc(g->num_rays, sizeof(t_ray));
+    g->ray = ft_calloc(g->num_rays, sizeof(t_ray));
     if (!g->ray)
         exit((perror("malloc()"), 1));
 }
@@ -62,8 +62,8 @@ void    init_minilibx(t_game *g)
 void    init_game(t_game *g)
 {
     ft_bzero(g, sizeof(t_game));
+    get_addr_t_game(g);
     
-    g->mapy = 100;
     g->width = WIDTH;
     g->height = HEIGHT;
     g->ceiling_color = LIGHT_BLUE;

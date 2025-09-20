@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 16:47:24 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,41 +52,37 @@ int calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
     wall_x -= floor(wall_x / g->tilesz) * g->tilesz;
     tex_x = (int)(wall_x / g->tilesz * texture->w);
     
-    if ((ray->axis == VERTICAL && cos(ray->angle) < 0) ||
-        (ray->axis == HORIZONTAL && sin(ray->angle) > 0)) // ! KHASK TBDLHA !!
-    {
-        // printf("waaah\n");
-        tex_x = texture->w - tex_x - 1;
-    }
+    // if ((ray->axis == VERTICAL && cos(ray->angle) < 0) ||
+    //     (ray->axis == HORIZONTAL && sin(ray->angle) > 0)) // ! KHASK TBDLHA !!
+    // {
+    //     printf("waaah\n");
+    //     printf("before %d\n", tex_x);
+    //     tex_x = texture->w - tex_x - 1;
+    //     printf("after  %d\n", tex_x);
+    // }
     return (tex_x);
 }
 
-
-// static void    draw_wall
-void    draw_cube(t_game *g, int idx, int begin_x, int begin_y, int end_y, int wall_height)
+void    draw_cube(int idx, int begin_y, int end_y, int wall_height)
 {
-    int     color;
-    int     x;
-    int     y;
-    int     tex_x;
-    int     tex_y;
-    double  tex_step;
-    double  tex_pos;
-    t_ray *ray = g->ray + idx;
-    t_texture *texture;
+    t_game      *g;
+    t_data_tex  tex;
+    int         begin_x;
     
-    texture = select_texture(g, ray);
-    tex_x = calculate_tex_x(g, ray, texture);
-    tex_step = (double)texture->h / wall_height;
-    tex_pos = (begin_y - g->height/2.0 + wall_height/2.0) * tex_step;
-    y = begin_y-1;
-    while (++y < end_y)
+    g = get_addr_t_game(NULL);
+    begin_x = idx * g->resolution;
+    tex.texture = select_texture(g, g->ray + idx);
+    tex.tex_x = calculate_tex_x(g, g->ray + idx, tex.texture);
+    tex.tex_step = (double)tex.texture->h / wall_height;
+    tex.tex_pos = (begin_y - g->height/2.0 + wall_height/2.0) * tex.tex_step;
+    tex.y = begin_y-1;
+    while (++tex.y < end_y)
     {
-        tex_y = (int)tex_pos & (texture->h - 1);
-        tex_pos += tex_step;
-        color = get_pixel_color(texture, tex_x, tex_y);
-        x = -1;
-        while (++x < g->resolution)
-            put_pixel_in_image(g, &g->img_3d, begin_x + x, y, color);
+        tex.tex_y = (int)tex.tex_pos & (tex.texture->h - 1);
+        tex.tex_pos += tex.tex_step;
+        tex.color = get_pixel_color(tex.texture, tex.tex_x, tex.tex_y);
+        tex.x = -1;
+        while (++tex.x < g->resolution)
+            put_pixel_in_image(begin_x + tex.x, tex.y, tex.color);
     }
 }

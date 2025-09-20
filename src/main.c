@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 12:20:01 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:19:09 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ void hooks(t_game *data)
     mlx_loop_hook(data->mlx, frames, data);
 }
 
-void    init_textures(t_game *g, t_data *data)
+void    init_textures(t_data *data)
 {
+    t_game *g;
+
+    g = get_addr_t_game(NULL);
     // * PATH XMP IMGS
-    g->north.filename = data->NO;
-    g->south.filename = data->SO;
-    g->west.filename = data->WE;
-    g->east.filename = data->EA;
+    g->north.filename = data->no;
+    g->south.filename = data->so;
+    g->west.filename = data->we;
+    g->east.filename = data->ea;
 
     // * CONVERT 'xpm' TO 'IMG' 
     g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename, &g->north.w, &g->north.h);
@@ -66,10 +69,12 @@ void    init_textures(t_game *g, t_data *data)
         exit((perror("mlx_get_data_addr()"), 1));
 }
 
-void api(t_game *game, char *filename)
+void api(char *filename)
 {
     t_data *data;
+    t_game *game;
 
+    game = get_addr_t_game(NULL);
     data = parse_input(filename);
     if (!data)
     {
@@ -77,11 +82,7 @@ void api(t_game *game, char *filename)
         exit(1);
     }
     game->map = data->map;
-    /******/
-
-    /******/
-    // !
-    game->mapy = 14;
+    game->mapy = data->map_y;
     game->ply.position.x = (data->player_x) * game->tilesz;
     game->ply.position.y = (data->player_y) * game->tilesz;
     if (data->player_d == 'E')
@@ -93,10 +94,9 @@ void api(t_game *game, char *filename)
     else if (data->player_d == 'S')
         game->ply.angle = deg2rad(270);
     printf("ply [%.2f : %.2f]\n", game->ply.position.x, game->ply.position.y);
-    game->ceiling_color = data->C;
-    game->floor_color = data->F;
-    /*****/
-    init_textures(game, data);
+    game->ceiling_color = data->c;
+    game->floor_color = data->f;
+    init_textures(data);
     
 }
 
@@ -110,10 +110,7 @@ int main(int argc, char *argv[])
         return (1);
     }
     init_game(&game);
-
-    printf(TXT_YELLOW "WIDTH = %d | g->height = %d\n" RESET, game.width, game.height);
-    // init_game_map(&game);
-    api(&game, argv[1]);
+    api(argv[1]);
 
     display(&game);
     hooks(&game);
