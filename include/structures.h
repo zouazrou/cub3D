@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/19 11:21:41 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 10:46:25 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_game
     double distance_to_plane;
 } t_game;
 
-typedef struct data
+typedef struct s_data
 {
 	char	*NO;
 	char	*SO;
@@ -118,4 +118,5 @@ typedef struct data
 	int		player_d;
 	char	**map;
 }			t_data;
+
 #endif

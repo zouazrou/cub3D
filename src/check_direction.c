@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 21:55:10 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/02 21:57:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 bool    facing_down(double angle)
 {

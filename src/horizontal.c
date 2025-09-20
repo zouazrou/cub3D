@@ -6,12 +6,12 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/19 11:47:11 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 void    init_ray_var(t_ray *ray, double ray_angle)
 {

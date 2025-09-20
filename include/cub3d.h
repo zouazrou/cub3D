@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/19 10:59:41 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:11:43 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@
 # include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include <stdbool.h>
 # include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <sys/time.h>
-# include "minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "structures.h"
-# include "libft/libft.h"
+# include "../src/get_next_line/get_next_line.h"
+# include "../libft/libft.h"
 
 # define WIDTH 800
 # define HEIGHT 600
-# define FPS 10
+# define FPS 60
 
 # define PI 3.14159265358979323846
 # define LIGHT_LVL 40
@@ -80,6 +82,27 @@ void    change_angle(int keysym, t_game *g);
 void	ft_bzero(void *s, size_t n);
 char	*ft_strdup(const char *s);
 
+// ! Parsing Part
+int		validate_rgb_part(char *part, int *value);
+t_data	*init_data(char *input, int *fd);
+int		parse_identifiers_and_map(int fd, t_data *data);
+int		is_color_line(char *s);
+void 	parse_color(char *color, t_data *data);
+void 	free_data(t_data *data);
+void 	data_init(t_data *data);
+int		validate_map(t_data *data);
+int		after_last_line(t_data *data);
+char	**my_realloc(char **old, int old_size);
+int		read_map(int fd, t_data *data);
+int		is_valid_char(char c);
+int		check_neighbors(char **map, int y, int x);
+int		check_all_exist(t_data *data);
+void	if_process(t_data *data, char *tmp, int *flag);
+void	free_str_array(char **str);
+char	*skip_ws(char *s);
+// int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		is_all_digits(const char *str);
+char	*print_error(char *error, int flag);
 t_data	*parse_input(char *input);
 // --------------------------
 

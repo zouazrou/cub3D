@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:32:19 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/01 11:23:18 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 int ft_clean(int keysym, t_game *g)
 {

@@ -19,6 +19,7 @@
         "structures.h": "c",
         "stdbool.h": "c",
         "stdlib.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "libft.h": "c"
     }
 }
