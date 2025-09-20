@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 18:30:08 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:53:38 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,7 @@ int	calculate_tex_x(t_game *g, t_ray *ray, t_texture *texture)
 	tex_x = (int)(wall_x / g->tilesz * texture->w);
 	if ((ray->axis == VERTICAL && cos(ray->angle) < 0)
 		|| (ray->axis == HORIZONTAL && sin(ray->angle) > 0))
-	{
-		// printf("waaah\n");
-		// printf("before %d\n", tex_x);
 		tex_x = texture->w - tex_x - 1;
-		// printf("after  %d\n", tex_x);
-	}
 	return (tex_x);
 }
 

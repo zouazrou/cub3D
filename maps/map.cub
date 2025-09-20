@@ -1,7 +1,7 @@
-SO image/blue_wall.xpm
-NO image/eagle.xpm
-EA image/orange_wall.xpm
-WE image/grey_wall.xpm
+SO image/floor_chest.xpm
+NO image/exit64.xpm
+EA image/exit64.xpm
+WE image/exit64.xpm
 
 F 220,100,200
 C 225,30,0
