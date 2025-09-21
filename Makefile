@@ -12,11 +12,11 @@ LIBS = $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
 
 SRC = $(addprefix src/, main.c init.c utils.c utils2.c keypress.c raycasting.c \
 	horizontal.c display.c clean.c check_direction.c \
-	3d_view.c draw_texture.c \
+	3d_view.c draw_texture.c raycasting_utils.c\
 	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-	color.c  data_utils.c  file_utils.c \
-	map_utlis.c  map_validate.c  parser.c  \
-	read_map.c  textures.c  utils3.c)
+	color.c data_utils.c file_utils.c \
+	map_utlis.c map_validate.c parser.c  \
+	read_map.c textures.c utils3.c)
 
 
 

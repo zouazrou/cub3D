@@ -1,15 +1,11 @@
-SO image/irhal.xpm
-NO image/zouazrou.xpm
-WE image/m6_512.xpm
-EA image/melayyad.xpm
+SO image/exit64.xpm
+NO image/floor_chest.xpm
+WE image/blue_wall.xpm
+EA image/grey_wall.xpm
 
 F 220,100,200
 C 225,30,0
 
 11111111111
-10000000001
-10000000001
-10000000001
-10000000W01
+1N01
 11111111111
-111

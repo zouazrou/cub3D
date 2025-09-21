@@ -6,28 +6,28 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 19:18:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 20:52:04 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
+
+void	increment_to_the_wall(t_ray *ray)
 {
-	if (ray_h->hit_wall && !ray_v->hit_wall)
-		*ray = *ray_h;
-	else if (!ray_h->hit_wall && ray_v->hit_wall)
-		*ray = *ray_v;
-	else if (ray_h->hit_wall && ray_v->hit_wall)
+	t_game	*g;
+
+	g = get_addr_t_game(NULL);
+	while (check_win_bound(ray))
 	{
-		if (ray_h->distance < ray_v->distance)
-			*ray = *ray_h;
-		else
-			*ray = *ray_v;
+		if (is_wall(ray) == true)
+			break ;
+		ray->inter.x += ray->inc.x;
+		ray->inter.y += ray->inc.y;
 	}
-	else
-		printf(TXT_RED "-------ERROR:ray num [%d] CHI 7AAAJA\n" RESET, index);
+	ray->distance = distance(ray->inter, g->ply.position);
 }
+
 
 void	ray_casting(t_game *g)
 {

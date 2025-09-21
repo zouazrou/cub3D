@@ -6,17 +6,23 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 19:25:26 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:31:03 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	hooks(t_game *data)
+int destroy_notify_func(t_game *game)
 {
-	mlx_hook(data->win_3d, DestroyNotify, 0, ft_clean(), NULL);
-	mlx_hook(data->win_3d, KeyPress, KeyPressMask, keyboard, data);
-	mlx_loop_hook(data->mlx, frames, data);
+	ft_clean(XK_Escape, game);
+	return (0);
+}
+
+void	hooks(t_game *game)
+{
+	mlx_hook(game->win_3d, DestroyNotify, 0, destroy_notify_func, NULL);
+	mlx_hook(game->win_3d, KeyPress, KeyPressMask, keyboard, game);
+	mlx_loop_hook(game->mlx, frames, game);
 }
 
 void	convert_xpm_to_images(t_game *g)

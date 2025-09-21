@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 18:57:11 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 20:56:23 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void ray_casting(t_game *g);
 double  fix_fish_eye(int index);
 
 // utils function
+void	choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index);
+void	increment_to_the_wall(t_ray *ray);
+t_ms	get_time(void);
+bool	check_win_bound(t_ray *ray);
 void    *ft_calloc(size_t nmemb, size_t size);
 void    put_pixel_in_image(int x, int y, int col);
 int     ft_clean(int keysym, t_game *g);
