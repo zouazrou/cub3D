@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:04:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 17:49:03 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:23:04 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ t_ray	horizontal_hit(double ray_angle)
 		return (ray);
 	if (facing_up(ray.angle))
 	{
-		ray.inter.y = floor(g->ply.position.y / g->tilesz) * g->tilesz - 1e-6;
+		ray.inter.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz - 1e-6;
 		ray.inc.y = -g->tilesz;
 		ray.side = NORTH;
 	}
 	else if (facing_down(ray.angle))
 	{
-		ray.inter.y = floor(g->ply.position.y / g->tilesz) * g->tilesz
+		ray.inter.y = (int)(g->ply.position.y / g->tilesz) * g->tilesz
 			+ g->tilesz;
 		ray.inc.y = g->tilesz;
 		ray.side = SOUTH;

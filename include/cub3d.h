@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 17:45:21 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:12:29 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_ray vertical_hit(double ray_angle);
 void display(t_game *data);
 
 double distance(t_vd p0, t_vd p1);
-
+bool	check_empty_space(t_vd new_position);
 int keyboard(int keysym, t_game *map);
 void init_game(t_game *data);
 // int close_win(void *ptr);
@@ -66,6 +66,7 @@ int     frames(t_game *data);
 //
 void    draw_cube(int idx, int begin_y, int end_y, int wall_height);
 // void    draw_colorful_cube(int idx, int begin_x, int begin_y, int wall_height);
+void	init_dirs(int dy[4], int dx[4]);
 
 bool facing_up(double angle);
 bool facing_down(double angle);

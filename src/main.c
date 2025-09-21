@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 17:40:57 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 13:24:03 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	convert_xpm_to_images(void)
 	g = get_addr_t_game(NULL);
 	g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename,
 			&g->north.w, &g->north.h);
+	printf("h = %d | w = %d\n", g->north.h, g->north.w);
 	g->south.image.img = mlx_xpm_file_to_image(g->mlx, g->south.filename,
 			&g->south.w, &g->south.h);
 	g->west.image.img = mlx_xpm_file_to_image(g->mlx, g->west.filename,
@@ -59,6 +60,27 @@ void	init_textures(t_data *data)
 	g->east.filename = data->ea;
 	convert_xpm_to_images();
 }
+void	placed_player(t_data *d)
+{
+	int		dx[4] = {1, 1, -1, -1};
+	int		dy[4] = {1, -1, 1, -1};
+	int		i;
+
+	t_game *g = get_addr_t_game(NULL);
+	int tilesz = g->tilesz;
+
+	
+	i = 0;
+	// new.y = d->player_y;
+	while (++i < 4)
+	{
+		g->ply.position.x = ((d->player_x + dy[i] * 0.5) * tilesz);
+		g->ply.position.y = ((d->player_y + dx[i] * 0.5) * tilesz);
+		printf(TXT_YELLOW"ply[%.2f:%.2f]\n"RESET, g->ply.position.x, g->ply.position.y);
+		if (check_empty_space(g->ply.position) == true)
+			break;
+	}
+}
 
 void	api(char *filename)
 {
@@ -76,6 +98,8 @@ void	api(char *filename)
 	game->mapy = data->map_y;
 	game->ply.position.x = (data->player_x) * game->tilesz;
 	game->ply.position.y = (data->player_y) * game->tilesz;
+	printf(TXT_RED"ply[%.2f:%.2f]\n"RESET, game->ply.position.x, game->ply.position.y);
+	placed_player(data);
 	if (data->player_d == 'E')
 		game->ply.angle = deg2rad(0);
 	else if (data->player_d == 'W')

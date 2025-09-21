@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 03:26:49 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:03:18 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	is_valid_char(char c)
 		|| c == 'W' || c == '\n');
 }
 
-static void	init_dirs(int dy[4], int dx[4])
+void	init_dirs(int dy[4], int dx[4])
 {
 	dy[0] = -1;
 	dy[1] = 1;

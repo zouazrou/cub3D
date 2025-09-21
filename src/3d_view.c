@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 17:41:05 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 13:18:06 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	draw_floor(int begin_x, int begin_y)
 	}
 }
 
+void    draw_colorful_cube(int idx, int begin_x, int begin_y, int wall_height);
+
 void	draw_3d_view(int idx)
 {
 	int		begin_x;
@@ -60,6 +62,7 @@ void	draw_3d_view(int idx)
 	begin_x = idx * g->resolution;
 	draw_ceiling(begin_x, begin_y);
 	draw_cube(idx, begin_y, end_y, wall_height);
+	// draw_colorful_cube(idx, begin_x, begin_y, wall_height);
 	draw_floor(begin_x, end_y);
 }
 
@@ -85,25 +88,29 @@ int	frames(t_game *data)
 	}
 	return (0);
 }
-// void    draw_colorful_cube(int idx, int begin_x, int begin_y,
-		// int wall_height)
-// {
-//     int x;
-//     int end_y;
-//     int color;
-//     t_ray *ray = g->ray + idx;
 
-//     end_y = begin_y + wall_height;
-//     while (begin_y <= end_y)
-//     {
-//         x = 0;
-//         while (x < g->resolution)
-//         {
-//             color = CYAN;
-//             if(ray->axis == HORIZONTAL) color = (color >> 1) & 8355711;
-//             put_pixel_in_image(g, begin_x + x, begin_y, color);
-//             x++;
-//         }
-//         begin_y++;
-//     }
-// }
+void    draw_colorful_cube(int idx, int begin_x, int begin_y,
+		int wall_height)
+{
+    int x;
+    int end_y;
+    int color;
+	t_game *g;
+    t_ray *ray;
+
+	g = get_addr_t_game(NULL);
+    ray = g->ray + idx;
+    end_y = begin_y + wall_height;
+    while (begin_y <= end_y)
+    {
+        x = 0;
+        while (x < g->resolution)
+        {
+            color = CYAN;
+            if(ray->axis == HORIZONTAL) color = (color >> 1) & 8355711;
+            put_pixel_in_image(begin_x + x, begin_y, color);
+            x++;
+        }
+        begin_y++;
+    }
+}

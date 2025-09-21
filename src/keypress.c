@@ -6,13 +6,13 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 17:27:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 10:54:22 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	check_empty_space(t_vd new_position)
+bool	check_empty_space(t_vd new_position)
 {
 	int		index_x;
 	int		index_y;
@@ -22,7 +22,12 @@ void	check_empty_space(t_vd new_position)
 	index_x = (new_position.x / g->tilesz);
 	index_y = (new_position.y / g->tilesz);
 	if (g->map[index_y][index_x] != '1')
+	{
 		g->ply.position = new_position;
+		// printf(TXT_YELLOW"ply[%2.f:%2.f]\n"RESET, g->ply.position.x, g->ply.position.y);
+		return (true);
+	}
+	return (false);
 }
 
 void	change_position(int keysym, t_game *g)
