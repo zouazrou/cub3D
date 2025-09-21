@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 18:27:06 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:04:22 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,48 +29,6 @@ double	normalize_angle(double radian)
 		radian += (PI * 2);
 	return (radian);
 }
-
-// void	ft_bzero(void *s, size_t n)
-// {
-// 	unsigned char	*buf;
-// 	size_t			i;
-
-// 	i = 0;
-// 	buf = (unsigned char *)s;
-// 	while (i < n)
-// 	{
-// 		buf[i] = 0;
-// 		i++;
-// 	}
-// }
-
-// void	*ft_calloc(size_t nmemb, size_t size)
-// {
-// 	void	*p;
-
-// 	p = malloc(nmemb * size);
-// 	if (p == NULL)
-// 		return (NULL);
-// 	ft_bzero(p, nmemb * size);
-// 	return (p);
-// }
-
-// char	*ft_strdup(const char *s)
-// {
-// 	char	*p;
-// 	size_t	i;
-
-// 	i = 0;
-// 	p = malloc((ft_strlen(s) + 1));
-// 	if (p == NULL)
-// 		return (p);
-// 	while (i < ft_strlen(s) + 1)
-// 	{
-// 		*(p + i) = s[i];
-// 		i++;
-// 	}
-// 	return (p);
-// }
 
 double	fix_fish_eye(int index)
 {

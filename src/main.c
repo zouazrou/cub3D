@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 13:24:03 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:25:26 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 void	hooks(t_game *data)
 {
-	mlx_hook(data->win_3d, DestroyNotify, 0, ft_clean, NULL);
+	mlx_hook(data->win_3d, DestroyNotify, 0, ft_clean(), NULL);
 	mlx_hook(data->win_3d, KeyPress, KeyPressMask, keyboard, data);
 	mlx_loop_hook(data->mlx, frames, data);
 }
 
-void	convert_xpm_to_images(void)
+void	convert_xpm_to_images(t_game *g)
 {
-	t_game	*g;
-
-	g = get_addr_t_game(NULL);
 	g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename,
 			&g->north.w, &g->north.h);
-	printf("h = %d | w = %d\n", g->north.h, g->north.w);
 	g->south.image.img = mlx_xpm_file_to_image(g->mlx, g->south.filename,
 			&g->south.w, &g->south.h);
 	g->west.image.img = mlx_xpm_file_to_image(g->mlx, g->west.filename,
@@ -35,7 +31,10 @@ void	convert_xpm_to_images(void)
 			&g->east.w, &g->east.h);
 	if (!g->north.image.img || !g->south.image.img || !g->west.image.img
 		|| !g->east.image.img)
-		exit((perror("mlx_xpm_file_to_image()"), 1));
+	{
+		ft_perror(NULL);
+		ft_clean(-1, g);
+	}
 	g->north.image.pixels = mlx_get_data_addr(g->north.image.img,
 			&g->north.image.bpp, &g->north.image.line, &g->north.image.endian);
 	g->south.image.pixels = mlx_get_data_addr(g->south.image.img,
@@ -44,9 +43,6 @@ void	convert_xpm_to_images(void)
 			&g->west.image.bpp, &g->west.image.line, &g->west.image.endian);
 	g->east.image.pixels = mlx_get_data_addr(g->east.image.img,
 			&g->east.image.bpp, &g->east.image.line, &g->east.image.endian);
-	if (!g->north.image.pixels || !g->south.image.pixels
-		|| !g->west.image.pixels || !g->east.image.pixels)
-		exit((perror("mlx_get_data_addr()"), 1));
 }
 
 void	init_textures(t_data *data)
@@ -58,8 +54,9 @@ void	init_textures(t_data *data)
 	g->south.filename = data->so;
 	g->west.filename = data->we;
 	g->east.filename = data->ea;
-	convert_xpm_to_images();
+	convert_xpm_to_images(g);
 }
+
 void	placed_player(t_data *d)
 {
 	int		dx[4] = {1, 1, -1, -1};
@@ -71,12 +68,10 @@ void	placed_player(t_data *d)
 
 	
 	i = 0;
-	// new.y = d->player_y;
 	while (++i < 4)
 	{
 		g->ply.position.x = ((d->player_x + dy[i] * 0.5) * tilesz);
 		g->ply.position.y = ((d->player_y + dx[i] * 0.5) * tilesz);
-		printf(TXT_YELLOW"ply[%.2f:%.2f]\n"RESET, g->ply.position.x, g->ply.position.y);
 		if (check_empty_space(g->ply.position) == true)
 			break;
 	}
@@ -89,11 +84,6 @@ void	api(char *filename)
 
 	game = get_addr_t_game(NULL);
 	data = parse_input(filename);
-	if (!data)
-	{
-		printf("Failed to parse map or map invalid.\n");
-		exit(1);
-	}
 	game->map = data->map;
 	game->mapy = data->map_y;
 	game->ply.position.x = (data->player_x) * game->tilesz;
@@ -118,10 +108,7 @@ int	main(int argc, char *argv[])
 	t_game	game;
 
 	if (argc != 2)
-	{
-		printf("Usage: %s <map_file.cub>\n", argv[0]);
-		return (1);
-	}
+		return (ft_perror("Usage: ./cub3d <map_file.cub>"), EXIT_FAILURE);
 	init_game(&game);
 	api(argv[1]);
 	display(&game);

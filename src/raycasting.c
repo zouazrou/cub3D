@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 18:19:11 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:18:59 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v, int index)
 			*ray = *ray_v;
 	}
 	else
-	{
 		printf(TXT_RED "-------ERROR:ray num [%d] CHI 7AAAJA\n" RESET, index);
-	}
 }
 
 void	ray_casting(t_game *g)

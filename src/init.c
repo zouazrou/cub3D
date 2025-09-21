@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 13:22:18 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:19:14 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	init_ray(t_game *g)
 {
 	g->ray = ft_calloc(g->num_rays, sizeof(t_ray));
 	if (!g->ray)
-		exit((perror("malloc()"), 1));
+		ft_clean(-1, g);
 }
 
 void	init_screen(t_game *g)
 {
 	g->resolution = 1;
-	g->tilesz = 64000;
+	g->tilesz = 1;
 	g->num_rays = g->width / g->resolution;
 	g->fov = deg2rad(60);
 	g->distance_to_plane = (g->width / 2.0) / (tan(g->fov / 2.0));
@@ -39,17 +39,29 @@ void	init_minilibx(t_game *g)
 {
 	g->mlx = mlx_init();
 	if (!g->mlx)
-		exit((perror("mlx_int()"), 1));
+	{
+		ft_perror(NULL);
+		ft_clean(-1, g);
+	}
 	g->win_3d = mlx_new_window(g->mlx, g->width, g->height, "3D");
 	if (!g->win_3d)
-		exit((perror("mlx_new_window()"), 42));
+	{
+		ft_perror(NULL);
+		ft_clean(-1, g);
+	}
 	g->img.img = mlx_new_image(g->mlx, g->width, g->height);
 	if (!g->img.img)
-		exit((perror("mlx_new_image()"), 42));
+	{
+		ft_perror(NULL);
+		ft_clean(-1, g);
+	}
 	g->img.pixels = mlx_get_data_addr(g->img.img, &g->img.bpp, &g->img.line,
 			&g->img.endian);
 	if (!g->img.pixels)
-		exit((perror("mlx_get_data_addr()"), 42));
+	{
+		ft_perror(NULL);
+		ft_clean(-1, g);
+	}
 }
 
 void	init_game(t_game *g)

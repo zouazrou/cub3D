@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 10:12:29 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:57:11 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ t_data	*init_data(char *input, int *fd);
 int		parse_identifiers_and_map(int fd, t_data *data);
 int		is_color_line(char *s);
 void 	parse_color(char *color, t_data *data);
+void    ft_perror(char *str);
 void 	free_data(t_data *data);
 void 	data_init(t_data *data);
 int		validate_map(t_data *data);
@@ -103,12 +104,11 @@ int		check_all_exist(t_data *data);
 void	if_process(t_data *data, char *tmp, int *flag);
 void	free_str_array(char **str);
 char	*skip_ws(char *s);
-// int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		is_all_digits(const char *str);
-char	*print_error(char *error, int flag);
 t_data	*parse_input(char *input);
 // --------------------------
 t_game *get_addr_t_game(t_game *ptr);
+t_data *get_addr_t_data(t_data *ptr);
 
 // Regular Colors
 #define RESET "\033[0m"

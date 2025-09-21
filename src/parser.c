@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 03:46:40 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 13:32:39 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:09:15 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	check_all_exist(t_data *data)
 static int	process_after_identifiers(int fd, t_data *data, int flag)
 {
 	if (!check_all_exist(data) || flag)
-		return (print_error("Error: Invalid or duplicate"
-				"identifiers or invalid texture\n", 0), 1);
+	{
+		ft_perror("Invalid or duplicate identifiers or invalid texture");
+		return (1);
+	}
 	if (read_map(fd, data))
-		return (print_error("map malloc failed\n", 0), 1);
+		return (ft_perror(NULL), 1);
 	if (!validate_map(data))
 		return (1);
 	return (0);
@@ -61,9 +63,12 @@ t_data	*parse_input(char *input)
 
 	data = init_data(input, &fd);
 	if (!data)
-		return (NULL);
+		ft_clean(-1, get_addr_t_game(NULL));
 	if (parse_identifiers_and_map(fd, data))
-		return (close(fd), free_data(data), NULL);
+	{
+		close(fd);
+		ft_clean(-1, get_addr_t_game(NULL));
+	}
 	close(fd);
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:40:32 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:57:04 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ char	*skip_ws(char *s)
 // 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 // }
 
+t_data	*get_addr_t_data(t_data *ptr)
+{
+	static t_data	*addr = NULL;
+
+	if (ptr)
+		addr = ptr;
+	return (addr);
+}
+
 int	is_all_digits(const char *str)
 {
 	int	i;
@@ -59,22 +68,4 @@ int	is_all_digits(const char *str)
 		i++;
 	}
 	return (1);
-}
-
-char	*print_error(char *error, int flag)
-{
-	int	i;
-
-	i = 0;
-	if (flag)
-	{
-		perror(error);
-		return (NULL);
-	}
-	else
-	{
-		while (error[i])
-			write(2, &error[i++], 1);
-	}
-	return (NULL);
 }

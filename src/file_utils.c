@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:32:18 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/20 12:10:27 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:55:25 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ t_data	*init_data(char *input, int *fd)
 	t_data	*data;
 
 	if (!is_dot_cub(input))
-		return (print_error("Error: File must have .cub extension\n", 0), NULL);
+		return (ft_perror("File must have .cub extension"), NULL);
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (print_error("Malloc: ", 1), NULL);
+		return (ft_perror(NULL), NULL);
+	get_addr_t_data(data);
 	data_init(data);
 	*fd = open(input, O_RDONLY);
 	if (*fd < 0)
-		return (free_data(data), print_error("Open: ", 1), NULL);
+		return (free_data(data), ft_perror(NULL), NULL);
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/20 18:38:25 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/21 18:57:30 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ bool	is_wall(t_ray *ray)
 	x = (int)ray->inter.x / g->tilesz;
 	y = (int)ray->inter.y / g->tilesz;
 	if (g->map[y][x] == ' ')
-	{
-		printf("is sp\n");
 		return (true);
-	}
 	if (g->map[y][x] == '1')
 	{
 		ray->hit_wall = true;
