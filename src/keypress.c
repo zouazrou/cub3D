@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 19:25:06 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:07:57 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ bool	check_empty_space(t_vd new_position)
 	t_game	*g;
 
 	g = get_addr_t_game(NULL);
-	index_x = (new_position.x / g->tilesz);
-	index_y = (new_position.y / g->tilesz);
+	index_x = (int)(new_position.x / g->tilesz);
+	index_y = (int)(new_position.y / g->tilesz);
 	if (g->map[index_y][index_x] != '1')
 	{
 		g->ply.position = new_position;

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 21:22:07 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:30:46 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	draw_cube(int idx, int begin_y, int end_y, int wall_height)
 	tex.y = begin_y - 1;
 	while (++tex.y < end_y)
 	{
-		tex.tex_y = (int)tex.tex_pos & (tex.texture->h - 1);
+		tex.tex_y = (int)tex.tex_pos % tex.texture->h;
 		tex.tex_pos += tex.tex_step;
 		tex.color = get_pixel_color(tex.texture, tex.tex_x, tex.tex_y);
 		tex.x = -1;

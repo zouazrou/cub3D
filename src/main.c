@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 21:31:03 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:59:52 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,6 @@ void	init_textures(t_data *data)
 	convert_xpm_to_images(g);
 }
 
-void	placed_player(t_data *d)
-{
-	int		dx[4] = {1, 1, -1, -1};
-	int		dy[4] = {1, -1, 1, -1};
-	int		i;
-
-	t_game *g = get_addr_t_game(NULL);
-	int tilesz = g->tilesz;
-
-	
-	i = 0;
-	while (++i < 4)
-	{
-		g->ply.position.x = ((d->player_x + dy[i] * 0.5) * tilesz);
-		g->ply.position.y = ((d->player_y + dx[i] * 0.5) * tilesz);
-		if (check_empty_space(g->ply.position) == true)
-			break;
-	}
-}
-
 void	api(char *filename)
 {
 	t_data	*data;
@@ -94,8 +74,9 @@ void	api(char *filename)
 	game->mapy = data->map_y;
 	game->ply.position.x = (data->player_x) * game->tilesz;
 	game->ply.position.y = (data->player_y) * game->tilesz;
+	game->ply.position.x = (data->player_x + 0.5) * game->tilesz;
+	game->ply.position.y = (data->player_y + 0.5) * game->tilesz;
 	printf(TXT_RED"ply[%.2f:%.2f]\n"RESET, game->ply.position.x, game->ply.position.y);
-	placed_player(data);
 	if (data->player_d == 'E')
 		game->ply.angle = deg2rad(0);
 	else if (data->player_d == 'W')

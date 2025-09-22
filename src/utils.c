@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 18:57:30 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:09:33 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	is_wall(t_ray *ray)
 	g = get_addr_t_game(NULL);
 	x = (int)ray->inter.x / g->tilesz;
 	y = (int)ray->inter.y / g->tilesz;
-	if (g->map[y][x] == ' ')
+	if (g->map[y][x] == ' ' || g->map[y][x] == '\n')
 		return (true);
 	if (g->map[y][x] == '1')
 	{

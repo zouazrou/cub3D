@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 21:33:57 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:28:24 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	draw_floor(int begin_x, int begin_y)
 	}
 }
 
+void    draw_colorful_cube(int idx, int begin_x, int begin_y,
+		int wall_height);
+		
 void	draw_3d_view(int idx)
 {
 	int		begin_x;
@@ -60,6 +63,7 @@ void	draw_3d_view(int idx)
 	begin_x = idx * g->resolution;
 	draw_ceiling(begin_x, begin_y);
 	draw_cube(idx, begin_y, end_y, wall_height);
+	// draw_colorful_cube(idx, begin_x, begin_y, wall_height);
 	draw_floor(begin_x, end_y);
 }
 
