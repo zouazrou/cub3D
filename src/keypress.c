@@ -6,55 +6,67 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 11:07:57 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:31:55 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-bool	check_empty_space(t_vd new_position)
+#define DIST 0.2
+bool	check_empty_space(t_vd new)
 {
-	int		index_x;
-	int		index_y;
 	t_game	*g;
+	t_vd	possible_wall;
+	double dx[4] = {1, -1, 0,  0};
+	double dy[4] = {0,  0, 1, -1};
+	
 
 	g = get_addr_t_game(NULL);
-	index_x = (int)(new_position.x / g->tilesz);
-	index_y = (int)(new_position.y / g->tilesz);
-	if (g->map[index_y][index_x] != '1')
+	possible_wall.x = (new.x / (double)g->tilesz);
+	possible_wall.y = (new.y / (double)g->tilesz);
+	for (int i = 0; i < 4; i++)
 	{
-		g->ply.position = new_position;
+		if (g->map[(int)(possible_wall.y + (dy[i]*DIST))][(int)(possible_wall.x + (dx[i]*DIST))] == '1')
+		{
+			printf(TXT_BLUE"You must leave 0.2 btw the Player and the WAll !\n"RESET);
+			return (false);
+		}
+	}
+	if (g->map[(int)possible_wall.y][(int)possible_wall.x] != '1')
+	{
+		g->ply.position = new;
 		return (true);
 	}
+	
 	return (false);
 }
 
 void	change_position(int keysym, t_game *g)
 {
-	t_vd	new_position;
+	t_vd	new;
 
-	new_position = g->ply.position;
+	new = g->ply.position;
 	if (keysym == XK_w)
 	{
-		new_position.x += cos(g->ply.angle) * g->ply.move_speed;
-		new_position.y += sin(g->ply.angle) * g->ply.move_speed;
+		new.x += cos(g->ply.angle) * g->ply.move_speed;
+		new.y += sin(g->ply.angle) * g->ply.move_speed;
 	}
 	if (keysym == XK_s)
 	{
-		new_position.x -= cos(g->ply.angle) * g->ply.move_speed;
-		new_position.y -= sin(g->ply.angle) * g->ply.move_speed;
+		new.x -= cos(g->ply.angle) * g->ply.move_speed;
+		new.y -= sin(g->ply.angle) * g->ply.move_speed;
 	}
 	if (keysym == XK_a)
 	{
-		new_position.x += cos(g->ply.angle - PI / 2) * g->ply.move_speed;
-		new_position.y += sin(g->ply.angle - PI / 2) * g->ply.move_speed;
+		new.x += cos(g->ply.angle - PI / 2) * g->ply.move_speed;
+		new.y += sin(g->ply.angle - PI / 2) * g->ply.move_speed;
 	}
 	if (keysym == XK_d)
 	{
-		new_position.x += cos(g->ply.angle + PI / 2) * g->ply.move_speed;
-		new_position.y += sin(g->ply.angle + PI / 2) * g->ply.move_speed;
+		new.x += cos(g->ply.angle + PI / 2) * g->ply.move_speed;
+		new.y += sin(g->ply.angle + PI / 2) * g->ply.move_speed;
 	}
-	check_empty_space(new_position);
+	check_empty_space(new);
 }
 
 void	change_angle(int keysym, t_game *g)

@@ -1,11 +1,11 @@
 SO image/exit64.xpm
-NO image/floor_chest.xpm
+NO image/m6.xpm
 WE image/blue_wall.xpm
 EA image/grey_wall.xpm
 
 F 220,100,200
 C 225,30,0
 
-1111
-10W1
-1111
+ 11111
+1W10001
+ 11111
