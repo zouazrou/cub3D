@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 13:29:31 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:34:21 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_screen(t_game *g)
 
 void	init_player(t_game *g)
 {
-	g->ply.move_speed = 0.01 * g->tilesz;
+	g->ply.move_speed = 0.1 * g->tilesz;
 	g->ply.rotation_speed = deg2rad(2);
 }
 

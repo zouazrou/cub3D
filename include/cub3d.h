@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 11:04:30 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:32:55 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_ray vertical_hit(double ray_angle);
 void display(t_game *data);
 
 double distance(t_vd p0, t_vd p1);
-bool	check_empty_space(t_vd new_position);
+int	destroy_notify_func(t_game *game);
 int keyboard(int keysym, t_game *map);
 void init_game(t_game *data);
 // int close_win(void *ptr);

@@ -6,12 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:50:50 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 11:05:38 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:33:36 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
 
 void	choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v)
 {
@@ -35,7 +34,6 @@ void	choose_nearest(t_ray *ray, t_ray *ray_h, t_ray *ray_v)
 		ray->hit_wall = true;
 	}
 }
-
 
 int	row_len(const char *row)
 {

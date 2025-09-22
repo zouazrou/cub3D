@@ -6,12 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 10:14:39 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:37:17 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
 
 void	increment_to_the_wall(t_ray *ray)
 {
@@ -27,7 +26,6 @@ void	increment_to_the_wall(t_ray *ray)
 	}
 	ray->distance = distance(ray->inter, g->ply.position);
 }
-
 
 void	ray_casting(t_game *g)
 {

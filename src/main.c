@@ -6,17 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 13:00:23 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:35:18 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-int destroy_notify_func(t_game *game)
-{
-	ft_clean(XK_Escape, game);
-	return (0);
-}
 
 void	hooks(t_game *game)
 {
@@ -76,7 +70,6 @@ void	api(char *filename)
 	game->ply.position.y = (data->player_y) * game->tilesz;
 	game->ply.position.x = (data->player_x + 0.5) * game->tilesz;
 	game->ply.position.y = (data->player_y + 0.5 + 0.0001) * game->tilesz;
-	printf(TXT_RED"ply[%.2f:%.2f]\n"RESET, game->ply.position.x, game->ply.position.y);
 	if (data->player_d == 'E')
 		game->ply.angle = deg2rad(0);
 	else if (data->player_d == 'W')

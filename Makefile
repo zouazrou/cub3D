@@ -18,11 +18,7 @@ SRC = $(addprefix src/, main.c init.c utils.c utils2.c keypress.c raycasting.c \
 	map_utlis.c map_validate.c parser.c  \
 	read_map.c textures.c utils3.c)
 
-
-
 OBJ = $(SRC:.c=.o)
-
-
 
 all : $(NAME)
 
@@ -54,4 +50,4 @@ fclean :
 	@make fclean -C libft/
 	@echo "\\033[1m\\033[31mfclean:🗑️\\033[0m"
 
-.PHONY : clean fclean
+.PHONY : all re clean fclean

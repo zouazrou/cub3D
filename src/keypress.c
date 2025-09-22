@@ -6,39 +6,46 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 13:31:55 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:27:18 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-#define DIST 0.2
-bool	check_empty_space(t_vd new)
+static void	init_directions(double dx[5], double dy[5])
 {
+	dx[0] = 0;
+	dx[1] = 0.2;
+	dx[2] = -0.2;
+	dx[3] = 0;
+	dx[4] = 0;
+	dy[0] = 0;
+	dy[1] = 0;
+	dy[2] = 0;
+	dy[3] = 0.2;
+	dy[4] = -0.2;
+}
+
+void	check_valid_move(t_vd new)
+{
+	int		i;
 	t_game	*g;
+	double	dx[5];
+	double	dy[5];
 	t_vd	possible_wall;
-	double dx[4] = {1, -1, 0,  0};
-	double dy[4] = {0,  0, 1, -1};
-	
 
 	g = get_addr_t_game(NULL);
+	init_directions(dx, dy);
 	possible_wall.x = (new.x / (double)g->tilesz);
 	possible_wall.y = (new.y / (double)g->tilesz);
-	for (int i = 0; i < 4; i++)
+	i = -1;
+	while (++i < 5)
 	{
-		if (g->map[(int)(possible_wall.y + (dy[i]*DIST))][(int)(possible_wall.x + (dx[i]*DIST))] == '1')
-		{
-			printf(TXT_BLUE"You must leave 0.2 btw the Player and the WAll !\n"RESET);
-			return (false);
-		}
+		if (g->map[(int)(possible_wall.y + dy[i])]
+			[(int)(possible_wall.x + dx[i])] == '1')
+			return ;
 	}
-	if (g->map[(int)possible_wall.y][(int)possible_wall.x] != '1')
-	{
-		g->ply.position = new;
-		return (true);
-	}
-	
-	return (false);
+	g->ply.position = new;
 }
 
 void	change_position(int keysym, t_game *g)
@@ -66,7 +73,7 @@ void	change_position(int keysym, t_game *g)
 		new.x += cos(g->ply.angle + PI / 2) * g->ply.move_speed;
 		new.y += sin(g->ply.angle + PI / 2) * g->ply.move_speed;
 	}
-	check_empty_space(new);
+	check_valid_move(new);
 }
 
 void	change_angle(int keysym, t_game *g)
