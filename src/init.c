@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 14:34:21 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:51:16 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_screen(t_game *g)
 	g->num_rays = g->width / g->resolution;
 	g->fov = deg2rad(60);
 	g->distance_to_plane = (g->width / 2.0) / (tan(g->fov / 2.0));
-	printf(TXT_GREEN "RAYS NUM -> %d" RESET "\n", g->num_rays);
 }
 
 void	init_player(t_game *g)
@@ -70,18 +69,8 @@ void	init_game(t_game *g)
 	get_addr_t_game(g);
 	g->width = WIDTH;
 	g->height = HEIGHT;
-	g->ceiling_color = LIGHT_BLUE;
-	g->floor_color = DARK_GRAY;
 	init_screen(g);
 	init_player(g);
 	init_ray(g);
 	init_minilibx(g);
 }
-
-/*
-? Wall-Height / dis-to-the-Wall
-!            == 
-? Projected-Wall-Height / dis-ply-to-projection-plane  
-
-
-*/

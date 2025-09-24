@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:26 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/22 13:37:17 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:31:53 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ void	ray_casting(t_game *g)
 	double	ray_angle;
 	int		i;
 
-	// double	ray_inc;
-	// ray_angle = g->ply.angle + atan((i - (g->num_rays * 0.5f))
-			/ g->distance_to_plane);
-	// ray_angle = g->ply.angle - (g->fov / 2);
-	// ray_inc = g->fov / g->num_rays;
 	i = -1;
 	while (++i < g->num_rays)
 	{
@@ -48,6 +43,5 @@ void	ray_casting(t_game *g)
 		ray_v = vertical_hit(normalize_angle(ray_angle));
 		choose_nearest(g->ray + i, &ray_h, &ray_v);
 		draw_3d_view(i);
-		// ray_angle += ray_inc;
 	}
 }

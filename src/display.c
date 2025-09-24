@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/21 21:27:25 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:39:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	frames(t_game *game)
 	if (get_time() - last_frame >= diff)
 	{
 		last_frame = get_time();
-		printf("ply[%.2f:%.2f]\n", game->ply.position.x, game->ply.position.y);
 		display(game);
-		printf(TXT_CYAN "\n============\n" RESET);
 	}
 	return (0);
 }

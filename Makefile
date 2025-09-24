@@ -1,7 +1,7 @@
 NAME = cub3d
-CC = cc -g
-CFLAGS = -Wall -Wextra -Werror
-HEADER_FILE = cub3d.h  structures.h
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g
+HEADER_FILE = include/cub3d.h  include/structures.h
 
 # libs
 MLX_FLAGS = -lXext -lX11
@@ -30,12 +30,12 @@ $(MLX_LIB) :
 	@make -C $(MLX_PATH)
 
 $(NAME) : $(OBJ) $(LIBS) 
-	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
+	@echo "\\033[1m\\033[32mOBJ:📁\\033[0m"
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
 	@echo "\\033[1m\\033[36mexec:⚙️\\033[0m"
 
 %.o : %.c $(HEADER_FILE) 
-	$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\\033[1m\\033[32mOBJ:📁\\033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 re : fclean all
 

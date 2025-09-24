@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:40:32 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/21 18:57:04 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:52:05 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,6 @@ char	*skip_ws(char *s)
 		s++;
 	return (s);
 }
-
-// int	ft_strncmp(const char *s1, const char *s2, size_t n)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (n == 0)
-// 		return (0);
-// 	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
-// 		i++;
-// 	if (i == n)
-// 		return (0);
-// 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-// }
 
 t_data	*get_addr_t_data(t_data *ptr)
 {
