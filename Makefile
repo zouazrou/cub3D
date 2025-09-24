@@ -48,7 +48,7 @@ bonus : $(NAME_BONUS)
 
 $(NAME_BONUS) : $(OBJ_BNS) $(LIBFT)
 	echo "\\033[1m\\033[32mOBJ_BNS:📁\\033[0m"
-	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ_BNS) $(LIBS) -lm -o $(NAME_BONUS)
 	echo "\\033[1m\\033[36mexec bonus:⚙️\\033[0m"
 
 %.o : %.c $(HEADER_FILE) 
@@ -66,7 +66,7 @@ fclean :
 	@rm -f $(OBJ)
 	@rm -f $(OBJ_BNS)
 	@rm -f $(NAME)
-	@rm -f $(NAME_NAME)
+	@rm -f $(NAME_BONUS)
 	@make fclean -C libft/
 	@echo "\\033[1m\\033[31mfclean:🗑️\\033[0m"
 
