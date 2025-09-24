@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/24 15:49:24 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/24 18:28:50 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "../src/get_next_line/get_next_line.h"
+# include "../mondatory/src/get_next_line/get_next_line.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>

@@ -1,4 +1,5 @@
 NAME = cub3d
+NAME_BONUS = cub3d_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 HEADER_FILE = include/cub3d.h  include/structures.h
@@ -10,7 +11,15 @@ MLX_LIB = $(MLX_PATH)libmlx.a
 LIBFT = libft/libft.a
 LIBS = $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
 
-SRC = $(addprefix src/, main.c init.c utils.c utils2.c keypress.c raycasting.c \
+SRC = $(addprefix mondatory/src/, main.c init.c utils.c utils2.c keypress.c raycasting.c \
+	horizontal.c display.c clean.c check_direction.c \
+	3d_view.c draw_texture.c raycasting_utils.c\
+	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+	color.c data_utils.c file_utils.c \
+	map_utlis.c map_validate.c parser.c  \
+	read_map.c textures.c utils3.c)
+
+SRC_BNS = $(addprefix bonus/src/, main.c init.c utils.c utils2.c keypress.c raycasting.c \
 	horizontal.c display.c clean.c check_direction.c \
 	3d_view.c draw_texture.c raycasting_utils.c\
 	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
@@ -20,8 +29,9 @@ SRC = $(addprefix src/, main.c init.c utils.c utils2.c keypress.c raycasting.c \
 
 OBJ = $(SRC:.c=.o)
 
-all : $(NAME)
+OBJ_BNS = $(SRC_BNS:.c=.o)
 
+all : $(NAME)
 
 $(LIBFT) :
 	@make -C libft/
@@ -34,19 +44,29 @@ $(NAME) : $(OBJ) $(LIBS)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
 	@echo "\\033[1m\\033[36mexec:⚙️\\033[0m"
 
+bonus : $(NAME_BONUS)
+
+$(NAME_BONUS) : $(OBJ_BNS) $(LIBFT)
+	echo "\\033[1m\\033[32mOBJ_BNS:📁\\033[0m"
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
+	echo "\\033[1m\\033[36mexec bonus:⚙️\\033[0m"
+
 %.o : %.c $(HEADER_FILE) 
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 re : fclean all
 
 clean :
 	@rm -f $(OBJ)
+	@rm -f $(OBJ_BNS)
 	@make clean -C libft/
 	@echo "\\033[1m\\033[35mclean:🧹"
 
 fclean :
 	@rm -f $(OBJ)
+	@rm -f $(OBJ_BNS)
 	@rm -f $(NAME)
+	@rm -f $(NAME_NAME)
 	@make fclean -C libft/
 	@echo "\\033[1m\\033[31mfclean:🗑️\\033[0m"
 
