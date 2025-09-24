@@ -1,11 +1,47 @@
-SO image/irhal.xpm
-NO image/m6.xpm
-WE image/blue_wall.xpm
-EA       image/grey_wall.xpm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  SO   image/irhal.xpm                     
+                    NO    image/melayyad.xpm
+
+
+
+
+
+WE             image/blue_wall.xpm
+
+
+
+
+
+
+
+
+EA               image/grey_wall.xpm
+
+
+
+
+
 
 F 220,100,200
-C 225,30,0
 
- 11111
-1W0001
- 11111
+
+
+
+C 225                ,  30   ,   0                         
+
+    11111
+    1W0001
+    11111

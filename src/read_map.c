@@ -61,7 +61,7 @@ int	read_map(int fd, t_data *data)
 			line = get_next_line(fd);
 			continue ;
 		}
-		if (!data->map)
+		if ((!data->map && line) && (line[0] != '\0' && line[0] != '\n'))
 		{
 			if (init_map(data, line, &count))
 				return (1);

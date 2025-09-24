@@ -32,17 +32,18 @@ void	ray_casting(t_game *g)
 	t_ray	ray_h;
 	t_ray	ray_v;
 	double	ray_angle;
-	// double	ray_inc;
 	int		i;
 
-	// ray_angle = g->ply.angle + atan((i - (g->num_rays * 0.5f)) / g->distance_to_plane);
-
+	// double	ray_inc;
+	// ray_angle = g->ply.angle + atan((i - (g->num_rays * 0.5f))
+			/ g->distance_to_plane);
 	// ray_angle = g->ply.angle - (g->fov / 2);
 	// ray_inc = g->fov / g->num_rays;
 	i = -1;
 	while (++i < g->num_rays)
 	{
-	    ray_angle = g->ply.angle + atan((i - (g->num_rays * 0.5f)) / g->distance_to_plane);
+		ray_angle = g->ply.angle + atan((i - (g->num_rays * 0.5f))
+				/ g->distance_to_plane);
 		ray_h = horizontal_hit(normalize_angle(ray_angle));
 		ray_v = vertical_hit(normalize_angle(ray_angle));
 		choose_nearest(g->ray + i, &ray_h, &ray_v);
