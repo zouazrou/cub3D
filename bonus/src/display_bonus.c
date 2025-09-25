@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:33:35 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:59:38 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ int	frames(t_game *game)
 		display(game);
 	}
 	return (0);
+}
+
+void	minimap_2d(t_game *game)
+{
+	int x;
+	int y;
+	
+	
+	for (y = 0; y < MINIMAP_H; y++)
+	{
+		for (x = 0; x < MINIMAP_W; x++)
+		{
+			
+			put_pixel_in_image(&game->img_2d, x, y, 0xffffff);
+		}
+	}
 }
 
 void	display(t_game *g)

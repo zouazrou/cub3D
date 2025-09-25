@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:58:52 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	draw_cube(int idx, int begin_y, int end_y, int wall_height)
 		tex.color = get_pixel_color(tex.texture, tex.tex_x, tex.tex_y);
 		tex.x = -1;
 		while (++tex.x < g->resolution)
-			put_pixel_in_image(begin_x + tex.x, tex.y, tex.color);
+			put_pixel_in_image(&g->img_3d, begin_x + tex.x, tex.y, tex.color);
 	}
 }

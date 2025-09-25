@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:09:58 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:58:00 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 
 # define WIDTH 800
 # define HEIGHT 600
+
+# define MINIMAP_W 100
+# define MINIMAP_H 100
+
 # define FPS 60
 
 # define PI 3.14159265358979323846
@@ -36,16 +40,17 @@
 t_ray	horizontal_hit(double ray_angle);
 t_ray	vertical_hit(double ray_angle);
 
-void	display(t_game *data);
+void	display(t_game *game);
 
 double	distance(t_vd p0, t_vd p1);
 int		destroy_notify_func(t_game *game);
 int		keyboard(int keysym, t_game *map);
-void	init_game(t_game *data);
+void	init_minilibx(t_game *g);
+void	init_game(t_game *game);
 bool	is_wall(t_ray *ray);
 double	normalize_angle(double radian);
 void	draw_3d_view(int idx);
-int		frames(t_game *data);
+int		frames(t_game *game);
 void	draw_cube(int idx, int begin_y, int end_y, int wall_height);
 void	init_dirs(int dy[4], int dx[4]);
 
@@ -63,7 +68,7 @@ void	increment_to_the_wall(t_ray *ray);
 t_ms	get_time(void);
 bool	check_win_bound(t_ray *ray);
 void	*ft_calloc(size_t nmemb, size_t size);
-void	put_pixel_in_image(int x, int y, int col);
+void	put_pixel_in_image(t_img *img, int x, int y, int col);
 int		ft_clean(int keysym, t_game *g);
 double	deg2rad(int degree);
 void	change_angle(int keysym, t_game *g);

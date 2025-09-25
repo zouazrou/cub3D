@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:39:57 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:52:43 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	change_angle(int keysym, t_game *g)
 		g->ply.angle = normalize_angle(g->ply.angle + g->ply.rotation_speed);
 }
 
-int	keyboard(int keysym, t_game *data)
+int	keyboard(int keysym, t_game *game)
 {
 	if (keysym == XK_Escape)
 	{
-		ft_clean(keysym, data);
+		ft_clean(keysym, game);
 		return (0);
 	}
-	change_position(keysym, data);
-	change_angle(keysym, data);
+	change_position(keysym, game);
+	change_angle(keysym, game);
 	return (0);
 }

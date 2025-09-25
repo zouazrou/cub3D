@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:40:07 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:58:37 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_ceiling(int begin_x, int begin_y)
 	{
 		x = -1;
 		while (++x < g->resolution)
-			put_pixel_in_image(begin_x + x, y, g->ceiling_color);
+			put_pixel_in_image(&g->img_3d, begin_x + x, y, g->ceiling_color);
 	}
 }
 
@@ -40,7 +40,7 @@ void	draw_floor(int begin_x, int begin_y)
 	{
 		x = -1;
 		while (++x < g->resolution)
-			put_pixel_in_image(begin_x + x, y, g->floor_color);
+			put_pixel_in_image(&g->img_3d, begin_x + x, y, g->floor_color);
 	}
 }
 
