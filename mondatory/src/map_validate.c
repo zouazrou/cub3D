@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 02:59:24 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/24 18:27:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:05:50 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 static int	cases_check(t_data *data, int y, int x, int *player_found)
 {

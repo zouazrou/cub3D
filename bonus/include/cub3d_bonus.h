@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 09:55:23 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:09:58 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
-# include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
-# include "../mondatory/src/get_next_line/get_next_line.h"
+# include "../../libft/libft.h"
+# include "../../minilibx-linux/mlx.h"
+# include "../src/get_next_line/get_next_line.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -25,7 +25,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
-# include "structures.h"
+# include "structures_bonus.h"
 
 # define WIDTH 800
 # define HEIGHT 600

@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 03:21:23 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/24 18:53:22 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 static int	handle_first_empty_line(char *line, int count)
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   structures_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/24 15:47:32 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:07:40 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
+#ifndef STRUCTURES_BONUS_H
+# define STRUCTURES_BONUS_H
 
 typedef long long	t_ms;
 
@@ -95,7 +95,6 @@ typedef struct s_game
 	t_texture		south;
 	t_texture		west;
 	t_texture		east;
-
 	int				floor_color;
 	int				ceiling_color;
 
@@ -106,7 +105,6 @@ typedef struct s_game
 	int				tilesz;
 
 	t_player		ply;
-
 	double			fov;
 	int				resolution;
 	int				num_rays;

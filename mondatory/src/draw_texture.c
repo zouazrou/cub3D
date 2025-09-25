@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 10:55:28 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/24 18:27:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:05:50 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 t_texture	*select_texture(t_game *g, t_ray *ray)
 {

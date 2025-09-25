@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:20:46 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 09:52:29 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 double	distance(t_vd p0, t_vd p1)
 {

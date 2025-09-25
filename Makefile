@@ -1,8 +1,10 @@
 NAME = cub3d
+
 NAME_BONUS = cub3d_bonus
+
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror -g
-HEADER_FILE = include/cub3d.h  include/structures.h
 
 # libs
 MLX_FLAGS = -lXext -lX11
@@ -51,7 +53,7 @@ $(NAME_BONUS) : $(OBJ_BNS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ_BNS) $(LIBS) -lm -o $(NAME_BONUS)
 	@echo "\\033[1m\\033[36mexec bonus:⚙️\\033[0m"
 
-%.o : %.c $(HEADER_FILE) 
+%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 re : fclean all

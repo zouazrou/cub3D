@@ -6,11 +6,11 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 03:46:40 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/24 18:53:11 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 int	check_all_exist(t_data *data)
 {
