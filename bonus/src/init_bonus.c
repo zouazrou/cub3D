@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 12:01:46 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:48:45 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_ray(t_game *g)
 void	init_screen(t_game *g)
 {
 	g->resolution = 1;
-	g->tilesz = 4;
+	g->tilesz = 10;
 	g->num_rays = g->width / g->resolution;
 	g->fov = deg2rad(60);
 	g->distance_to_plane = (g->width / 2.0) / (tan(g->fov / 2.0));
@@ -44,11 +44,11 @@ void	init_minilibx(t_game *g)
 		error = true;
 	g->win = mlx_new_window(g->mlx, g->width, g->height, "3D");
 	g->img_2d.img = mlx_new_image(g->mlx, MINIMAP_W, MINIMAP_H);
-	g->img_2d.pixels = mlx_get_data_addr(g->img_2d.img, &g->img_2d.bpp, &g->img_2d.line,
-		&g->img_2d.endian);
+	g->img_2d.pixels = mlx_get_data_addr(g->img_2d.img, &g->img_2d.bpp,
+			&g->img_2d.line, &g->img_2d.endian);
 	g->img_3d.img = mlx_new_image(g->mlx, g->width, g->height);
-	g->img_3d.pixels = mlx_get_data_addr(g->img_3d.img, &g->img_3d.bpp, &g->img_3d.line,
-		&g->img_3d.endian);
+	g->img_3d.pixels = mlx_get_data_addr(g->img_3d.img, &g->img_3d.bpp,
+			&g->img_3d.line, &g->img_3d.endian);
 	if (!g->win || !g->img_2d.img || !g->img_3d.img
 		|| !g->img_3d.pixels || !g->img_2d.pixels)
 		error = true;

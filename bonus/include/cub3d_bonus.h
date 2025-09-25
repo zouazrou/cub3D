@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:58:00 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:42:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define MINIMAP_W 100
 # define MINIMAP_H 100
 
+# define BLUE 0X0000FF
+# define GRAY 0X808080
+# define RED 0XFF0000
 # define FPS 60
 
 # define PI 3.14159265358979323846

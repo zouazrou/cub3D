@@ -6,22 +6,27 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 12:01:15 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:51:44 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
-void    draw_big_point(t_img *img, int x, int y,  int r, int col)
+void	draw_big_point(t_img *img, int x, int y, int r)
 {
-    for (int dx = -r; dx <= r; dx++)
-    {
-        for (int dy = -r; dy <= r; dy++)
-        {
-            if (dx*dx + dy*dy <= r*r)
-                put_pixel_in_image(img, x + dx, y + dy, col);
-        }
-    }
+	int	dx;
+	int	dy;
+
+	dx = -r - 1;
+	while (++dx <= r)
+	{
+		dy = -r - 1;
+		while (++dy <= r)
+		{
+			if (dx * dx + dy * dy <= r * r)
+				put_pixel_in_image(img, x + dx, y + dy, RED);
+		}
+	}
 }
 
 int	frames(t_game *game)
@@ -38,36 +43,33 @@ int	frames(t_game *game)
 	return (0);
 }
 
-#define BLUE 0X0000FF
-#define GRAY 0X808080
-#define RED 0XFF0000
-
-void	minimap_2d(t_game *game)
+void	minimap_2d(t_game *g)
 {
-	t_vd center;
-	
-	center.x = (MINIMAP_W / 2) - 1;
-	center.y = (MINIMAP_H / 2) - 1;
-	for (int y = 0; y < MINIMAP_H; y++)
+	double	i;
+	double	j;
+	t_vd	m;
+	t_vd	d;
+
+	j = -1;
+	while (++j < MINIMAP_H)
 	{
-		for (int x = 0; x < MINIMAP_W; x++)
+		i = -1;
+		while (++i < MINIMAP_W)
 		{
-			double fx = game->ply.position.x / center.x; 
-			double fy = game->ply.position.y / center.y; 
-			int tmp_x = (int)(y*fy)/game->tilesz;
-			int tmp_y = (int)(x*fx)/game->tilesz;
-			if (!(tmp_x < 0 || tmp_y < 0))
-			{
-				if (game->map[tmp_y][tmp_x] == '1')
-					put_pixel_in_image(&game->img_2d, x, y, BLUE);
-				else if (game->map[tmp_y][tmp_x] == '0'|| )
-					put_pixel_in_image(&game->img_2d, x, y, GRAY);
-				else
-					put_pixel_in_image(&game->img_2d, x, y, 0xffffff);
-			}
+			d.x = i - (MINIMAP_W / 2.0);
+			d.y = j - (MINIMAP_H / 2.0);
+			m.x = (int)((g->ply.position.x) + d.x) / g->tilesz;
+			m.y = (int)((g->ply.position.y) + d.y) / g->tilesz;
+			if (m.y < 0 || m.y >= g->mapy || !g->map[(int)m.y] || m.x < 0
+				|| m.x >= (int)ft_strlen(g->map[(int)m.y]))
+				put_pixel_in_image(&g->img_2d, i, j, GRAY);
+			else if (g->map[(int)m.y][(int)m.x] == '1')
+				put_pixel_in_image(&g->img_2d, i, j, BLUE);
+			else
+				put_pixel_in_image(&g->img_2d, i, j, GRAY);
 		}
 	}
-	draw_big_point(&game->img_2d, 50, 50, 1, RED);
+	draw_big_point(&g->img_2d, MINIMAP_W / 2, MINIMAP_H / 2, 3);
 }
 
 void	display(t_game *g)
