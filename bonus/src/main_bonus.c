@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:33:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	handling_mouse_event(int x, int y, void *g)
 
 void	hooks(t_game *game)
 {
-	mlx_hook(game->win_3d, MotionNotify, PointerMotionMask,
+	mlx_hook(game->win, MotionNotify, PointerMotionMask,
 		handling_mouse_event, game);
-	mlx_hook(game->win_3d, DestroyNotify, 0, destroy_notify_func, NULL);
-	mlx_hook(game->win_3d, KeyPress, KeyPressMask, keyboard, game);
+	mlx_hook(game->win, DestroyNotify, 0, destroy_notify_func, NULL);
+	mlx_hook(game->win, KeyPress, KeyPressMask, keyboard, game);
 	mlx_loop_hook(game->mlx, frames, game);
 }
 

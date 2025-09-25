@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:33:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,21 @@ void	init_minilibx(t_game *g)
 		ft_perror(NULL);
 		ft_clean(-1, g);
 	}
-	g->win_3d = mlx_new_window(g->mlx, g->width, g->height, "3D");
-	if (!g->win_3d)
+	g->win = mlx_new_window(g->mlx, g->width, g->height, "3D");
+	if (!g->win)
 	{
 		ft_perror(NULL);
 		ft_clean(-1, g);
 	}
-	g->img.img = mlx_new_image(g->mlx, g->width, g->height);
-	if (!g->img.img)
+	g->img_3d.img = mlx_new_image(g->mlx, g->width, g->height);
+	if (!g->img_3d.img)
 	{
 		ft_perror(NULL);
 		ft_clean(-1, g);
 	}
-	g->img.pixels = mlx_get_data_addr(g->img.img, &g->img.bpp, &g->img.line,
-			&g->img.endian);
-	if (!g->img.pixels)
+	g->img_3d.pixels = mlx_get_data_addr(g->img_3d.img, &g->img_3d.bpp, &g->img_3d.line,
+			&g->img_3d.endian);
+	if (!g->img_3d.pixels)
 	{
 		ft_perror(NULL);
 		ft_clean(-1, g);

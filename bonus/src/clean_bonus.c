@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:32:19 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:33:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ int	ft_clean(int keysym, t_game *g)
 	free(g->ray);
 	destroy_images(g);
 	g->map = NULL;
-	if (g->win_3d)
-		mlx_destroy_window(g->mlx, g->win_3d);
-	if (g->img.img)
-		mlx_destroy_image(g->mlx, g->img.img);
+	if (g->win)
+		mlx_destroy_window(g->mlx, g->win);
+	if (g->img_3d.img)
+		mlx_destroy_image(g->mlx, g->img_3d.img);
 	if (g->mlx)
 		mlx_destroy_display(g->mlx);
 	free(g->mlx);
-	g->win_3d = NULL;
-	g->img.img = NULL;
+	g->win = NULL;
+	g->img_3d.img = NULL;
 	g->mlx = NULL;
 	if (keysym == -1)
 		exit(EXIT_FAILURE);

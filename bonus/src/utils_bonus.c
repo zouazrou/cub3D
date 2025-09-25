@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:32:16 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	put_pixel_in_image(int x, int y, int col)
 	g = get_addr_t_game(NULL);
 	if (is_outside_window(x, y))
 		return ;
-	offset = (y * g->img.line) + (x * (g->img.bpp / 8));
-	*(unsigned int *)(g->img.pixels + offset) = col;
+	offset = (y * g->img_3d.line) + (x * (g->img_3d.bpp / 8));
+	*(unsigned int *)(g->img_3d.pixels + offset) = col;
 }
 
 t_game	*get_addr_t_game(t_game *ptr)

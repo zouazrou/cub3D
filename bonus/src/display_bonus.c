@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:30:11 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:33:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int	frames(t_game *game)
 void	display(t_game *g)
 {
 	ray_casting(g);
-	mlx_put_image_to_window(g->mlx, g->win_3d, g->img.img, 0, 0);
+	mlx_put_image_to_window(g->mlx, g->win, g->img_3d.img, 0, 0);
 }

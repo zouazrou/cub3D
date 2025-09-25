@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 13:41:55 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:07:40 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 10:33:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ typedef struct s_data_tex
 typedef struct s_game
 {
 	void			*mlx;
-	void			*win_3d;
-	t_img			img;
+	void			*win;
+	t_img			img_3d;
 
 	t_texture		north;
 	t_texture		south;
