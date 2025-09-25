@@ -1,48 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/24 18:27:59 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 09:54:12 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+int	handling_mouse_event(int x, int y, void *g)
+{
+	static int	last_pos;
+
+	(void)y;
+	if (x < last_pos)
+		change_angle(XK_Left, g);
+	if (x > last_pos)
+		change_angle(XK_Right, g);
+	last_pos = x;
+	return (0);
+}
+
 void	hooks(t_game *game)
 {
+	mlx_hook(game->win_3d, MotionNotify, PointerMotionMask,
+		handling_mouse_event, game);
 	mlx_hook(game->win_3d, DestroyNotify, 0, destroy_notify_func, NULL);
 	mlx_hook(game->win_3d, KeyPress, KeyPressMask, keyboard, game);
 	mlx_loop_hook(game->mlx, frames, game);
-}
-
-void	convert_xpm_to_images(t_game *g)
-{
-	g->north.image.img = mlx_xpm_file_to_image(g->mlx, g->north.filename,
-			&g->north.w, &g->north.h);
-	g->south.image.img = mlx_xpm_file_to_image(g->mlx, g->south.filename,
-			&g->south.w, &g->south.h);
-	g->west.image.img = mlx_xpm_file_to_image(g->mlx, g->west.filename,
-			&g->west.w, &g->west.h);
-	g->east.image.img = mlx_xpm_file_to_image(g->mlx, g->east.filename,
-			&g->east.w, &g->east.h);
-	if (!g->north.image.img || !g->south.image.img || !g->west.image.img
-		|| !g->east.image.img)
-	{
-		ft_perror(NULL);
-		ft_clean(-1, g);
-	}
-	g->north.image.pixels = mlx_get_data_addr(g->north.image.img,
-			&g->north.image.bpp, &g->north.image.line, &g->north.image.endian);
-	g->south.image.pixels = mlx_get_data_addr(g->south.image.img,
-			&g->south.image.bpp, &g->south.image.line, &g->south.image.endian);
-	g->west.image.pixels = mlx_get_data_addr(g->west.image.img,
-			&g->west.image.bpp, &g->west.image.line, &g->west.image.endian);
-	g->east.image.pixels = mlx_get_data_addr(g->east.image.img,
-			&g->east.image.bpp, &g->east.image.line, &g->east.image.endian);
 }
 
 void	init_textures(t_data *data)

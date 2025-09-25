@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/24 18:28:50 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/25 09:55:23 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ double	deg2rad(int degree);
 void	change_angle(int keysym, t_game *g);
 void	ft_bzero(void *s, size_t n);
 char	*ft_strdup(const char *s);
+void	convert_xpm_to_images(t_game *g);
 
 // ! Parsing Part
 int		validate_rgb_part(char *part, int *value);
