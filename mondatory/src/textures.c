@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:39:45 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/25 10:05:50 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/26 09:47:19 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@ static void	trim_end(char *s)
 
 static void	assign_texture(char **dst, char *path, int *flag)
 {
-	int	i;
-
 	if (*dst)
 	{
 		*flag = 1;
 		return ;
 	}
 	path = skip_ws(path);
-	i = ft_strlen(skip_ws(path));
 	trim_end(path);
 	*dst = ft_strdup(skip_ws(path));
 	if (!*dst)

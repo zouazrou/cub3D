@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 03:26:49 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/26 09:46:35 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 int	after_last_line(t_data *data)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (data->map[i] && data->map[i][0] == '\n')
 		i++;
 	while (data->map[i] && data->map[i][0] != '\n')

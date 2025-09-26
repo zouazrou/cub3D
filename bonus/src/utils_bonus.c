@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:36 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:57:47 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/26 09:47:55 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ bool	is_outside_window(int x, int y)
 void	put_pixel_in_image(t_img *img, int x, int y, int col)
 {
 	int		offset;
-	t_game	*g;
 
-	g = get_addr_t_game(NULL);
 	if (is_outside_window(x, y))
 		return ;
 	offset = (y * img->line) + (x * (img->bpp / 8));

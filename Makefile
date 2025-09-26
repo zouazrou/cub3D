@@ -43,18 +43,18 @@ $(MLX_LIB) :
 
 $(NAME) : $(OBJ) $(LIBS) 
 	@echo "\\033[1m\\033[32mOBJ:📁\\033[0m"
-	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
 	@echo "\\033[1m\\033[36mexec:⚙️\\033[0m"
 
 bonus : $(NAME_BONUS)
 
 $(NAME_BONUS) : $(OBJ_BNS) $(LIBFT)
 	@echo "\\033[1m\\033[32mOBJ_BNS:📁\\033[0m"
-	$(CC) $(CFLAGS) $(OBJ_BNS) $(LIBS) -lm -o $(NAME_BONUS)
+	@$(CC) $(CFLAGS) $(OBJ_BNS) $(LIBS) -lm -o $(NAME_BONUS)
 	@echo "\\033[1m\\033[36mexec bonus:⚙️\\033[0m"
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 re : fclean all
 
