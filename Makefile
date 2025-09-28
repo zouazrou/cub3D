@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 
 NAME_BONUS = cub3d_bonus
 

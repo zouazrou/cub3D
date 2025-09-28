@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:05:50 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/28 09:55:33 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,4 @@ void	init_game(t_game *g)
 	init_screen(g);
 	init_player(g);
 	init_ray(g);
-	init_minilibx(g);
 }

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 15:32:18 by melayyad          #+#    #+#             */
-/*   Updated: 2025/09/25 10:06:42 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/28 09:54:24 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ t_data	*init_data(char *input, int *fd)
 	data_init(data);
 	*fd = open(input, O_RDONLY);
 	if (*fd < 0)
-		return (free_data(data), ft_perror(NULL), NULL);
+		return (ft_perror(NULL), NULL);
 	return (data);
 }
