@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/28 09:55:33 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:11:31 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_ray(t_game *g)
 void	init_screen(t_game *g)
 {
 	g->resolution = 1;
-	g->tilesz = 1;
+	g->tilesz = 10;
 	g->num_rays = g->width / g->resolution;
 	g->fov = deg2rad(60);
 	g->distance_to_plane = (g->width / 2.0) / (tan(g->fov / 2.0));

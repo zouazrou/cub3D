@@ -9,10 +9,8 @@
 
 
 
-                  SO   image/irhal.xpm                     
-                    NO    image/melayyad.xpm
-
-
+SO   image/irhal.xpm                     
+NO    image/melayyad.xpm
 
 
 
@@ -40,5 +38,5 @@ F 220,100,200
 C 225                ,  30   ,   0                         
 
     11111
-    1W0001
+    1N0001
     11111

@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 10:48:57 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:21:48 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	api(char *filename)
 		game->ply.angle = deg2rad(0);
 	else if (data->player_d == 'W')
 		game->ply.angle = deg2rad(180);
-	else if (data->player_d == 'N')
-		game->ply.angle = deg2rad(90);
 	else if (data->player_d == 'S')
+		game->ply.angle = deg2rad(90);
+	else if (data->player_d == 'N')
 		game->ply.angle = deg2rad(270);
 	game->ceiling_color = data->c;
 	game->floor_color = data->f;
