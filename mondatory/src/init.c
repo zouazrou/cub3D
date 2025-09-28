@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/28 10:11:31 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:35:41 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_minilibx(t_game *g)
 		ft_perror(NULL);
 		ft_clean(-1, g);
 	}
+	init_textures(get_addr_t_data(NULL));
 	g->win_3d = mlx_new_window(g->mlx, g->width, g->height, "3D");
 	if (!g->win_3d)
 	{

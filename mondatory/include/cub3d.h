@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:51 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/28 10:13:21 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:36:06 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	display(t_game *data);
 double	distance(t_vd p0, t_vd p1);
 int		destroy_notify_func(t_game *game);
 void	init_minilibx(t_game *g);
+void	init_textures(t_data *data);
 int		keyboard(int keysym, t_game *map);
 void	init_game(t_game *data);
 bool	is_wall(t_ray *ray);

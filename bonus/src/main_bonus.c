@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 08:22:29 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/28 10:21:48 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:36:23 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	api(char *filename)
 	game->ceiling_color = data->c;
 	game->floor_color = data->f;
 	init_minilibx(game);
-	init_textures(data);
 }
 
 int	main(int argc, char *argv[])
