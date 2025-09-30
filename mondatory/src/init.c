@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/28 10:35:41 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/30 15:15:42 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,9 @@ void	init_minilibx(t_game *g)
 		ft_clean(-1, g);
 	}
 	g->img.img = mlx_new_image(g->mlx, g->width, g->height);
-	if (!g->img.img)
-	{
-		ft_perror(NULL);
-		ft_clean(-1, g);
-	}
 	g->img.pixels = mlx_get_data_addr(g->img.img, &g->img.bpp, &g->img.line,
 			&g->img.endian);
-	if (!g->img.pixels)
+	if (!g->img.img || !g->img.pixels)
 	{
 		ft_perror(NULL);
 		ft_clean(-1, g);
