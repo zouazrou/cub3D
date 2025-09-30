@@ -6,7 +6,7 @@
 /*   By: zouazrou <zouazrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 08:27:15 by zouazrou          #+#    #+#             */
-/*   Updated: 2025/09/25 20:48:45 by zouazrou         ###   ########.fr       */
+/*   Updated: 2025/09/30 15:00:49 by zouazrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_minilibx(t_game *g)
 	g->mlx = mlx_init();
 	if (!g->mlx && true)
 		error = true;
+	init_textures(get_addr_t_data(NULL));
 	g->win = mlx_new_window(g->mlx, g->width, g->height, "3D");
 	g->img_2d.img = mlx_new_image(g->mlx, MINIMAP_W, MINIMAP_H);
 	g->img_2d.pixels = mlx_get_data_addr(g->img_2d.img, &g->img_2d.bpp,
