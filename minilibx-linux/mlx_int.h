@@ -9,7 +9,6 @@
 */
 
 
-
 /*
 ** Internal settings for MiniLibX
 */
