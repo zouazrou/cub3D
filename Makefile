@@ -46,6 +46,7 @@ $(NAME) : $(OBJ) $(LIBS)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -lm -o $(NAME)
 	@echo "\\033[1m\\033[36mexec:⚙️\\033[0m"
 
+# bonus
 bonus : $(NAME_BONUS)
 
 $(NAME_BONUS) : $(OBJ_BNS) $(LIBFT)
@@ -58,6 +59,7 @@ $(NAME_BONUS) : $(OBJ_BNS) $(LIBFT)
 
 re : fclean all
 
+# Clean rules
 clean :
 	@rm -f $(OBJ)
 	@rm -f $(OBJ_BNS)
